@@ -1,7 +1,7 @@
 import javafx.application.*;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
+import javafx.scene.image.Image;
 import javafx.stage.*;
 
 // MainApp durch den eigenen Dateinamen ersetzen
@@ -11,18 +11,17 @@ public class MainApp extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
-        primaryStage.setTitle("Wetterapp");
-        Button btn = new Button();
-        btn.setText("Set Location");
-        btn.setOnAction( (event) -> select() );
-        Pane root = new StackPane();
-        root.getChildren().add(btn);
-        primaryStage.setScene(new Scene(root, 500, 500));
+    public void start(Stage primaryStage) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("MainWindow/mainWindow.fxml"));
+        primaryStage.setTitle("BPT-Wetter");
+        Scene scene = new Scene(root,600,400);
+        scene.getStylesheets().add(getClass().getResource("css/styles.css").toExternalForm());
+        primaryStage.setScene(scene);
         primaryStage.show();
+        primaryStage.setResizable(false);
+        primaryStage.getIcons().add(new Image(getClass().getResource("img/sun.png").toExternalForm()));
+
     }
 
-    void select(){
-        System.out.println("HELLO");
-    }
+
 }

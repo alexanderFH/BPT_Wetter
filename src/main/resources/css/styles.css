@@ -1,0 +1,34 @@
+.wetteranzeige {
+    -fx-background-color: #4288ff;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+}
+
+.wetteranzeige:hover {
+    -fx-background-color: #3396ff;
+    -fx-cursor: hand;
+/*    -fx-skin: 'sample.MyButtonSkin';*/
+}
+/*
+
+.myBorderPane {
+    -fx-background-image: url("sonne_dpa.jpg");
+}
+*/
+
+.subPane {
+    -fx-background-radius: 10 10 10 10;
+}
+
+.subPane:hover {
+    -fx-effect: dropshadow(three-pass-box, #5c98ff, 30, 0.5, 0, 0);
+    -fx-cursor: hand;
+
+    /*-fx-end-margin: 10px;
+    -fx-pref-height: 158px;
+    -fx-pref-width: 113px;*/
+}
+
+.testMe {
+    -fx-rotate: 100;
+}

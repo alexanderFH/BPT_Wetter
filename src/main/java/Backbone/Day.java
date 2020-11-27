@@ -1,3 +1,5 @@
+package Backbone;
+
 public class Day {
     private String name;
     private int minTemp;

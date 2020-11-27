@@ -1,3 +1,5 @@
+package Backbone;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -9,7 +11,7 @@ import java.util.ArrayList;
 
 public class WeatherGetter {
     public static void main(String[] args) throws IOException {
-       // ArrayList<Day> days = getWeatherJson("33.74,-84.39");
+       // ArrayList<Backbone.Day> days = getWeatherJson("33.74,-84.39");
         ArrayList<Day> days = getWeatherJson("1220:AT");
         for (Day d : days)
             System.out.println(d);
@@ -41,12 +43,6 @@ public class WeatherGetter {
             JSONArray tempMin = obj.getJSONArray("temperatureMin");
             JSONArray tempMax = obj.getJSONArray("temperatureMax");
             JSONArray nar = obj.getJSONArray("narrative");
-            System.out.println(dayName.length());
-            System.out.println(tempMax.length());
-            System.out.println(tempMin.length());
-            System.out.println(nar.length());
-            System.out.println(tempMax.get(0));
-            System.out.println(tempMin.get(0));
             for (int i = 0; i < dayName.length(); i++) {
                 back.add(new Day(dayName.getString(i), tempMin.getInt(i), tempMax.getInt(i), nar.getString(i)));
             }

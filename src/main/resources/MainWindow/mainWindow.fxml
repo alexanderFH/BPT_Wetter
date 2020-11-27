@@ -12,7 +12,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="myBorderPane" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
+            styleClass="myBorderPane" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <MenuBar style="-fx-background-color: #85c0ff;" BorderPane.alignment="CENTER">
         <menus>
@@ -45,11 +46,11 @@
                   <Font size="45.0" />
                </font>
             </Label>
-            <!--<ImageView style="-fx-rotate: 200px;" fitHeight="101.0" fitWidth="111.0" layoutX="237.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView style="-fx-rotate: 200px;" fitHeight="101.0" fitWidth="111.0" layoutX="237.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@img/sun.png" />
+                  <Image url="/img/sun-icon.png" />
                </image>
-            </ImageView>-->
+            </ImageView>
             <Button layoutX="480.0" layoutY="14.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="106.0" styleClass="wetteranzeige" text="Wetteranzeige" />
 
             <Pane layoutX="180.0" layoutY="213.0" prefHeight="148.0" prefWidth="108.0" styleClass="subPane" style="-fx-background-color: #FFF;">

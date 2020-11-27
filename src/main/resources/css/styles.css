@@ -9,12 +9,10 @@
     -fx-cursor: hand;
 /*    -fx-skin: 'sample.MyButtonSkin';*/
 }
-/*
 
 .myBorderPane {
-    -fx-background-image: url("sonne_dpa.jpg");
+    -fx-background-image: url("/img/sonne_bg.jpg");
 }
-*/
 
 .subPane {
     -fx-background-radius: 10 10 10 10;

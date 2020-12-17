@@ -40,7 +40,6 @@
    </top>
    <center>
       <Pane prefHeight="73.0" prefWidth="121.0" BorderPane.alignment="CENTER">
-          <Button>Test</Button>
          <children>
             <Label layoutX="205.0" prefHeight="56.0" prefWidth="167.0" style="-fx-font-weight: bold;" text="25 Grad" textFill="WHITE">
                <font>
@@ -56,24 +55,24 @@
 
             <Pane layoutX="180.0" layoutY="213.0" prefHeight="148.0" prefWidth="108.0" styleClass="subPane" style="-fx-background-color: #FFF;">
                <children>
-                  <Label layoutX="29.0" layoutY="14.0" style="-fx-font-weight: bold;" text="Mittwoch" />
+                  <Label fx:id="dayThree" layoutX="29.0" layoutY="14.0" style="-fx-font-weight: bold;" text="Mittwoch" />
                </children></Pane>
             <Pane layoutX="464.0" layoutY="213.0" prefHeight="148.0" prefWidth="108.0" styleClass="subPane" style="-fx-background-color: #FFF;">
                <children>
-                  <Label layoutX="36.0" layoutY="14.0" style="-fx-font-weight: bold;" text="Freitag" />
+                  <Label fx:id="dayFive" layoutX="36.0" layoutY="14.0" style="-fx-font-weight: bold;" text="Freitag" />
                </children>
             </Pane>
             <Pane layoutX="30.0" layoutY="213.0" prefHeight="148.0" prefWidth="108.0" styleClass="subPane" style="-fx-background-color: #FFF;">
                <children>
-                  <Label layoutX="31.0" layoutY="14.0" style="-fx-font-weight: bold;" text="Dienstag" />
+                  <Label fx:id="dayTwo" layoutX="31.0" layoutY="14.0" style="-fx-font-weight: bold;" text="Dienstag" />
                </children>
             </Pane>
             <Pane layoutX="323.0" layoutY="213.0" prefHeight="148.0" prefWidth="108.0" styleClass="subPane" style="-fx-background-color: #FFF;">
                <children>
-                  <Label layoutX="23.0" layoutY="14.0" style="-fx-font-weight: bold;" text="Donnerstag" />
+                  <Label fx:id="dayFour" layoutX="23.0" layoutY="14.0" style="-fx-font-weight: bold;" text="Donnerstag" />
                </children>
             </Pane>
-            <Label layoutX="228.0" layoutY="66.0" text="Montag 27.08.2020" textFill="WHITE">
+            <Label fx:id="dayOne" layoutX="228.0" layoutY="66.0" text="Montag 27.08.2020" textFill="WHITE">
                <font>
                   <Font size="17.0" />
                </font>

@@ -1,14 +1,3 @@
-.wetteranzeige {
-    -fx-background-color: #4288ff;
-    -fx-font-weight: bold;
-    -fx-font-size: 12px;
-}
-
-.wetteranzeige:hover {
-    -fx-background-color: #3396ff;
-    -fx-cursor: hand;
-/*    -fx-skin: 'sample.MyButtonSkin';*/
-}
 
 .myBorderPane {
     -fx-background-image: url("/img/sonne_bg.jpg");
@@ -25,6 +14,19 @@
     /*-fx-end-margin: 10px;
     -fx-pref-height: 158px;
     -fx-pref-width: 113px;*/
+}
+
+.displayTemp {
+    -fx-text-alignment: center;
+    -fx-font-weight: bold;
+}
+
+.displayDate {
+    -fx-font-size: 17px;
+}
+
+.displayDetails {
+    -fx-text-fill: white;
 }
 
 .testMe {

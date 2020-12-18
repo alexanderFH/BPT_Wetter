@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:controller="Frontend.MainWindow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
-            styleClass="myBorderPane" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="myBorderPane" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Frontend.MainWindow">
    <top>
       <MenuBar style="-fx-background-color: #85c0ff;" BorderPane.alignment="CENTER">
         <menus>
@@ -41,7 +38,7 @@
    <center>
       <Pane prefHeight="73.0" prefWidth="121.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="temp" layoutX="205.0" prefHeight="56.0" prefWidth="167.0" style="-fx-font-weight: bold;" text="25 Grad" textFill="WHITE">
+            <Label fx:id="temp" styleClass="displayTemp" layoutX="245.0" prefHeight="56.0" prefWidth="167.0" text="25 Grad" textFill="WHITE">
                <font>
                   <Font size="45.0" />
                </font>
@@ -51,32 +48,34 @@
                   <Image url="/img/sun-icon.png" />
                </image>
             </ImageView>
-            <Button layoutX="480.0" layoutY="14.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="106.0" styleClass="wetteranzeige" text="Wetteranzeige" />
 
-            <Pane onMouseClicked="#changeDayThree" layoutX="180.0" layoutY="213.0" prefHeight="148.0" prefWidth="108.0" styleClass="subPane" style="-fx-background-color: #FFF;">
+            <Pane layoutX="180.0" layoutY="213.0" onMouseClicked="#changeDayThree" prefHeight="148.0" prefWidth="108.0" style="-fx-background-color: #FFF;" styleClass="subPane">
                <children>
                   <Label fx:id="dayThree" layoutX="29.0" layoutY="14.0" style="-fx-font-weight: bold;" text="Mittwoch" />
                </children></Pane>
-            <Pane onMouseClicked="#changeDayFive" layoutX="464.0" layoutY="213.0" prefHeight="148.0" prefWidth="108.0" styleClass="subPane" style="-fx-background-color: #FFF;">
+            <Pane layoutX="464.0" layoutY="213.0" onMouseClicked="#changeDayFive" prefHeight="148.0" prefWidth="108.0" style="-fx-background-color: #FFF;" styleClass="subPane">
                <children>
                   <Label fx:id="dayFive" layoutX="36.0" layoutY="14.0" style="-fx-font-weight: bold;" text="Freitag" />
                </children>
             </Pane>
-            <Pane onMouseClicked="#changeDayTwo" layoutX="30.0" layoutY="213.0" prefHeight="148.0" prefWidth="108.0" styleClass="subPane" style="-fx-background-color: #FFF;">
+            <Pane layoutX="30.0" layoutY="213.0" onMouseClicked="#changeDayTwo" prefHeight="148.0" prefWidth="108.0" style="-fx-background-color: #FFF;" styleClass="subPane">
                <children>
                   <Label fx:id="dayTwo" layoutX="31.0" layoutY="14.0" style="-fx-font-weight: bold;" text="Dienstag" />
                </children>
             </Pane>
-            <Pane onMouseClicked="#changeDayFour" layoutX="323.0" layoutY="213.0" prefHeight="148.0" prefWidth="108.0" styleClass="subPane" style="-fx-background-color: #FFF;">
+            <Pane layoutX="323.0" layoutY="213.0" onMouseClicked="#changeDayFour" prefHeight="148.0" prefWidth="108.0" style="-fx-background-color: #FFF;" styleClass="subPane">
                <children>
                   <Label fx:id="dayFour" layoutX="23.0" layoutY="14.0" style="-fx-font-weight: bold;" text="Donnerstag" />
                </children>
             </Pane>
-            <Label fx:id="dayOne" layoutX="228.0" layoutY="66.0" text="Montag 27.08.2020" textFill="WHITE">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
+            <Label fx:id="dayOne" styleClass="displayDate" layoutX="245.0" layoutY="66.0" text="Montag 27.08.2020" textFill="WHITE"/>
+
+            <Label fx:id="minTemp" styleClass="displayDetails" layoutX="46.0" layoutY="49.0" text="Label" />
+            <Label fx:id="maxTemp" styleClass="displayDetails" layoutX="46.0" layoutY="84.0" text="Label" />
+            <Label fx:id="detail" styleClass="displayDetails" layoutX="46.0" layoutY="122.0" text="Label" />
+            <Label styleClass="displayDetails" layoutX="490.0" layoutY="49.0" text="Label" />
+            <Label styleClass="displayDetails" layoutX="490.0" layoutY="84.0" text="Label" />
+            <Label styleClass="displayDetails" layoutX="490.0" layoutY="122.0" text="Label" />
          </children>
       </Pane>
    </center>

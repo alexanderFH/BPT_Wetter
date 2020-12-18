@@ -18,6 +18,8 @@ public class MainWindow implements Initializable {
     @FXML
     private Label dayOne;
     @FXML
+    private Label dayOne2;
+    @FXML
     private Label dayTwo;
     @FXML
     private Label dayThree;
@@ -72,33 +74,17 @@ public class MainWindow implements Initializable {
     }
 
     @FXML
-    private void changeDayThree() {
-        dayOne.setText(dayThree.getText());
+    private void changeToFirstDay() {
+        dayOne.setText(dayOne.getText());
         try {
             ArrayList<Day> days = WeatherGetter.getWeatherJson("1220:AT");
-            double minT = days.get(2).getMinTemp();
-            double maxT = days.get(2).getMaxTemp();
+            double minT = days.get(0).getMinTemp();
+            double maxT = days.get(0).getMaxTemp();
 
             temp.setText((minT+maxT)/2 + " \u2103");
-            minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(2).getMinTemp()) + " \u2103");
-            maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(2).getMaxTemp()) + " \u2103");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    private void changeDayFive() {
-        dayOne.setText(dayFive.getText());
-        try {
-            ArrayList<Day> days = WeatherGetter.getWeatherJson("1220:AT");
-            double minT = days.get(4).getMinTemp();
-            double maxT = days.get(4).getMaxTemp();
-
-            temp.setText((minT+maxT)/2 + " \u2103");
-            minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(4).getMinTemp()) + " \u2103");
-            maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(4).getMaxTemp()) + " \u2103");
+            minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(0).getMinTemp()) + " \u2103");
+            maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(0).getMaxTemp()) + " \u2103");
+            //detail.setText(days.get(0).getNarrative());
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -123,6 +109,23 @@ public class MainWindow implements Initializable {
     }
 
     @FXML
+    private void changeDayThree() {
+        dayOne.setText(dayThree.getText());
+        try {
+            ArrayList<Day> days = WeatherGetter.getWeatherJson("1220:AT");
+            double minT = days.get(2).getMinTemp();
+            double maxT = days.get(2).getMaxTemp();
+
+            temp.setText((minT+maxT)/2 + " \u2103");
+            minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(2).getMinTemp()) + " \u2103");
+            maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(2).getMaxTemp()) + " \u2103");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     private void changeDayFour() {
         dayOne.setText(dayFour.getText());
         try {
@@ -139,10 +142,29 @@ public class MainWindow implements Initializable {
         }
     }
 
+    @FXML
+    private void changeDayFive() {
+        dayOne.setText(dayFive.getText());
+        try {
+            ArrayList<Day> days = WeatherGetter.getWeatherJson("1220:AT");
+            double minT = days.get(4).getMinTemp();
+            double maxT = days.get(4).getMaxTemp();
+
+            temp.setText((minT+maxT)/2 + " \u2103");
+            minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(4).getMinTemp()) + " \u2103");
+            maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(4).getMaxTemp()) + " \u2103");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     // "Main" method of the controller
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setDays(dayOne, 0);
+        setDays(dayOne2, 0);
         setDays(dayTwo, 1);
         setDays(dayThree, 2);
         setDays(dayFour, 3);

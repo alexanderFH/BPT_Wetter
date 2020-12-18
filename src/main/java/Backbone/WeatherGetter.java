@@ -26,7 +26,7 @@ public class WeatherGetter {
         return sb.toString();
     }
 
-    protected static ArrayList<Day> getWeatherJson(String plz) throws IOException {
+    public static ArrayList<Day> getWeatherJson(String plz) throws IOException {
         ArrayList<Day> back = new ArrayList<>();
        // InputStream is = new URL("https://api.weather.com/v3/wx/forecast/daily/5day?geocode=" + coordinates + "&format=json&units=m&language=de-DE&apiKey=1531e846099f413eb1e846099ff13ef6").openStream();
         InputStream is = new URL("https://api.weather.com/v3/wx/forecast/daily/5day?postalKey=" + plz + "&format=json&units=m&language=de-DE&apiKey=1531e846099f413eb1e846099ff13ef6").openStream();

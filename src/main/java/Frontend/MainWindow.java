@@ -1,11 +1,15 @@
 package Frontend;
 
+import Backbone.Day;
+import Backbone.WeatherGetter;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 
@@ -21,6 +25,8 @@ public class MainWindow implements Initializable {
     private Label dayFour;
     @FXML
     private Label dayFive;
+    @FXML
+    private Label temp;
 
 
     // Sets the days based on int values on to tge GUI
@@ -59,6 +65,66 @@ public class MainWindow implements Initializable {
 
     }
 
+    @FXML
+    private void changeDayThree() {
+        dayOne.setText(dayThree.getText());
+        try {
+            ArrayList<Day> days = WeatherGetter.getWeatherJson("1220:AT");
+            double minT = days.get(2).getMinTemp();
+            double maxT = days.get(2).getMaxTemp();
+
+            temp.setText((minT+maxT)/2 + " \u2103");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void changeDayFive() {
+        dayOne.setText(dayFive.getText());
+        try {
+            ArrayList<Day> days = WeatherGetter.getWeatherJson("1220:AT");
+            double minT = days.get(4).getMinTemp();
+            double maxT = days.get(4).getMaxTemp();
+
+            temp.setText((minT+maxT)/2 + " \u2103");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void changeDayTwo() {
+        dayOne.setText(dayTwo.getText());
+        try {
+            ArrayList<Day> days = WeatherGetter.getWeatherJson("1220:AT");
+            double minT = days.get(1).getMinTemp();
+            double maxT = days.get(1).getMaxTemp();
+
+            temp.setText((minT+maxT)/2 + " \u2103");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void changeDayFour() {
+        dayOne.setText(dayFour.getText());
+        try {
+            ArrayList<Day> days = WeatherGetter.getWeatherJson("1220:AT");
+            double minT = days.get(3).getMinTemp();
+            double maxT = days.get(3).getMaxTemp();
+
+            temp.setText((minT+maxT)/2 + " \u2103");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     // "Main" method of the controller
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -67,5 +133,16 @@ public class MainWindow implements Initializable {
         setDays(dayThree, 2);
         setDays(dayFour, 3);
         setDays(dayFive, 4);
+
+        try {
+            ArrayList<Day> days = WeatherGetter.getWeatherJson("1220:AT");
+            double minT = days.get(0).getMinTemp();
+            double maxT = days.get(0).getMaxTemp();
+
+            temp.setText((minT+maxT)/2 + " \u2103");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

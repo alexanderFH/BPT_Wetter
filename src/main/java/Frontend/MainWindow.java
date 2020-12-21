@@ -9,15 +9,13 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 
-public class MainWindow  implements Initializable {
+public class MainWindow implements Initializable {
 
     @FXML
     private Label dayOne;
@@ -88,10 +86,13 @@ public class MainWindow  implements Initializable {
     @FXML
     private void changeToFirstDay() {
         dayOne.setText(dayOne2.getText());
-        double minT = days.get(0).getMinTemp();
-        double maxT = days.get(0).getMaxTemp();
-
-        temp.setText((minT+maxT)/2 + " \u2103");
+        if(days.get(0).getCurrentTemp() == -999) {
+            double minT = days.get(0).getMinTemp();
+            double maxT = days.get(0).getMaxTemp();
+            temp.setText((minT+maxT)/2 + " \u2103");
+        } else {
+            temp.setText(days.get(0).getCurrentTemp() + " \u2103");
+        }
         minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(0).getMinTemp()) + " \u2103");
         maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(0).getMaxTemp()) + " \u2103");
         //detail.setText(days.get(0).getNarrative());
@@ -102,10 +103,13 @@ public class MainWindow  implements Initializable {
     @FXML
     private void changeDayTwo() {
         dayOne.setText(dayTwo.getText());
-        double minT = days.get(1).getMinTemp();
-        double maxT = days.get(1).getMaxTemp();
-
-        temp.setText((minT+maxT)/2 + " \u2103");
+        if(days.get(1).getCurrentTemp() == -999) {
+            double minT = days.get(1).getMinTemp();
+            double maxT = days.get(1).getMaxTemp();
+            temp.setText((minT+maxT)/2 + " \u2103");
+        } else {
+            temp.setText(days.get(1).getCurrentTemp() + " \u2103");
+        }
         minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(1).getMinTemp()) + " \u2103");
         maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(1).getMaxTemp()) + " \u2103");
         changeImage(1);
@@ -115,11 +119,13 @@ public class MainWindow  implements Initializable {
     @FXML
     private void changeDayThree() {
         dayOne.setText(dayThree.getText());
-
-        double minT = days.get(2).getMinTemp();
-        double maxT = days.get(2).getMaxTemp();
-
-        temp.setText((minT+maxT)/2 + " \u2103");
+        if(days.get(2).getCurrentTemp() == -999) {
+            double minT = days.get(2).getMinTemp();
+            double maxT = days.get(2).getMaxTemp();
+            temp.setText((minT+maxT)/2 + " \u2103");
+        } else {
+            temp.setText(days.get(2).getCurrentTemp() + " \u2103");
+        }
         minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(2).getMinTemp()) + " \u2103");
         maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(2).getMaxTemp()) + " \u2103");
         changeImage(2);
@@ -129,10 +135,13 @@ public class MainWindow  implements Initializable {
     @FXML
     private void changeDayFour() {
         dayOne.setText(dayFour.getText());
-        double minT = days.get(3).getMinTemp();
-        double maxT = days.get(3).getMaxTemp();
-
-        temp.setText((minT+maxT)/2 + " \u2103");
+        if(days.get(3).getCurrentTemp() == -999) {
+            double minT = days.get(3).getMinTemp();
+            double maxT = days.get(3).getMaxTemp();
+            temp.setText((minT+maxT)/2 + " \u2103");
+        } else {
+            temp.setText(days.get(3).getCurrentTemp() + " \u2103");
+        }
         minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(3).getMinTemp()) + " \u2103");
         maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(3).getMaxTemp()) + " \u2103");
         changeImage(3);
@@ -142,11 +151,13 @@ public class MainWindow  implements Initializable {
     @FXML
     private void changeDayFive() {
         dayOne.setText(dayFive.getText());
-
-        double minT = days.get(4).getMinTemp();
-        double maxT = days.get(4).getMaxTemp();
-
-        temp.setText((minT+maxT)/2 + " \u2103");
+        if(days.get(4).getCurrentTemp() == -999) {
+            double minT = days.get(4).getMinTemp();
+            double maxT = days.get(4).getMaxTemp();
+            temp.setText((minT+maxT)/2 + " \u2103");
+        } else {
+            temp.setText(days.get(4).getCurrentTemp() + " \u2103");
+        }
         minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(4).getMinTemp()) + " \u2103");
         maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(4).getMaxTemp()) + " \u2103");
         changeImage(4);
@@ -192,18 +203,20 @@ public class MainWindow  implements Initializable {
         setDays(dayFour, 3);
         setDays(dayFive, 4);
 
-        try {
-            days = WeatherGetter.getWeatherJson("1220", "AT");
+        days = WeatherGetter.getWeatherJson("1220", "AT");
+
+        if(days.get(0).getCurrentTemp() == -999) {
             double minT = days.get(0).getMinTemp();
             double maxT = days.get(0).getMaxTemp();
-
             temp.setText((minT+maxT)/2 + " \u2103");
-            minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(0).getMinTemp()) + " \u2103");
-            maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(0).getMaxTemp()) + " \u2103");
-            //detail.setText(days.get(0).getNarrative());
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        } else {
+            temp.setText(days.get(0).getCurrentTemp() + " \u2103");
         }
+
+        minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(0).getMinTemp()) + " \u2103");
+        maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(0).getMaxTemp()) + " \u2103");
+        //detail.setText(days.get(0).getNarrative());
+
+        changeImage(0);
     }
 }

@@ -11,8 +11,8 @@ import java.util.ArrayList;
 
 public class WeatherGetter {
     public static void main(String[] args) throws IOException {
-       // ArrayList<Backbone.Day> days = getWeatherJson("33.74,-84.39");
-        Day day = new Day("sonntat",5,10,"toll");//test
+        // ArrayList<Backbone.Day> days = getWeatherJson("33.74,-84.39");
+        Day day = new Day("sonntat", 5, 10, "toll");//test
         System.out.println(day.getCurrentTemp());
         ArrayList<Day> days = getWeatherJson("1220:AT");
         for (Day d : days)
@@ -30,7 +30,7 @@ public class WeatherGetter {
 
     public static ArrayList<Day> getWeatherJson(String plz) throws IOException {
         ArrayList<Day> back = new ArrayList<>();
-       // InputStream is = new URL("https://api.weather.com/v3/wx/forecast/daily/5day?geocode=" + coordinates + "&format=json&units=m&language=de-DE&apiKey=1531e846099f413eb1e846099ff13ef6").openStream();
+        // InputStream is = new URL("https://api.weather.com/v3/wx/forecast/daily/5day?geocode=" + coordinates + "&format=json&units=m&language=de-DE&apiKey=1531e846099f413eb1e846099ff13ef6").openStream();
         InputStream is = new URL("https://api.weather.com/v3/wx/forecast/daily/5day?postalKey=" + plz + "&format=json&units=m&language=de-DE&apiKey=1531e846099f413eb1e846099ff13ef6").openStream();
 
         try {
@@ -46,7 +46,10 @@ public class WeatherGetter {
             JSONArray tempMax = obj.getJSONArray("temperatureMax");
             JSONArray nar = obj.getJSONArray("narrative");
             for (int i = 0; i < dayName.length(); i++) {
-                back.add(new Day(dayName.getString(i), tempMin.getInt(i), tempMax.getInt(i), nar.getString(i)));
+                if (tempMax.get(i).equals(null))
+                    back.add(new Day(dayName.getString(i), tempMin.getInt(i), 20, nar.getString(i)));
+                else
+                    back.add(new Day(dayName.getString(i), tempMin.getInt(i), tempMax.getInt(i), nar.getString(i)));
             }
            /* JSONObject day = (JSONObject) obj.getJSONArray("daypart").get(0);
             System.out.println(day.length());

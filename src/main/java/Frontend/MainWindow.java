@@ -41,6 +41,37 @@ public class MainWindow implements Initializable {
     private ImageView image;
     @FXML
     private Image img;
+    @FXML
+    private ImageView imageNextDay1;
+    @FXML
+    private Image imgNextDay1;
+    @FXML
+    private ImageView imageNextDay2;
+    @FXML
+    private Image imgNextDay2;
+    @FXML
+    private ImageView imageNextDay3;
+    @FXML
+    private Image imgNextDay3;
+    @FXML
+    private ImageView imageNextDay4;
+    @FXML
+    private Image imgNextDay4;
+    @FXML
+    private ImageView imageNextDay5;
+    @FXML
+    private Image imgNextDay5;
+
+    @FXML
+    private Label nextDayTemp1;
+    @FXML
+    private Label nextDayTemp2;
+    @FXML
+    private Label nextDayTemp3;
+    @FXML
+    private Label nextDayTemp4;
+    @FXML
+    private Label nextDayTemp5;
 
     private ArrayList<Day> days;
 
@@ -192,7 +223,6 @@ public class MainWindow implements Initializable {
 
     }
 
-
     // "Main" method of the controller
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -209,8 +239,45 @@ public class MainWindow implements Initializable {
             double minT = days.get(0).getMinTemp();
             double maxT = days.get(0).getMaxTemp();
             temp.setText((minT+maxT)/2 + " \u2103");
+            nextDayTemp1.setText((minT+maxT)/2 + " \u2103");
+
         } else {
             temp.setText(days.get(0).getCurrentTemp() + " \u2103");
+            nextDayTemp1.setText(days.get(0).getCurrentTemp() + " \u2103");
+        }
+
+        /**folgendes wird eventuell durch eine schleife/switch o.Ä. ersetzt...*/
+
+        if(days.get(1).getCurrentTemp() == -999) {
+            double minT = days.get(1).getMinTemp();
+            double maxT = days.get(1).getMaxTemp();
+            nextDayTemp2.setText((minT+maxT)/2 + " \u2103");
+        } else {
+            nextDayTemp2.setText(days.get(1).getCurrentTemp() + " \u2103");
+        }
+
+        if(days.get(2).getCurrentTemp() == -999) {
+            double minT = days.get(2).getMinTemp();
+            double maxT = days.get(2).getMaxTemp();
+            nextDayTemp3.setText((minT+maxT)/2 + " \u2103");
+        } else {
+            nextDayTemp3.setText(days.get(2).getCurrentTemp() + " \u2103");
+        }
+
+        if(days.get(3).getCurrentTemp() == -999) {
+            double minT = days.get(3).getMinTemp();
+            double maxT = days.get(3).getMaxTemp();
+            nextDayTemp4.setText((minT+maxT)/2 + " \u2103");
+        } else {
+            nextDayTemp4.setText(days.get(3).getCurrentTemp() + " \u2103");
+        }
+
+        if(days.get(4).getCurrentTemp() == -999) {
+            double minT = days.get(4).getMinTemp();
+            double maxT = days.get(4).getMaxTemp();
+            nextDayTemp5.setText((minT+maxT)/2 + " \u2103");
+        } else {
+            nextDayTemp5.setText(days.get(4).getCurrentTemp() + " \u2103");
         }
 
         minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(0).getMinTemp()) + " \u2103");

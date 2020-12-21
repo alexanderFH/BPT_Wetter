@@ -5,15 +5,21 @@
 
 .subPane {
     -fx-background-radius: 10 10 10 10;
+    -fx-opacity: 0.8;
 }
 
 .subPane:hover {
     -fx-effect: dropshadow(three-pass-box, #5c98ff, 30, 0.5, 0, 0);
     -fx-cursor: hand;
-
+    -fx-opacity: 0.9;
     /*-fx-end-margin: 10px;
     -fx-pref-height: 158px;
     -fx-pref-width: 113px;*/
+}
+
+.subPane:armed {
+    -fx-effect: dropshadow(three-pass-box, red, 30, 0.5, 0, 0);
+    -fx-cursor: hand;
 }
 
 .displayTemp {

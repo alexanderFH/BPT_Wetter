@@ -36,6 +36,7 @@ public class MainWindow implements Initializable {
     @FXML
     private Label detail;
 
+    private ArrayList<Day> days;
 
     // Sets the days based on int values on to tge GUI
     // dayfx = Label of the day
@@ -75,88 +76,66 @@ public class MainWindow implements Initializable {
 
     @FXML
     private void changeToFirstDay() {
-        dayOne.setText(dayOne.getText());
-        try {
-            ArrayList<Day> days = WeatherGetter.getWeatherJson("1220:AT");
-            double minT = days.get(0).getMinTemp();
-            double maxT = days.get(0).getMaxTemp();
+        dayOne.setText(dayOne2.getText());
+        double minT = days.get(0).getMinTemp();
+        double maxT = days.get(0).getMaxTemp();
 
-            temp.setText((minT+maxT)/2 + " \u2103");
-            minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(0).getMinTemp()) + " \u2103");
-            maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(0).getMaxTemp()) + " \u2103");
-            //detail.setText(days.get(0).getNarrative());
+        temp.setText((minT+maxT)/2 + " \u2103");
+        minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(0).getMinTemp()) + " \u2103");
+        maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(0).getMaxTemp()) + " \u2103");
+        //detail.setText(days.get(0).getNarrative());
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @FXML
     private void changeDayTwo() {
         dayOne.setText(dayTwo.getText());
-        try {
-            ArrayList<Day> days = WeatherGetter.getWeatherJson("1220:AT");
-            double minT = days.get(1).getMinTemp();
-            double maxT = days.get(1).getMaxTemp();
+        double minT = days.get(1).getMinTemp();
+        double maxT = days.get(1).getMaxTemp();
 
-            temp.setText((minT+maxT)/2 + " \u2103");
-            minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(1).getMinTemp()) + " \u2103");
-            maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(1).getMaxTemp()) + " \u2103");
+        temp.setText((minT+maxT)/2 + " \u2103");
+        minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(1).getMinTemp()) + " \u2103");
+        maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(1).getMaxTemp()) + " \u2103");
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @FXML
     private void changeDayThree() {
         dayOne.setText(dayThree.getText());
-        try {
-            ArrayList<Day> days = WeatherGetter.getWeatherJson("1220:AT");
-            double minT = days.get(2).getMinTemp();
-            double maxT = days.get(2).getMaxTemp();
 
-            temp.setText((minT+maxT)/2 + " \u2103");
-            minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(2).getMinTemp()) + " \u2103");
-            maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(2).getMaxTemp()) + " \u2103");
+        double minT = days.get(2).getMinTemp();
+        double maxT = days.get(2).getMaxTemp();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        temp.setText((minT+maxT)/2 + " \u2103");
+        minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(2).getMinTemp()) + " \u2103");
+        maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(2).getMaxTemp()) + " \u2103");
+
     }
 
     @FXML
     private void changeDayFour() {
         dayOne.setText(dayFour.getText());
-        try {
-            ArrayList<Day> days = WeatherGetter.getWeatherJson("1220:AT");
-            double minT = days.get(3).getMinTemp();
-            double maxT = days.get(3).getMaxTemp();
+        double minT = days.get(3).getMinTemp();
+        double maxT = days.get(3).getMaxTemp();
 
-            temp.setText((minT+maxT)/2 + " \u2103");
-            minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(3).getMinTemp()) + " \u2103");
-            maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(3).getMaxTemp()) + " \u2103");
+        temp.setText((minT+maxT)/2 + " \u2103");
+        minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(3).getMinTemp()) + " \u2103");
+        maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(3).getMaxTemp()) + " \u2103");
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @FXML
     private void changeDayFive() {
         dayOne.setText(dayFive.getText());
-        try {
-            ArrayList<Day> days = WeatherGetter.getWeatherJson("1220:AT");
-            double minT = days.get(4).getMinTemp();
-            double maxT = days.get(4).getMaxTemp();
 
-            temp.setText((minT+maxT)/2 + " \u2103");
-            minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(4).getMinTemp()) + " \u2103");
-            maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(4).getMaxTemp()) + " \u2103");
+        double minT = days.get(4).getMinTemp();
+        double maxT = days.get(4).getMaxTemp();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        temp.setText((minT+maxT)/2 + " \u2103");
+        minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(4).getMinTemp()) + " \u2103");
+        maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(4).getMaxTemp()) + " \u2103");
+
+
     }
 
 
@@ -170,9 +149,8 @@ public class MainWindow implements Initializable {
         setDays(dayFour, 3);
         setDays(dayFive, 4);
 
-
         try {
-            ArrayList<Day> days = WeatherGetter.getWeatherJson("1220:AT");
+            days = WeatherGetter.getWeatherJson("1220:AT");
             double minT = days.get(0).getMinTemp();
             double maxT = days.get(0).getMaxTemp();
 
@@ -184,5 +162,6 @@ public class MainWindow implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 }

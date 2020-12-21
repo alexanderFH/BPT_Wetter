@@ -1,24 +1,21 @@
 package Backbone;
 
 public class Day {
-    private String name;
     private int minTemp;
     private int maxTemp;
+    private int feelsLike;
     private int currentTemp = -999;
+    private int humidity;
     //sunset sunrise
     //windgesch / richtung
     private String narrative;
 
-    public Day(String name, int minTemp, int maxTemp, String narrative) {
-        this.name = name;
+    public Day( int minTemp, int maxTemp, String narrative) {
         this.minTemp = minTemp;
         this.maxTemp = maxTemp;
         this.narrative = narrative;
     }
 
-    public String getName() {
-        return name;
-    }
 
     public int getMinTemp() {
         return minTemp;
@@ -36,13 +33,21 @@ public class Day {
         return currentTemp;
     }
 
+    public int getFeelsLike() {
+        return feelsLike;
+    }
+
+    public void setFeelsLike(int feelsLike) {
+        this.feelsLike = feelsLike;
+    }
+
     public String getNarrative() {
         return narrative;
     }
 
     @Override
     public String toString() {
-        return name + ": - MinTemp: " + minTemp + " - MaxTemp: " + maxTemp + "\n" +
+        return "- MinTemp: " + minTemp + " - MaxTemp: " + maxTemp + "\n" +
                 "Narrative: " + narrative;
     }
 }

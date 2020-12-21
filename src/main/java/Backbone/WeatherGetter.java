@@ -7,16 +7,26 @@ import org.json.JSONObject;
 import java.io.*;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class WeatherGetter {
     public static void main(String[] args) throws IOException {
         // ArrayList<Backbone.Day> days = getWeatherJson("33.74,-84.39");
-        Day day = new Day("sonntat", 5, 10, "toll");//test
+        getCurrentWeather("1220");
+       /* Day day = new Day("sonntat", 5, 10, "toll");//test
         System.out.println(day.getCurrentTemp());
         ArrayList<Day> days = getWeatherJson("1220:AT");
         for (Day d : days)
             System.out.println(d);
+        */
     }
 
     private static String readAll(Reader rd) throws IOException {
@@ -45,11 +55,12 @@ public class WeatherGetter {
             JSONArray tempMin = obj.getJSONArray("temperatureMin");
             JSONArray tempMax = obj.getJSONArray("temperatureMax");
             JSONArray nar = obj.getJSONArray("narrative");
-            for (int i = 0; i < dayName.length(); i++) {
+            back.add(getCurrentWeather(plz));
+            for (int i = 1; i < dayName.length(); i++) {
                 if (tempMax.get(i).equals(null))
-                    back.add(new Day(dayName.getString(i), tempMin.getInt(i), 20, nar.getString(i)));
+                    back.add(new Day(tempMin.getInt(i), 20, nar.getString(i)));
                 else
-                    back.add(new Day(dayName.getString(i), tempMin.getInt(i), tempMax.getInt(i), nar.getString(i)));
+                    back.add(new Day(tempMin.getInt(i), tempMax.getInt(i), nar.getString(i)));
             }
            /* JSONObject day = (JSONObject) obj.getJSONArray("daypart").get(0);
             System.out.println(day.length());
@@ -69,23 +80,26 @@ public class WeatherGetter {
         return back;
     }
 
-    protected static void getCurrentWeather(String plz) throws IOException {
-        InputStream is = new URL("http://api.openweathermap.org/data/2.5/weather?zip=" + plz + ",AT&appid=6b5717bc865ffcb87230cfbcf6263078&units=metric").openStream();
+    protected static Day getCurrentWeather(String plz) throws IOException {
+        Day back = null;
+        InputStream is = new URL("http://api.openweathermap.org/data/2.5/weather?zip=" + plz + ",AT&appid=6b5717bc865ffcb87230cfbcf6263078&units=metric&lang=de").openStream();
         try {
-            BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+            BufferedReader rd = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
             String jsonString = readAll(rd);
-            //String jsonString = "{\"coord\":{\"lon\":16.5,\"lat\":48.22},\"weather\":[{\"id\":803,\"main\":\"Clouds\",\"description\":\"broken clouds\",\"icon\":\"04n\"}],\"base\":\"stations\",\"main\":{\"temp\":2.97,\"feels_like\":0.59,\"temp_min\":1.67,\"temp_max\":3.89,\"pressure\":1026,\"humidity\":93},\"visibility\":10000,\"wind\":{\"speed\":1,\"deg\":160},\"clouds\":{\"all\":75},\"dt\":1608222958,\"sys\":{\"type\":1,\"id\":6878,\"country\":\"AT\",\"sunrise\":1608187190,\"sunset\":1608217246},\"timezone\":3600,\"id\":0,\"name\":\"Wien, Donaustadt\",\"cod\":200}\n"
-            System.out.println(jsonString);
-            JSONObject obj = new JSONObject(jsonString);
-            JSONObject weather = obj.getJSONArray("weather").getJSONObject(0);
-            JSONObject temp = obj.getJSONObject("main");
-            System.out.println(temp);
-            System.out.println(weather.get("main")); // Jetziges Wetter Sonne/Wolke/whatever
-            //System.out.println(weather.get(0).);
+            JSONObject weatherData = new JSONObject(jsonString);
+            JSONObject weather = weatherData.getJSONArray("weather").getJSONObject(0);
+            JSONObject temp = weatherData.getJSONObject("main");
+            ZonedDateTime zo = ZonedDateTime.ofInstant(Instant.ofEpochSecond(weatherData.getInt("dt")), ZoneId.systemDefault());
+            String day_name = zo.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.GERMAN);
+            back = new Day(temp.getInt("temp_min"), temp.getInt("temp_max"), weather.getString("description"));
+            back.setFeelsLike(temp.getInt("feels_like"));
+            back.setCurrentTemp(temp.getInt("temp"));
         } catch (Exception e) {
-
+            System.err.println("Da lief etwas schief!");
+            e.printStackTrace();
         } finally {
             is.close();
         }
+        return back;
     }
 }

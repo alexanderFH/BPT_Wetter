@@ -12,6 +12,8 @@ import java.util.ArrayList;
 public class WeatherGetter {
     public static void main(String[] args) throws IOException {
        // ArrayList<Backbone.Day> days = getWeatherJson("33.74,-84.39");
+        Day day = new Day("sonntat",5,10,"toll");
+        System.out.println(day.getCurrentTemp());
         ArrayList<Day> days = getWeatherJson("1220:AT");
         for (Day d : days)
             System.out.println(d);

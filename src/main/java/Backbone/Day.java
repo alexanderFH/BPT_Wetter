@@ -4,7 +4,8 @@ public class Day {
     private String name;
     private int minTemp;
     private int maxTemp;
-//sunset sunrise
+    private int currentTemp = -999;
+    //sunset sunrise
     //windgesch / richtung
     private String narrative;
 
@@ -25,6 +26,14 @@ public class Day {
 
     public int getMaxTemp() {
         return maxTemp;
+    }
+
+    public void setCurrentTemp(int currentTemp) {
+        this.currentTemp = currentTemp;
+    }
+
+    public int getCurrentTemp() {
+        return currentTemp;
     }
 
     public String getNarrative() {

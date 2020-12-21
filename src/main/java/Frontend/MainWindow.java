@@ -6,14 +6,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 
-public class MainWindow implements Initializable {
+public class MainWindow  implements Initializable {
 
     @FXML
     private Label dayOne;
@@ -35,8 +39,15 @@ public class MainWindow implements Initializable {
     private Label maxTemp;
     @FXML
     private Label detail;
+    @FXML
+    private ImageView image;
+    @FXML
+    private Image img;
 
     private ArrayList<Day> days;
+
+    // Create Day object to work with Temp
+    //Day day;
 
     // Sets the days based on int values on to tge GUI
     // dayfx = Label of the day
@@ -84,6 +95,7 @@ public class MainWindow implements Initializable {
         minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(0).getMinTemp()) + " \u2103");
         maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(0).getMaxTemp()) + " \u2103");
         //detail.setText(days.get(0).getNarrative());
+        changeImage(0);
 
     }
 
@@ -96,6 +108,7 @@ public class MainWindow implements Initializable {
         temp.setText((minT+maxT)/2 + " \u2103");
         minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(1).getMinTemp()) + " \u2103");
         maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(1).getMaxTemp()) + " \u2103");
+        changeImage(1);
 
     }
 
@@ -109,6 +122,7 @@ public class MainWindow implements Initializable {
         temp.setText((minT+maxT)/2 + " \u2103");
         minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(2).getMinTemp()) + " \u2103");
         maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(2).getMaxTemp()) + " \u2103");
+        changeImage(2);
 
     }
 
@@ -121,6 +135,7 @@ public class MainWindow implements Initializable {
         temp.setText((minT+maxT)/2 + " \u2103");
         minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(3).getMinTemp()) + " \u2103");
         maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(3).getMaxTemp()) + " \u2103");
+        changeImage(3);
 
     }
 
@@ -134,7 +149,35 @@ public class MainWindow implements Initializable {
         temp.setText((minT+maxT)/2 + " \u2103");
         minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(4).getMinTemp()) + " \u2103");
         maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(4).getMaxTemp()) + " \u2103");
+        changeImage(4);
 
+
+    }
+
+
+    // Change image based on currentTemp/narrative
+    @FXML
+    private void changeImage(int currentDay) {
+        // Für später --> String narative = days.get(0).getNarrative();
+        int temp = days.get(currentDay).getCurrentTemp();
+
+        // Declares Images for every Weather icon
+        Image sunny = new Image("/img/sunny.png");
+        Image cloudy = new Image("/img/clouds.png");
+        Image cloudyRain = new Image("/img/cloudy_rain.png");
+        Image thunderstorm = new Image("/img/thunderstorm.png");
+
+
+        // Sets image based on current temp/narrative
+        if (0 < temp && temp < 9) {
+            image.setImage(cloudyRain);
+        } else if (temp >= 9 && temp <= 20 ) {
+            image.setImage(cloudy);
+        } else if (temp > 20) {
+            image.setImage(sunny);
+        } else {
+            image.setImage(thunderstorm);
+        }
 
     }
 
@@ -150,7 +193,7 @@ public class MainWindow implements Initializable {
         setDays(dayFive, 4);
 
         try {
-            days = WeatherGetter.getWeatherJson("1220:AT");
+            days = WeatherGetter.getWeatherJson("1220", "AT");
             double minT = days.get(0).getMinTemp();
             double maxT = days.get(0).getMaxTemp();
 
@@ -162,6 +205,5 @@ public class MainWindow implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }

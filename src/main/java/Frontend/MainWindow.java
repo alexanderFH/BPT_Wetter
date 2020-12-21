@@ -95,6 +95,7 @@ public class MainWindow  implements Initializable {
         minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(0).getMinTemp()) + " \u2103");
         maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(0).getMaxTemp()) + " \u2103");
         //detail.setText(days.get(0).getNarrative());
+        changeImage(0);
 
     }
 
@@ -107,6 +108,7 @@ public class MainWindow  implements Initializable {
         temp.setText((minT+maxT)/2 + " \u2103");
         minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(1).getMinTemp()) + " \u2103");
         maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(1).getMaxTemp()) + " \u2103");
+        changeImage(1);
 
     }
 
@@ -120,6 +122,7 @@ public class MainWindow  implements Initializable {
         temp.setText((minT+maxT)/2 + " \u2103");
         minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(2).getMinTemp()) + " \u2103");
         maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(2).getMaxTemp()) + " \u2103");
+        changeImage(2);
 
     }
 
@@ -132,6 +135,7 @@ public class MainWindow  implements Initializable {
         temp.setText((minT+maxT)/2 + " \u2103");
         minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(3).getMinTemp()) + " \u2103");
         maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(3).getMaxTemp()) + " \u2103");
+        changeImage(3);
 
     }
 
@@ -145,6 +149,7 @@ public class MainWindow  implements Initializable {
         temp.setText((minT+maxT)/2 + " \u2103");
         minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(4).getMinTemp()) + " \u2103");
         maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(4).getMaxTemp()) + " \u2103");
+        changeImage(4);
 
 
     }
@@ -164,9 +169,9 @@ public class MainWindow  implements Initializable {
 
 
         // Sets image based on current temp/narrative
-        if (0 < temp && temp < 10) {
+        if (0 < temp && temp < 9) {
             image.setImage(cloudyRain);
-        } else if (temp >= 10 && temp <= 20 ) {
+        } else if (temp >= 9 && temp <= 20 ) {
             image.setImage(cloudy);
         } else if (temp > 20) {
             image.setImage(sunny);
@@ -200,8 +205,5 @@ public class MainWindow  implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        changeImage(0);
-
     }
 }

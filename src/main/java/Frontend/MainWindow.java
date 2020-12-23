@@ -157,7 +157,6 @@ public class MainWindow implements Initializable {
         minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(2).getMinTemp()) + " \u2103");
         maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(2).getMaxTemp()) + " \u2103");
         changeImage(2, days.get(2).getCurrentTemp());
-
     }
 
     @FXML
@@ -173,7 +172,6 @@ public class MainWindow implements Initializable {
         minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(3).getMinTemp()) + " \u2103");
         maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(3).getMaxTemp()) + " \u2103");
         changeImage(3, days.get(3).getCurrentTemp());
-
     }
 
     @FXML
@@ -189,8 +187,6 @@ public class MainWindow implements Initializable {
         minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(4).getMinTemp()) + " \u2103");
         maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(4).getMaxTemp()) + " \u2103");
         changeImage(4, days.get(4).getCurrentTemp());
-
-
     }
 
 
@@ -205,7 +201,7 @@ public class MainWindow implements Initializable {
         Image cloudy = new Image("/img/clouds.png");
         Image cloudyRain = new Image("/img/cloudy_rain.png");
         Image thunderstorm = new Image("/img/thunderstorm.png");
-        Image snowy = new Image("/img/snowy.png");
+        //Image snowy = new Image("/img/snowy.png");
 
         // Checks which Image is currently displayed
         String checkImage = "";
@@ -329,6 +325,11 @@ public class MainWindow implements Initializable {
         maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(0).getMaxTemp()) + " \u2103");
         //detail.setText(days.get(0).getNarrative());
 
+
+        changeImage(1, days.get(1).getCurrentTemp());
+        changeImage(2, days.get(2).getCurrentTemp());
+        changeImage(3, days.get(3).getCurrentTemp());
+        changeImage(4, days.get(4).getCurrentTemp());
         changeImage(0, days.get(0).getCurrentTemp());
     }
 }

@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Frontend.Settings"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Frontend.Settings">
+   <children>
+      <MenuButton fx:id="Temperature" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#ButtonPressed" onMouseClicked="#select" prefHeight="45.0" prefWidth="120.0" text="Celsius" textAlignment="CENTER">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Fahrenheit" />
+        </items>
+      </MenuButton>
+      <TextField fx:id="Position" layoutX="160.0" layoutY="16.0" prefHeight="45.0" prefWidth="120.0" text="Position change" />
+      <Button fx:id="Export" layoutX="311.0" layoutY="16.0" mnemonicParsing="false" onAction="#press" prefHeight="45.0" prefWidth="120.0" text="Exportieren" />
+      <ColorPicker fx:id="Colourpick" layoutX="466.0" layoutY="16.0" prefHeight="45.0" prefWidth="120.0" />
+      <Text layoutX="450.0" layoutY="380.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Version: 1.0.0 " wrappingWidth="120.00000067055225" />
+   </children>
 </AnchorPane>
+

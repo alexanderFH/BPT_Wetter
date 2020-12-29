@@ -3,7 +3,10 @@ package Frontend;
 import Backbone.Day;
 import Backbone.WeatherGetter;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
@@ -13,6 +16,7 @@ import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -477,6 +481,21 @@ public class MainWindow implements Initializable {
             bp2.getStyleClass().removeAll("clickedOnPane");
             bp3.getStyleClass().removeAll("clickedOnPane");
             bp4.getStyleClass().removeAll("clickedOnPane");
+        }
+    }
+
+    public void openSettings() {
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getClassLoader().getResource("Settings/settings.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("My New Stage Title");
+            stage.setScene(new Scene(root, 450, 400));
+            stage.show();
+
+        }
+        catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

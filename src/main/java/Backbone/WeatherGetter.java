@@ -1,27 +1,17 @@
 package Backbone;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.TextStyle;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 public class WeatherGetter {
     public static void main(String[] args) throws IOException {
         // ArrayList<Backbone.Day> days = getWeatherJson("33.74,-84.39");
-        getWeatherJson("8872","CH");
+        getWeatherJson("8872", "CH");
         // System.out.println(getCurrentWeather("1220", "AT").getNarrative());
         // ArrayList<Day> days = getWeatherJson("1220", "AT");
         // System.out.println(days.get(0));
@@ -44,7 +34,8 @@ public class WeatherGetter {
 
     public static ArrayList<Day> getWeatherJson(String plz, String country) {
         ArrayList<Day> back = new ArrayList<>();
-        back.add(getCurrentWeather(plz, country));
+        Day today = getCurrentWeather(plz, country);
+
         try (InputStream is = new URL("https://api.weather.com/v3/wx/forecast/daily/5day?postalKey=" + plz + ":" + country + "&format=json&units=m&language=de-DE&apiKey=1531e846099f413eb1e846099ff13ef6").openStream()) {
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
             String jsonString = readAll(rd);
@@ -53,8 +44,12 @@ public class WeatherGetter {
             JSONArray tempMin = weatherData.getJSONArray("temperatureMin");
             JSONArray tempMax = weatherData.getJSONArray("temperatureMax");
             JSONArray nar = weatherData.getJSONArray("narrative");
+            JSONArray moon = weatherData.getJSONArray("moonPhase");
+            today.setMoonphase(moon.getString(0));
+            today.setNarrative(nar.getString(0));
+            back.add(today);
             for (int i = 1; i < dayName.length(); i++) {
-                back.add(new Day(tempMin.getInt(i), tempMax.getInt(i), nar.getString(i)));
+                back.add(new Day(tempMin.getInt(i), tempMax.getInt(i), nar.getString(i), moon.getString(i)));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -81,20 +76,17 @@ public class WeatherGetter {
     }
 
     protected static Day getCurrentWeather(String plz, String country) {
-        Day back = null;
+        Day today = null;
         try (InputStream is = new URL("http://api.openweathermap.org/data/2.5/weather?zip=" + plz + "," + country + "&appid=6b5717bc865ffcb87230cfbcf6263078&units=metric&lang=de").openStream()) {
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
             String jsonString = rd.readLine();
             JSONObject weatherData = new JSONObject(jsonString);
-            JSONObject weather = weatherData.getJSONArray("weather").getJSONObject(0);
             JSONObject temp = weatherData.getJSONObject("main");
-            back = new Day(temp.getInt("temp_min"), temp.getInt("temp_max"), weather.getString("description"));
-            back.setFeelsLike(temp.getInt("feels_like"));
-            back.setCurrentTemp(temp.getInt("temp"));
+            today = new Day(temp.getInt("temp_min"), temp.getInt("temp_max"), temp.getInt("feels_like"), temp.getInt("temp"), temp.getInt("humidity"));
         } catch (Exception e) {
             System.err.println("Da lief etwas schief!");
             e.printStackTrace();
         }
-        return back;
+        return today;
     }
 }

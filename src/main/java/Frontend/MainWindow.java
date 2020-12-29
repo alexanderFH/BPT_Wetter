@@ -5,10 +5,14 @@ import Backbone.WeatherGetter;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -23,6 +27,8 @@ public class MainWindow implements Initializable {
 
     private static final DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 
+    @FXML
+    private MenuItem closeMenu;
     @FXML
     private Label displayDate;
     @FXML
@@ -472,5 +478,9 @@ public class MainWindow implements Initializable {
             bp3.getStyleClass().removeAll("clickedOnPane");
             bp4.getStyleClass().removeAll("clickedOnPane");
         }
+    }
+
+    public void closeWindow() {
+        System.exit(0);
     }
 }

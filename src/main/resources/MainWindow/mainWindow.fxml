@@ -25,7 +25,7 @@
                   <MenuItem mnemonicParsing="false" text="Settings" />
               </items>
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem fx:id="closeMenu" onAction="#closeWindow" mnemonicParsing="false" text="Close"/>
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">

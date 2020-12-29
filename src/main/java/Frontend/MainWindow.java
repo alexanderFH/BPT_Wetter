@@ -562,7 +562,7 @@ public class MainWindow implements Initializable {
         try {
             root = FXMLLoader.load(getClass().getClassLoader().getResource("Settings/settings.fxml"));
             Stage stage = new Stage();
-            stage.setTitle("My New Stage Title");
+            stage.setTitle("Settings");
             stage.setScene(new Scene(root, 450, 400));
             stage.show();
         }

@@ -121,8 +121,8 @@ public class MainWindow implements Initializable {
         } else {
             temp.setText(days.get(0).getCurrentTemp() + " \u2103");
         }
-        minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(0).getMinTemp()) + " \u2103");
-        maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(0).getMaxTemp()) + " \u2103");
+        minTemp.setText("minimale Temperatur: " + days.get(0).getMinTemp() + " \u2103");
+        maxTemp.setText("maximale Temperatur: " + days.get(0).getMaxTemp() + " \u2103");
         //detail.setText(days.get(0).getNarrative());
         changeImage(0, days.get(0).getCurrentTemp());
 
@@ -138,8 +138,8 @@ public class MainWindow implements Initializable {
         } else {
             temp.setText(days.get(1).getCurrentTemp() + " \u2103");
         }
-        minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(1).getMinTemp()) + " \u2103");
-        maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(1).getMaxTemp()) + " \u2103");
+        minTemp.setText("minimale Temperatur: " + days.get(1).getMinTemp() + " \u2103");
+        maxTemp.setText("maximale Temperatur: " + days.get(1).getMaxTemp() + " \u2103");
         changeImage(1, days.get(1).getCurrentTemp());
 
     }
@@ -154,8 +154,8 @@ public class MainWindow implements Initializable {
         } else {
             temp.setText(days.get(2).getCurrentTemp() + " \u2103");
         }
-        minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(2).getMinTemp()) + " \u2103");
-        maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(2).getMaxTemp()) + " \u2103");
+        minTemp.setText("minimale Temperatur: " + days.get(2).getMinTemp() + " \u2103");
+        maxTemp.setText("maximale Temperatur: " + days.get(2).getMaxTemp() + " \u2103");
         changeImage(2, days.get(2).getCurrentTemp());
     }
 
@@ -169,8 +169,8 @@ public class MainWindow implements Initializable {
         } else {
             temp.setText(days.get(3).getCurrentTemp() + " \u2103");
         }
-        minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(3).getMinTemp()) + " \u2103");
-        maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(3).getMaxTemp()) + " \u2103");
+        minTemp.setText("minimale Temperatur: " + days.get(3).getMinTemp() + " \u2103");
+        maxTemp.setText("maximale Temperatur: " + days.get(3).getMaxTemp() + " \u2103");
         changeImage(3, days.get(3).getCurrentTemp());
     }
 
@@ -184,15 +184,15 @@ public class MainWindow implements Initializable {
         } else {
             temp.setText(days.get(4).getCurrentTemp() + " \u2103");
         }
-        minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(4).getMinTemp()) + " \u2103");
-        maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(4).getMaxTemp()) + " \u2103");
+        minTemp.setText("minimale Temperatur: " + days.get(4).getMinTemp() + " \u2103");
+        maxTemp.setText("maximale Temperatur: " + days.get(4).getMaxTemp() + " \u2103");
         changeImage(4, days.get(4).getCurrentTemp());
     }
 
 
     // Change image based on currentTemp/narrative
     @FXML
-    private void changeImage(int currentDay, int currentTemp) {
+    private void changeImage(int currentDay, double currentTemp) {
         // Für später --> String narative = days.get(0).getNarrative();
         //int temp = days.get(currentDay).getCurrentTemp();
 
@@ -321,8 +321,8 @@ public class MainWindow implements Initializable {
             nextDayTemp5.setText(days.get(4).getCurrentTemp() + " \u2103");
         }
 
-        minTemp.setText("minimale Temperatur: " + Integer.toString( days.get(0).getMinTemp()) + " \u2103");
-        maxTemp.setText("maximale Temperatur: " + Integer.toString(days.get(0).getMaxTemp()) + " \u2103");
+        minTemp.setText("minimale Temperatur: " + days.get(0).getMinTemp() + " \u2103");
+        maxTemp.setText("maximale Temperatur: " + days.get(0).getMaxTemp() + " \u2103");
         //detail.setText(days.get(0).getNarrative());
 
 

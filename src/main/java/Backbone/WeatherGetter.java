@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class WeatherGetter {
     public static void main(String[] args) throws IOException {
         // ArrayList<Backbone.Day> days = getWeatherJson("33.74,-84.39");
-        getWeatherJson("8872", "CH");
+        getWeatherJson("1220", "AT");
         // System.out.println(getCurrentWeather("1220", "AT").getNarrative());
         // ArrayList<Day> days = getWeatherJson("1220", "AT");
         // System.out.println(days.get(0));
@@ -49,7 +49,7 @@ public class WeatherGetter {
             today.setNarrative(nar.getString(0));
             back.add(today);
             for (int i = 1; i < dayName.length(); i++) {
-                back.add(new Day(tempMin.getInt(i), tempMax.getInt(i), nar.getString(i), moon.getString(i)));
+                back.add(new Day(tempMin.getDouble(i), tempMax.getDouble(i), nar.getString(i), moon.getString(i)));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -82,7 +82,7 @@ public class WeatherGetter {
             String jsonString = rd.readLine();
             JSONObject weatherData = new JSONObject(jsonString);
             JSONObject temp = weatherData.getJSONObject("main");
-            today = new Day(temp.getInt("temp_min"), temp.getInt("temp_max"), temp.getInt("feels_like"), temp.getInt("temp"), temp.getInt("humidity"));
+            today = new Day(temp.getDouble("temp_min"), temp.getDouble("temp_max"), temp.getDouble("feels_like"), temp.getDouble("temp"), temp.getDouble("humidity"));
         } catch (Exception e) {
             System.err.println("Da lief etwas schief!");
             e.printStackTrace();

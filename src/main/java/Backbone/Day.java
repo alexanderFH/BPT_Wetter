@@ -1,17 +1,18 @@
 package Backbone;
 
 public class Day {
-    private int minTemp;
-    private int maxTemp;
-    private int feelsLike;
-    private int currentTemp = -999;
-    private int humidity;
+    private double minTemp;
+    private double maxTemp;
+    private double feelsLike;
+    private double currentTemp = -999;
+    private double humidity;
     private String moonphase;
     //sunset sunrise
     //windgesch / richtung
     private String narrative;
+    private double rain;
 
-    public Day(int minTemp, int maxTemp, int feelsLike, int currentTemp, int humidity) {
+    public Day(double minTemp, double maxTemp, double feelsLike, double currentTemp, double humidity) {
         this.minTemp = minTemp;
         this.maxTemp = maxTemp;
         this.feelsLike = feelsLike;
@@ -19,7 +20,7 @@ public class Day {
         this.humidity = humidity;
     }
 
-    public Day(int minTemp, int maxTemp, String narrative, String moonphase) {
+    public Day(double minTemp, double maxTemp, String narrative, String moonphase) {
         this.minTemp = minTemp;
         this.maxTemp = maxTemp;
         this.narrative = narrative;
@@ -27,15 +28,15 @@ public class Day {
     }
 
 
-    public int getMinTemp() {
+    public double getMinTemp() {
         return minTemp;
     }
 
-    public int getMaxTemp() {
+    public double getMaxTemp() {
         return maxTemp;
     }
 
-    public int getCurrentTemp() {
+    public double getCurrentTemp() {
         return currentTemp;
     }
 
@@ -43,7 +44,7 @@ public class Day {
         this.currentTemp = currentTemp;
     }
 
-    public int getFeelsLike() {
+    public double getFeelsLike() {
         return feelsLike;
     }
 
@@ -67,7 +68,7 @@ public class Day {
         this.moonphase = moonphase;
     }
 
-    public int getHumidity() {
+    public Double getHumidity() {
         return humidity;
     }
 

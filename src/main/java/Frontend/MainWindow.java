@@ -48,6 +48,8 @@ public class MainWindow implements Initializable {
     @FXML
     private Label dayFive;
     @FXML
+    private Label daySix;
+    @FXML
     private Label temp;
     @FXML
     private Label minTemp;
@@ -79,6 +81,10 @@ public class MainWindow implements Initializable {
     private ImageView imageNextDay5;  // Icon Box 5
     @FXML
     private Image imgNextDay5;
+    @FXML
+    private ImageView imageNextDay6;  // Icon Box 5
+    @FXML
+    private Image imgNextDay6;
 
     @FXML
     private Label nextDayTemp1;
@@ -90,6 +96,8 @@ public class MainWindow implements Initializable {
     private Label nextDayTemp4;
     @FXML
     private Label nextDayTemp5;
+    @FXML
+    private Label nextDayTemp6;
 
     private ArrayList<Day> days;
 
@@ -98,6 +106,7 @@ public class MainWindow implements Initializable {
     private boolean bp3Pressed;
     private boolean bp4Pressed;
     private boolean bp5Pressed;
+    private boolean bp6Pressed;
 
     @FXML
     private BorderPane bp1;
@@ -109,6 +118,8 @@ public class MainWindow implements Initializable {
     private BorderPane bp4;
     @FXML
     private BorderPane bp5;
+    @FXML
+    private BorderPane bp6;
 
     // Sets the days based on int values on to tge GUI
     // dayfx = Label of the day
@@ -170,6 +181,7 @@ public class MainWindow implements Initializable {
         bp3Pressed = false;
         bp4Pressed = false;
         bp5Pressed = false;
+        bp6Pressed = false;
         borderPanePressed();
     }
 
@@ -200,6 +212,7 @@ public class MainWindow implements Initializable {
         bp4Pressed = false;
         bp3Pressed = false;
         bp5Pressed = false;
+        bp6Pressed = false;
         borderPanePressed();
     }
 
@@ -230,6 +243,7 @@ public class MainWindow implements Initializable {
         bp2Pressed = false;
         bp4Pressed = false;
         bp5Pressed = false;
+        bp6Pressed = false;
         borderPanePressed();
     }
 
@@ -260,6 +274,7 @@ public class MainWindow implements Initializable {
         bp2Pressed = false;
         bp3Pressed = false;
         bp5Pressed = false;
+        bp6Pressed = false;
         borderPanePressed();
     }
 
@@ -290,9 +305,40 @@ public class MainWindow implements Initializable {
         bp2Pressed = false;
         bp3Pressed = false;
         bp4Pressed = false;
+        bp6Pressed = false;
         borderPanePressed();
     }
 
+    @FXML
+    private void changeDaySix() {
+        Calendar c = Calendar.getInstance();
+        c.setTime(currentDate);
+        c.add(Calendar.DATE, 5);
+
+        Date currentDate = c.getTime();
+
+        displayDate.setText(dateFormat.format(currentDate));
+
+        dayOne.setText(daySix.getText());
+        if(days.get(5).getCurrentTemp() == -999) {
+            double minT = days.get(5).getMIN_TEMP();
+            double maxT = days.get(5).getMAX_TEMP();
+            temp.setText((minT+maxT)/2 + " \u2103");
+        } else {
+            temp.setText(days.get(5).getCurrentTemp() + " \u2103");
+        }
+        minTemp.setText("minimale Temperatur: " + days.get(5).getMIN_TEMP() + " \u2103");
+        maxTemp.setText("maximale Temperatur: " + days.get(5).getMAX_TEMP() + " \u2103");
+        changeImage(5, days.get(5).getCurrentTemp());
+
+        bp6Pressed = true;
+        bp1Pressed = false;
+        bp2Pressed = false;
+        bp3Pressed = false;
+        bp4Pressed = false;
+        bp5Pressed = false;
+        borderPanePressed();
+    }
 
     // Change image based on currentTemp/narrative
     @FXML
@@ -335,6 +381,7 @@ public class MainWindow implements Initializable {
                     case 2 -> imageNextDay3.setImage(cloudyRain);
                     case 3 -> imageNextDay4.setImage(cloudyRain);
                     case 4 -> imageNextDay5.setImage(cloudyRain);
+                    case 5 -> imageNextDay6.setImage(cloudyRain);
                 }
                 break;
             case "cloudy":
@@ -344,6 +391,7 @@ public class MainWindow implements Initializable {
                     case 2 -> imageNextDay3.setImage(cloudy);
                     case 3 -> imageNextDay4.setImage(cloudy);
                     case 4 -> imageNextDay5.setImage(cloudy);
+                    case 5 -> imageNextDay6.setImage(cloudy);
                 }
                 break;
             case "sunny":
@@ -353,6 +401,7 @@ public class MainWindow implements Initializable {
                     case 2 -> imageNextDay3.setImage(sunny);
                     case 3 -> imageNextDay4.setImage(sunny);
                     case 4 -> imageNextDay5.setImage(sunny);
+                    case 5 -> imageNextDay6.setImage(sunny);
                 }
                 break;
             default:
@@ -362,6 +411,7 @@ public class MainWindow implements Initializable {
                     case 2 -> imageNextDay3.setImage(thunderstorm);
                     case 3 -> imageNextDay4.setImage(thunderstorm);
                     case 4 -> imageNextDay5.setImage(thunderstorm);
+                    case 5 -> imageNextDay6.setImage(thunderstorm);
                 }
                 break;
         }
@@ -382,6 +432,7 @@ public class MainWindow implements Initializable {
         setDays(dayThree, 2);
         setDays(dayFour, 3);
         setDays(dayFive, 4);
+        setDays(daySix, 5);
 
         bp1.getStyleClass().add("clickedOnPane");
 
@@ -432,6 +483,14 @@ public class MainWindow implements Initializable {
             nextDayTemp5.setText(days.get(4).getCurrentTemp() + " \u2103");
         }
 
+        if(days.get(5).getCurrentTemp() == -999) {
+            double minT = days.get(5).getMIN_TEMP();
+            double maxT = days.get(5).getMAX_TEMP();
+            nextDayTemp6.setText((minT+maxT)/2 + " \u2103");
+        } else {
+            nextDayTemp6.setText(days.get(5).getCurrentTemp() + " \u2103");
+        }
+
         minTemp.setText("minimale Temperatur: " + days.get(0).getMIN_TEMP() + " \u2103");
         maxTemp.setText("maximale Temperatur: " + days.get(0).getMAX_TEMP() + " \u2103");
         //detail.setText(days.get(0).getNarrative());
@@ -441,6 +500,7 @@ public class MainWindow implements Initializable {
         changeImage(2, days.get(2).getCurrentTemp());
         changeImage(3, days.get(3).getCurrentTemp());
         changeImage(4, days.get(4).getCurrentTemp());
+        changeImage(5, days.get(5).getCurrentTemp());
         changeImage(0, days.get(0).getCurrentTemp());
 
 
@@ -453,6 +513,7 @@ public class MainWindow implements Initializable {
             bp3.getStyleClass().removeAll("clickedOnPane");
             bp4.getStyleClass().removeAll("clickedOnPane");
             bp5.getStyleClass().removeAll("clickedOnPane");
+            bp6.getStyleClass().removeAll("clickedOnPane");
         }
         if(bp2Pressed) {
             bp2.getStyleClass().add("clickedOnPane");
@@ -460,6 +521,7 @@ public class MainWindow implements Initializable {
             bp3.getStyleClass().removeAll("clickedOnPane");
             bp4.getStyleClass().removeAll("clickedOnPane");
             bp5.getStyleClass().removeAll("clickedOnPane");
+            bp6.getStyleClass().removeAll("clickedOnPane");
         }
         if(bp3Pressed) {
             bp3.getStyleClass().add("clickedOnPane");
@@ -467,6 +529,7 @@ public class MainWindow implements Initializable {
             bp2.getStyleClass().removeAll("clickedOnPane");
             bp4.getStyleClass().removeAll("clickedOnPane");
             bp5.getStyleClass().removeAll("clickedOnPane");
+            bp6.getStyleClass().removeAll("clickedOnPane");
         }
         if(bp4Pressed) {
             bp4.getStyleClass().add("clickedOnPane");
@@ -474,6 +537,7 @@ public class MainWindow implements Initializable {
             bp2.getStyleClass().removeAll("clickedOnPane");
             bp3.getStyleClass().removeAll("clickedOnPane");
             bp5.getStyleClass().removeAll("clickedOnPane");
+            bp6.getStyleClass().removeAll("clickedOnPane");
         }
         if(bp5Pressed) {
             bp5.getStyleClass().add("clickedOnPane");
@@ -481,6 +545,15 @@ public class MainWindow implements Initializable {
             bp2.getStyleClass().removeAll("clickedOnPane");
             bp3.getStyleClass().removeAll("clickedOnPane");
             bp4.getStyleClass().removeAll("clickedOnPane");
+            bp6.getStyleClass().removeAll("clickedOnPane");
+        }
+        if(bp6Pressed) {
+            bp6.getStyleClass().add("clickedOnPane");
+            bp1.getStyleClass().removeAll("clickedOnPane");
+            bp2.getStyleClass().removeAll("clickedOnPane");
+            bp3.getStyleClass().removeAll("clickedOnPane");
+            bp4.getStyleClass().removeAll("clickedOnPane");
+            bp5.getStyleClass().removeAll("clickedOnPane");
         }
     }
 
@@ -492,7 +565,6 @@ public class MainWindow implements Initializable {
             stage.setTitle("My New Stage Title");
             stage.setScene(new Scene(root, 450, 400));
             stage.show();
-
         }
         catch (IOException e) {
             e.printStackTrace();

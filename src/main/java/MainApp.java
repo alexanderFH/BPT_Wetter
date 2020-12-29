@@ -14,7 +14,7 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("MainWindow/mainWindow.fxml"));
         primaryStage.setTitle("BPT-Wetter");
-        Scene scene = new Scene(root,600,400);
+        Scene scene = new Scene(root,700,400);
         scene.getStylesheets().add(getClass().getResource("css/styles.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();

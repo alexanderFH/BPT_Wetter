@@ -10,8 +10,15 @@ import java.util.ArrayList;
 
 public class WeatherGetter {
     public static void main(String[] args) throws IOException {
+        ArrayList<Day> days = getWeatherJson("1220", "AT");
+        for (Day day : days) {
+            System.out.println(day.getMoonphase());
+            System.out.println(day.getSUNRISE());
+        }
         // ArrayList<Backbone.Day> days = getWeatherJson("33.74,-84.39");
-        getWeatherJson("1220", "AT");
+        //getWeatherJson("1220", "AT");
+        //WeatherGetter w = new WeatherGetter();
+        //System.out.println(w.UTC_to_String(1609224276));
         // System.out.println(getCurrentWeather("1220", "AT").getNarrative());
         // ArrayList<Day> days = getWeatherJson("1220", "AT");
         // System.out.println(days.get(0));
@@ -45,11 +52,15 @@ public class WeatherGetter {
             JSONArray tempMax = weatherData.getJSONArray("temperatureMax");
             JSONArray nar = weatherData.getJSONArray("narrative");
             JSONArray moon = weatherData.getJSONArray("moonPhase");
+            JSONArray sunrise = weatherData.getJSONArray("sunriseTimeUtc");
+            JSONArray sunset = weatherData.getJSONArray("sunsetTimeUtc");
+            JSONArray rain = weatherData.getJSONArray("qpf");
             today.setMoonphase(moon.getString(0));
             today.setNarrative(nar.getString(0));
+            today.setRain(rain.getDouble(0));
             back.add(today);
             for (int i = 1; i < dayName.length(); i++) {
-                back.add(new Day(tempMin.getDouble(i), tempMax.getDouble(i), nar.getString(i), moon.getString(i)));
+                back.add(new Day(tempMin.getDouble(i), tempMax.getDouble(i), nar.getString(i), moon.getString(i), sunrise.getLong(i), sunset.getLong(i), rain.getDouble(i)));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -82,11 +93,14 @@ public class WeatherGetter {
             String jsonString = rd.readLine();
             JSONObject weatherData = new JSONObject(jsonString);
             JSONObject temp = weatherData.getJSONObject("main");
-            today = new Day(temp.getDouble("temp_min"), temp.getDouble("temp_max"), temp.getDouble("feels_like"), temp.getDouble("temp"), temp.getDouble("humidity"));
+            JSONObject sys = weatherData.getJSONObject("sys");
+            today = new Day(temp.getDouble("temp_min"), temp.getDouble("temp_max"), temp.getDouble("feels_like"), temp.getDouble("temp"), temp.getDouble("humidity"), sys.getLong("sunrise"), sys.getLong("sunset"));
         } catch (Exception e) {
             System.err.println("Da lief etwas schief!");
             e.printStackTrace();
         }
         return today;
     }
+
+
 }

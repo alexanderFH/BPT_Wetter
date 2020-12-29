@@ -1,39 +1,70 @@
 package Backbone;
 
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Day {
-    private double minTemp;
-    private double maxTemp;
+    private final double MIN_TEMP;
+    private final double MAX_TEMP;
+    private final long SUNSET;
+    private final long SUNRISE;
     private double feelsLike;
     private double currentTemp = -999;
     private double humidity;
     private String moonphase;
-    //sunset sunrise
-    //windgesch / richtung
     private String narrative;
     private double rain;
 
-    public Day(double minTemp, double maxTemp, double feelsLike, double currentTemp, double humidity) {
-        this.minTemp = minTemp;
-        this.maxTemp = maxTemp;
+    //windgesch / richtung
+
+    /**
+     * Constructor for the current condition API (Different API with access to different informations)
+     * @param MIN_TEMP
+     * @param MAX_TEMP
+     * @param feelsLike
+     * @param currentTemp
+     * @param humidity
+     * @param SUNRISE
+     * @param SUNSET
+     */
+    public Day(double MIN_TEMP, double MAX_TEMP, double feelsLike, double currentTemp, double humidity, long SUNRISE, long SUNSET) {
+        this.MIN_TEMP = MIN_TEMP;
+        this.MAX_TEMP = MAX_TEMP;
         this.feelsLike = feelsLike;
         this.currentTemp = currentTemp;
         this.humidity = humidity;
+        this.SUNRISE = SUNRISE;
+        this.SUNSET = SUNSET;
     }
 
-    public Day(double minTemp, double maxTemp, String narrative, String moonphase) {
-        this.minTemp = minTemp;
-        this.maxTemp = maxTemp;
+    /**
+     * Constructor for the weather forecast API
+     * @param MIN_TEMP
+     * @param MAX_TEMP
+     * @param narrative
+     * @param moonphase
+     * @param SUNRISE
+     * @param SUNSET
+     */
+    public Day(double MIN_TEMP, double MAX_TEMP, String narrative, String moonphase, long SUNRISE, long SUNSET, double rain) {
+        this.MIN_TEMP = MIN_TEMP;
+        this.MAX_TEMP = MAX_TEMP;
         this.narrative = narrative;
         this.moonphase = moonphase;
+        this.SUNRISE = SUNRISE;
+        this.SUNSET = SUNSET;
+        this.rain = rain;
     }
 
 
-    public double getMinTemp() {
-        return minTemp;
+    public double getMIN_TEMP() {
+        return MIN_TEMP;
     }
 
-    public double getMaxTemp() {
-        return maxTemp;
+    public double getMAX_TEMP() {
+        return MAX_TEMP;
     }
 
     public double getCurrentTemp() {
@@ -76,9 +107,30 @@ public class Day {
         this.humidity = humidity;
     }
 
+    public String getSUNRISE(){
+        return UTC_to_String(SUNRISE);
+    }
+
+    public String getSUNSET(){
+        return UTC_to_String(SUNSET);
+    }
+
+    public double getRain() {
+        return rain;
+    }
+
+    public void setRain(double rain) {
+        this.rain = rain;
+    }
+
+    private String UTC_to_String(long utc){
+        ZonedDateTime zo = ZonedDateTime.ofInstant(Instant.ofEpochSecond(utc), ZoneId.systemDefault());
+        return DateTimeFormatter.ofPattern("HH:mm:ss").format(zo);
+    }
+
     @Override
     public String toString() {
-        return "- MinTemp: " + minTemp + " - MaxTemp: " + maxTemp + "\n" +
+        return "- MinTemp: " + MIN_TEMP + " - MaxTemp: " + MAX_TEMP + "\n" +
                 "Narrative: " + narrative;
     }
 }

@@ -2,12 +2,16 @@ package Frontend;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 
-    public class Settings {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class Settings implements Initializable {
 
         @FXML
         private MenuButton Temperature;
@@ -21,4 +25,9 @@ import javafx.scene.control.TextField;
         @FXML
         private ColorPicker Colourpick;
 
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
     }
+}

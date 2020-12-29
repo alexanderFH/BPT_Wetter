@@ -7,14 +7,24 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class MainWindow implements Initializable {
 
+    Date currentDate = null;
+
+    private static final DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+
+    @FXML
+    private Label displayDate;
     @FXML
     private Label dayOne;
     @FXML
@@ -73,6 +83,23 @@ public class MainWindow implements Initializable {
 
     private ArrayList<Day> days;
 
+    private boolean bp1Pressed;
+    private boolean bp2Pressed;
+    private boolean bp3Pressed;
+    private boolean bp4Pressed;
+    private boolean bp5Pressed;
+
+    @FXML
+    private BorderPane bp1;
+    @FXML
+    private BorderPane bp2;
+    @FXML
+    private BorderPane bp3;
+    @FXML
+    private BorderPane bp4;
+    @FXML
+    private BorderPane bp5;
+
     // Sets the days based on int values on to tge GUI
     // dayfx = Label of the day
     // controllNumber = used to change from dayOne to dayTwo and so on...
@@ -111,6 +138,10 @@ public class MainWindow implements Initializable {
 
     @FXML
     private void changeToFirstDay() {
+        currentDate = new Date();
+
+        displayDate.setText(dateFormat.format(currentDate));
+
         dayOne.setText(dayOne2.getText());
         if(days.get(0).getCurrentTemp() == -999) {
             double minT = days.get(0).getMIN_TEMP();
@@ -124,10 +155,24 @@ public class MainWindow implements Initializable {
         //detail.setText(days.get(0).getNarrative());
         changeImage(0, days.get(0).getCurrentTemp());
 
+        bp1Pressed = true;
+        bp2Pressed = false;
+        bp3Pressed = false;
+        bp4Pressed = false;
+        bp5Pressed = false;
+        borderPanePressed();
     }
 
     @FXML
     private void changeDayTwo() {
+        Calendar c = Calendar.getInstance();
+        c.setTime(currentDate);
+        c.add(Calendar.DATE, 1);
+
+        Date currentDate = c.getTime();
+
+        displayDate.setText(dateFormat.format(currentDate));
+
         dayOne.setText(dayTwo.getText());
         if(days.get(1).getCurrentTemp() == -999) {
             double minT = days.get(1).getMIN_TEMP();
@@ -140,10 +185,24 @@ public class MainWindow implements Initializable {
         maxTemp.setText("maximale Temperatur: " + days.get(1).getMAX_TEMP() + " \u2103");
         changeImage(1, days.get(1).getCurrentTemp());
 
+        bp2Pressed = true;
+        bp1Pressed = false;
+        bp4Pressed = false;
+        bp3Pressed = false;
+        bp5Pressed = false;
+        borderPanePressed();
     }
 
     @FXML
     private void changeDayThree() {
+        Calendar c = Calendar.getInstance();
+        c.setTime(currentDate);
+        c.add(Calendar.DATE, 2);
+
+        Date currentDate = c.getTime();
+
+        displayDate.setText(dateFormat.format(currentDate));
+
         dayOne.setText(dayThree.getText());
         if(days.get(2).getCurrentTemp() == -999) {
             double minT = days.get(2).getMIN_TEMP();
@@ -155,10 +214,25 @@ public class MainWindow implements Initializable {
         minTemp.setText("minimale Temperatur: " + days.get(2).getMIN_TEMP() + " \u2103");
         maxTemp.setText("maximale Temperatur: " + days.get(2).getMAX_TEMP() + " \u2103");
         changeImage(2, days.get(2).getCurrentTemp());
+
+        bp3Pressed = true;
+        bp1Pressed = false;
+        bp2Pressed = false;
+        bp4Pressed = false;
+        bp5Pressed = false;
+        borderPanePressed();
     }
 
     @FXML
     private void changeDayFour() {
+        Calendar c = Calendar.getInstance();
+        c.setTime(currentDate);
+        c.add(Calendar.DATE, 3);
+
+        Date currentDate = c.getTime();
+
+        displayDate.setText(dateFormat.format(currentDate));
+
         dayOne.setText(dayFour.getText());
         if(days.get(3).getCurrentTemp() == -999) {
             double minT = days.get(3).getMIN_TEMP();
@@ -170,10 +244,25 @@ public class MainWindow implements Initializable {
         minTemp.setText("minimale Temperatur: " + days.get(3).getMIN_TEMP() + " \u2103");
         maxTemp.setText("maximale Temperatur: " + days.get(3).getMAX_TEMP() + " \u2103");
         changeImage(3, days.get(3).getCurrentTemp());
+
+        bp4Pressed = true;
+        bp1Pressed = false;
+        bp2Pressed = false;
+        bp3Pressed = false;
+        bp5Pressed = false;
+        borderPanePressed();
     }
 
     @FXML
     private void changeDayFive() {
+        Calendar c = Calendar.getInstance();
+        c.setTime(currentDate);
+        c.add(Calendar.DATE, 4);
+
+        Date currentDate = c.getTime();
+
+        displayDate.setText(dateFormat.format(currentDate));
+
         dayOne.setText(dayFive.getText());
         if(days.get(4).getCurrentTemp() == -999) {
             double minT = days.get(4).getMIN_TEMP();
@@ -185,6 +274,13 @@ public class MainWindow implements Initializable {
         minTemp.setText("minimale Temperatur: " + days.get(4).getMIN_TEMP() + " \u2103");
         maxTemp.setText("maximale Temperatur: " + days.get(4).getMAX_TEMP() + " \u2103");
         changeImage(4, days.get(4).getCurrentTemp());
+
+        bp5Pressed = true;
+        bp1Pressed = false;
+        bp2Pressed = false;
+        bp3Pressed = false;
+        bp4Pressed = false;
+        borderPanePressed();
     }
 
 
@@ -265,12 +361,19 @@ public class MainWindow implements Initializable {
     // "Main" method of the controller
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        currentDate = new Date();
+
+        displayDate.setText(dateFormat.format(currentDate));
+
         setDays(dayOne, 0);
         setDays(dayOne2, 0);
         setDays(dayTwo, 1);
         setDays(dayThree, 2);
         setDays(dayFour, 3);
         setDays(dayFive, 4);
+
+        bp1.getStyleClass().add("clickedOnPane");
 
         days = WeatherGetter.getWeatherJson("1220", "AT");
 
@@ -329,5 +432,45 @@ public class MainWindow implements Initializable {
         changeImage(3, days.get(3).getCurrentTemp());
         changeImage(4, days.get(4).getCurrentTemp());
         changeImage(0, days.get(0).getCurrentTemp());
+
+
+    }
+
+    public void borderPanePressed() {
+        if(bp1Pressed) {
+            bp1.getStyleClass().add("clickedOnPane");
+            bp2.getStyleClass().removeAll("clickedOnPane");
+            bp3.getStyleClass().removeAll("clickedOnPane");
+            bp4.getStyleClass().removeAll("clickedOnPane");
+            bp5.getStyleClass().removeAll("clickedOnPane");
+        }
+        if(bp2Pressed) {
+            bp2.getStyleClass().add("clickedOnPane");
+            bp1.getStyleClass().removeAll("clickedOnPane");
+            bp3.getStyleClass().removeAll("clickedOnPane");
+            bp4.getStyleClass().removeAll("clickedOnPane");
+            bp5.getStyleClass().removeAll("clickedOnPane");
+        }
+        if(bp3Pressed) {
+            bp3.getStyleClass().add("clickedOnPane");
+            bp1.getStyleClass().removeAll("clickedOnPane");
+            bp2.getStyleClass().removeAll("clickedOnPane");
+            bp4.getStyleClass().removeAll("clickedOnPane");
+            bp5.getStyleClass().removeAll("clickedOnPane");
+        }
+        if(bp4Pressed) {
+            bp4.getStyleClass().add("clickedOnPane");
+            bp1.getStyleClass().removeAll("clickedOnPane");
+            bp2.getStyleClass().removeAll("clickedOnPane");
+            bp3.getStyleClass().removeAll("clickedOnPane");
+            bp5.getStyleClass().removeAll("clickedOnPane");
+        }
+        if(bp5Pressed) {
+            bp5.getStyleClass().add("clickedOnPane");
+            bp1.getStyleClass().removeAll("clickedOnPane");
+            bp2.getStyleClass().removeAll("clickedOnPane");
+            bp3.getStyleClass().removeAll("clickedOnPane");
+            bp4.getStyleClass().removeAll("clickedOnPane");
+        }
     }
 }

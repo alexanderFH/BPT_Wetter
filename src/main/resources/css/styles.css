@@ -11,20 +11,19 @@
 .subPane:hover {
     -fx-effect: dropshadow(three-pass-box, #5c98ff, 30, 0.5, 0, 0);
     -fx-cursor: hand;
-    -fx-opacity: 0.9;
+    -fx-opacity: 1;
     /*-fx-end-margin: 10px;
     -fx-pref-height: 158px;
     -fx-pref-width: 113px;*/
 }
 
-.subPane:armed {
-    -fx-effect: dropshadow(three-pass-box, red, 30, 0.5, 0, 0);
-    -fx-cursor: hand;
-}
-
 .displayTemp {
     -fx-text-alignment: center;
     -fx-font-weight: bold;
+}
+
+.displayDay {
+    -fx-font-size: 17px;
 }
 
 .displayDate {
@@ -37,4 +36,9 @@
 
 .testMe {
     -fx-rotate: 100;
+}
+
+.clickedOnPane {
+    -fx-opacity: 1;
+    -fx-effect: dropshadow(three-pass-box, #5c98ff, 30, 0.5, 0, 0);
 }

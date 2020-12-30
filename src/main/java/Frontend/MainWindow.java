@@ -436,7 +436,7 @@ public class MainWindow implements Initializable {
 
         bp1.getStyleClass().add("clickedOnPane");
 
-        days = WeatherGetter.getWeatherJson("1220", "AT");
+        days = WeatherGetter.getWeatherJson("1220", "AT",true);
 
         if(days.get(0).getCurrentTemp() == -999) {
             double minT = days.get(0).getMIN_TEMP();

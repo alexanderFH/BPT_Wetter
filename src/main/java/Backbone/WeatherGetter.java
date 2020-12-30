@@ -10,8 +10,9 @@ import java.util.ArrayList;
 
 public class WeatherGetter {
     public static void main(String[] args) throws IOException {
-        ArrayList<Day> days = getWeatherJson("1220", "AT");
+        ArrayList<Day> days = getWeatherJson("2325", "AT",true);
         for (Day day : days) {
+            System.out.println(day.getMIN_TEMP());
             System.out.println(day.getMoonphase());
             System.out.println(day.getSUNRISE());
         }
@@ -39,11 +40,13 @@ public class WeatherGetter {
         return sb.toString();
     }
 
-    public static ArrayList<Day> getWeatherJson(String plz, String country) {
+    public static ArrayList<Day> getWeatherJson(String plz, String country, boolean celsius) {
         ArrayList<Day> back = new ArrayList<>();
-        Day today = getCurrentWeather(plz, country);
-
-        try (InputStream is = new URL("https://api.weather.com/v3/wx/forecast/daily/5day?postalKey=" + plz + ":" + country + "&format=json&units=m&language=de-DE&apiKey=1531e846099f413eb1e846099ff13ef6").openStream()) {
+        Day today = getCurrentWeather(plz, country, celsius);
+        String unit = "m";
+        if(!celsius)
+            unit = "e";
+        try (InputStream is = new URL("https://api.weather.com/v3/wx/forecast/daily/5day?postalKey=" + plz + ":" + country + "&format=json&units="+unit+"&language=de-DE&apiKey=1531e846099f413eb1e846099ff13ef6").openStream()) {
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
             String jsonString = readAll(rd);
             JSONObject weatherData = new JSONObject(jsonString);
@@ -86,9 +89,12 @@ public class WeatherGetter {
         }
     }
 
-    protected static Day getCurrentWeather(String plz, String country) {
+    protected static Day getCurrentWeather(String plz, String country, boolean celsius) {
         Day today = null;
-        try (InputStream is = new URL("http://api.openweathermap.org/data/2.5/weather?zip=" + plz + "," + country + "&appid=6b5717bc865ffcb87230cfbcf6263078&units=metric&lang=de").openStream()) {
+        String unit = "metric";
+        if (!celsius)
+            unit = "imperial";
+        try (InputStream is = new URL("http://api.openweathermap.org/data/2.5/weather?zip=" + plz + "," + country + "&appid=6b5717bc865ffcb87230cfbcf6263078&units=" + unit + "&lang=de").openStream()) {
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
             String jsonString = rd.readLine();
             JSONObject weatherData = new JSONObject(jsonString);

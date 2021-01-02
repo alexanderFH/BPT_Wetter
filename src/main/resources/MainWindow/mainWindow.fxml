@@ -50,14 +50,16 @@
                <Insets left="23"/>
            </padding>
 
+
+
            <VBox spacing="20">
                <padding>
                    <Insets top="15" />
                </padding>
-               <Label fx:id="minTemp" layoutX="46.0" layoutY="49.0" styleClass="displayDetails" text="Label" />
-               <Label fx:id="maxTemp" layoutX="46.0" layoutY="84.0" styleClass="displayDetails" text="Label" />
-               <Label fx:id="humidity" layoutX="46.0" layoutY="122.0" styleClass="displayDetails" text="Label" />
-               <Label fx:id="rain" layoutX="46.0" layoutY="122.0" styleClass="displayDetails" text="Label" />
+               <Label fx:id="sunrise" layoutX="490.0" layoutY="49.0" styleClass="displayDetails" text="Label" />
+               <Label fx:id="sunset" layoutX="490.0" layoutY="84.0" styleClass="displayDetails" text="Label" />
+               <Label fx:id="moonphase" layoutX="490.0" layoutY="122.0" styleClass="displayDetails" text="Label" />
+               <Label fx:id="feelsLike" layoutX="490.0" layoutY="122.0" styleClass="displayDetails" text="Label" />
            </VBox>
 
            <VBox spacing="5">
@@ -83,10 +85,10 @@
                <padding>
                    <Insets top="15" />
                </padding>
-               <Label fx:id="sunrise" layoutX="490.0" layoutY="49.0" styleClass="displayDetails" text="Label" />
-               <Label fx:id="sunset" layoutX="490.0" layoutY="84.0" styleClass="displayDetails" text="Label" />
-               <Label fx:id="moonphase" layoutX="490.0" layoutY="122.0" styleClass="displayDetails" text="Label" />
-               <Label fx:id="feelsLike" layoutX="490.0" layoutY="122.0" styleClass="displayDetails" text="Label" />
+               <Label fx:id="minTemp" layoutX="46.0" layoutY="49.0" styleClass="displayDetails" text="Label" />
+               <Label fx:id="maxTemp" layoutX="46.0" layoutY="84.0" styleClass="displayDetails" text="Label" />
+               <Label fx:id="humidity" layoutX="46.0" layoutY="122.0" styleClass="displayDetails" text="Label" />
+               <Label fx:id="rain" layoutX="46.0" layoutY="122.0" styleClass="displayDetails" text="Label" />
            </VBox>
        </HBox>
    </center>

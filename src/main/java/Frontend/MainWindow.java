@@ -14,8 +14,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -168,6 +166,7 @@ public class MainWindow implements Initializable {
         changeImage(4, days.get(4).getCurrentTemp());
         changeImage(5, days.get(5).getCurrentTemp());
         changeImage(0, days.get(0).getCurrentTemp());
+
 
         bp1.getStyleClass().add("clickedOnPane");
     }
@@ -506,6 +505,10 @@ public class MainWindow implements Initializable {
 
     }
 
+    public void changeIconWhenNight(int currentDay) {
+
+    }
+
     // "Main" method of the controller
 
 
@@ -570,7 +573,7 @@ public class MainWindow implements Initializable {
         } else if(days.get(index).getRain() >= 3 && days.get(index).getRain() < 4) {
             rain.setText("Starker Regen moeglich");
         } else if(days.get(index).getRain() >= 4) {
-            rain.setText("Starker Regen bis hinzu Hagel moeglich");
+            rain.setText("Starker Regen bis hinzu Hagel\n moeglich");
         }
     }
 

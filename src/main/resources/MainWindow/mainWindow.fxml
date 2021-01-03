@@ -46,8 +46,8 @@
    </top>
 
    <center>
-       <HBox spacing="80" alignment="CENTER">
-           <VBox spacing="20">
+       <HBox fx:id="weatherInfo" spacing="80" alignment="CENTER">
+           <VBox fx:id="leftInfos" spacing="20">
                <padding>
                    <Insets top="15"/>
                </padding>
@@ -58,7 +58,7 @@
                <Label fx:id="rain" layoutX="46.0" layoutY="122.0" styleClass="displayDetails" text="Label" />
            </VBox>
 
-           <VBox spacing="5">
+           <VBox fx:id="centerInfos" spacing="5">
                <Label fx:id="temp" prefHeight="56.0" prefWidth="167.0" styleClass="displayTemp" text="25 Grad" textFill="WHITE">
                    <font>
                        <Font size="45.0" />
@@ -77,7 +77,7 @@
                </ImageView>
            </VBox>
 
-           <VBox spacing="20">
+           <VBox fx:id="rightInfos" spacing="20">
                <padding>
                    <Insets top="15"/>
                </padding>
@@ -91,7 +91,7 @@
    </center>
 
     <bottom>
-        <HBox spacing="27" alignment="BOTTOM_CENTER">
+        <HBox fx:id="nextWeatherInfo" spacing="27" alignment="BOTTOM_CENTER">
             <padding>
                 <Insets bottom="10" />
             </padding>

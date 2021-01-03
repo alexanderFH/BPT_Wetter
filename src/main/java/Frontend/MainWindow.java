@@ -2,6 +2,7 @@ package Frontend;
 
 import Backbone.Day;
 import Backbone.WeatherGetter;
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,7 +13,11 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -134,6 +139,18 @@ public class MainWindow implements Initializable {
     @FXML
     private BorderPane bp6;
 
+    @FXML
+    private HBox weatherInfo;
+    @FXML
+    private HBox nextWeatherInfo;
+
+    @FXML
+    private VBox leftInfos;
+    @FXML
+    private VBox centerInfos;
+    @FXML
+    private VBox rightInfos;
+
     // Sets the days based on int values on to tge GUI
     // dayfx = Label of the day
     // controllNumber = used to change from dayOne to dayTwo and so on...
@@ -170,9 +187,10 @@ public class MainWindow implements Initializable {
         changeImage(5, days.get(5).getCurrentTemp());
         changeImage(0, days.get(0).getCurrentTemp());
 
-
         bp1.getStyleClass().add("clickedOnPane");
 
+        setFadeAnimation(weatherInfo, 1200);
+        setFadeAnimation(nextWeatherInfo, 1200);
     }
 
     @FXML
@@ -239,6 +257,8 @@ public class MainWindow implements Initializable {
         bp5Pressed = false;
         bp6Pressed = false;
         borderPanePressed();
+
+        setFadeAnimation(weatherInfo, 1200);
     }
 
     @FXML
@@ -277,6 +297,8 @@ public class MainWindow implements Initializable {
         bp5Pressed = false;
         bp6Pressed = false;
         borderPanePressed();
+
+        setFadeAnimation(weatherInfo, 1200);
     }
 
     @FXML
@@ -315,6 +337,8 @@ public class MainWindow implements Initializable {
         bp5Pressed = false;
         bp6Pressed = false;
         borderPanePressed();
+
+        setFadeAnimation(weatherInfo, 1200);
     }
 
     @FXML
@@ -353,6 +377,8 @@ public class MainWindow implements Initializable {
         bp5Pressed = false;
         bp6Pressed = false;
         borderPanePressed();
+
+        setFadeAnimation(weatherInfo, 1200);
     }
 
     @FXML
@@ -391,6 +417,8 @@ public class MainWindow implements Initializable {
         bp4Pressed = false;
         bp6Pressed = false;
         borderPanePressed();
+
+        setFadeAnimation(weatherInfo, 1200);
     }
 
     @FXML
@@ -429,6 +457,8 @@ public class MainWindow implements Initializable {
         bp4Pressed = false;
         bp5Pressed = false;
         borderPanePressed();
+
+        setFadeAnimation(weatherInfo, 1200);
     }
 
     // Change image based on currentTemp/narrative
@@ -644,4 +674,12 @@ public class MainWindow implements Initializable {
     public void closeWindow() {
         System.exit(0);
     }
+
+    public void setFadeAnimation(Pane p, int ms) {
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(ms),p);
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(1.0);
+        fadeTransition.play();
+    }
+
 }

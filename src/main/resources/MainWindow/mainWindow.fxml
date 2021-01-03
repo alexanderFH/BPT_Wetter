@@ -18,6 +18,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.Region?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="myBorderPane" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Frontend.MainWindow">
    <top>
       <MenuBar style="-fx-background-color: #85c0ff;" BorderPane.alignment="CENTER">
@@ -45,21 +46,16 @@
    </top>
 
    <center>
-       <HBox spacing="70" alignment="BASELINE_CENTER">
-           <padding>
-               <Insets left="23"/>
-           </padding>
-
-
-
+       <HBox spacing="80" alignment="CENTER">
            <VBox spacing="20">
                <padding>
-                   <Insets top="15" />
+                   <Insets top="15"/>
                </padding>
-               <Label fx:id="sunrise" layoutX="490.0" layoutY="49.0" styleClass="displayDetails" text="Label" />
-               <Label fx:id="sunset" layoutX="490.0" layoutY="84.0" styleClass="displayDetails" text="Label" />
-               <Label fx:id="moonphase" layoutX="490.0" layoutY="122.0" styleClass="displayDetails" text="Label" />
-               <Label fx:id="feelsLike" layoutX="490.0" layoutY="122.0" styleClass="displayDetails" text="Label" />
+
+               <Label fx:id="minTemp" layoutX="46.0" layoutY="49.0" styleClass="displayDetails" text="Label" />
+               <Label fx:id="maxTemp" layoutX="46.0" layoutY="84.0" styleClass="displayDetails" text="Label" />
+               <Label fx:id="humidity" layoutX="46.0" layoutY="122.0" styleClass="displayDetails" text="Label" />
+               <Label fx:id="rain" layoutX="46.0" layoutY="122.0" styleClass="displayDetails" text="Label" />
            </VBox>
 
            <VBox spacing="5">
@@ -83,12 +79,13 @@
 
            <VBox spacing="20">
                <padding>
-                   <Insets top="15" />
+                   <Insets top="15"/>
                </padding>
-               <Label fx:id="minTemp" layoutX="46.0" layoutY="49.0" styleClass="displayDetails" text="Label" />
-               <Label fx:id="maxTemp" layoutX="46.0" layoutY="84.0" styleClass="displayDetails" text="Label" />
-               <Label fx:id="humidity" layoutX="46.0" layoutY="122.0" styleClass="displayDetails" text="Label" />
-               <Label fx:id="rain" layoutX="46.0" layoutY="122.0" styleClass="displayDetails" text="Label" />
+
+               <Label fx:id="sunrise" layoutX="490.0" layoutY="49.0" styleClass="displayDetails" text="Label" />
+               <Label fx:id="sunset" layoutX="490.0" layoutY="84.0" styleClass="displayDetails" text="Label" />
+               <Label fx:id="moonphase" layoutX="490.0" layoutY="122.0" styleClass="displayDetails" text="Label" />
+               <Label fx:id="feelsLike" layoutX="490.0" layoutY="122.0" styleClass="displayDetails" text="Label" />
            </VBox>
        </HBox>
    </center>

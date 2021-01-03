@@ -18,6 +18,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -155,10 +158,10 @@ public class MainWindow implements Initializable {
         maxTemp.setText("maximale Temperatur: " + days.get(0).getMAX_TEMP() + " \u2103");
         setRainLabel(0);
         humidity.setText("Luftfeuchtigkeit: " + days.get(0).getHumidity() + "%");
-        sunrise.setText("Sonnenaufgang um: " + days.get(0).getSUNRISE() + " Uhr");
-        sunset.setText("Sonnenuntergang um: " + days.get(0).getSUNSET() + " Uhr");
-        moonphase.setText("Mondphase: " + days.get(0).getMoonphase());
-        feelsLike.setText("Temperatur fuehlt sich an wie " + days.get(0).getFeelsLike() + " \u2103");
+        sunrise.setText("Sonnenaufgang um:\n " + days.get(0).getSUNRISE() + " Uhr");
+        sunset.setText("Sonnenuntergang um:\n " + days.get(0).getSUNSET() + " Uhr");
+        moonphase.setText("Mondphase:\n " + days.get(0).getMoonphase());
+        feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(0).getFeelsLike() + " \u2103");
 
         changeImage(1, days.get(1).getCurrentTemp());
         changeImage(2, days.get(2).getCurrentTemp());
@@ -169,6 +172,7 @@ public class MainWindow implements Initializable {
 
 
         bp1.getStyleClass().add("clickedOnPane");
+
     }
 
     @FXML
@@ -221,10 +225,10 @@ public class MainWindow implements Initializable {
         minTemp.setText("minimale Temperatur: " + days.get(0).getMIN_TEMP() + " \u2103");
         maxTemp.setText("maximale Temperatur: " + days.get(0).getMAX_TEMP() + " \u2103");
         humidity.setText("Luftfeuchtigkeit: " + days.get(0).getHumidity() + "%");
-        sunrise.setText("Sonnenaufgang um: " + days.get(0).getSUNRISE() + " Uhr");
-        sunset.setText("Sonnenuntergang um: " + days.get(0).getSUNSET() + " Uhr");
-        moonphase.setText("Mondphase: " + days.get(0).getMoonphase());
-        feelsLike.setText("Temperatur fuehlt sich an wie " + days.get(0).getFeelsLike() + " \u2103");
+        sunrise.setText("Sonnenaufgang um:\n " + days.get(0).getSUNRISE() + " Uhr");
+        sunset.setText("Sonnenuntergang um:\n " + days.get(0).getSUNSET() + " Uhr");
+        moonphase.setText("Mondphase:\n " + days.get(0).getMoonphase());
+        feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(0).getFeelsLike() + " \u2103");
         //detail.setText(days.get(0).getNarrative());
         changeImage(0, days.get(0).getCurrentTemp());
 
@@ -260,10 +264,10 @@ public class MainWindow implements Initializable {
         minTemp.setText("minimale Temperatur: " + days.get(1).getMIN_TEMP() + " \u2103");
         maxTemp.setText("maximale Temperatur: " + days.get(1).getMAX_TEMP() + " \u2103");
         humidity.setText("Luftfeuchtigkeit: " + days.get(1).getHumidity() + "%");
-        sunrise.setText("Sonnenaufgang um: " + days.get(1).getSUNRISE() + " Uhr");
-        sunset.setText("Sonnenuntergang um: " + days.get(1).getSUNSET() + " Uhr");
-        moonphase.setText("Mondphase: " + days.get(1).getMoonphase());
-        feelsLike.setText("Temperatur fuehlt sich an wie " + days.get(1).getFeelsLike() + " \u2103");
+        sunrise.setText("Sonnenaufgang um:\n " + days.get(1).getSUNRISE() + " Uhr");
+        sunset.setText("Sonnenuntergang um:\n " + days.get(1).getSUNSET() + " Uhr");
+        moonphase.setText("Mondphase:\n " + days.get(1).getMoonphase());
+        feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(1).getFeelsLike() + " \u2103");
         changeImage(1, days.get(1).getCurrentTemp());
 
         bp2Pressed = true;
@@ -298,10 +302,10 @@ public class MainWindow implements Initializable {
         minTemp.setText("minimale Temperatur: " + days.get(2).getMIN_TEMP() + " \u2103");
         maxTemp.setText("maximale Temperatur: " + days.get(2).getMAX_TEMP() + " \u2103");
         humidity.setText("Luftfeuchtigkeit: " + days.get(2).getHumidity() + "%");
-        sunrise.setText("Sonnenaufgang um: " + days.get(2).getSUNRISE() + " Uhr");
-        sunset.setText("Sonnenuntergang um: " + days.get(2).getSUNSET() + " Uhr");
-        moonphase.setText("Mondphase: " + days.get(2).getMoonphase());
-        feelsLike.setText("Temperatur fuehlt sich an wie " + days.get(2).getFeelsLike() + " \u2103");
+        sunrise.setText("Sonnenaufgang um:\n " + days.get(2).getSUNRISE() + " Uhr");
+        sunset.setText("Sonnenuntergang um:\n " + days.get(2).getSUNSET() + " Uhr");
+        moonphase.setText("Mondphase:\n " + days.get(2).getMoonphase());
+        feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(2).getFeelsLike() + " \u2103");
         changeImage(2, days.get(2).getCurrentTemp());
 
         bp3Pressed = true;
@@ -336,10 +340,10 @@ public class MainWindow implements Initializable {
         minTemp.setText("minimale Temperatur: " + days.get(3).getMIN_TEMP() + " \u2103");
         maxTemp.setText("maximale Temperatur: " + days.get(3).getMAX_TEMP() + " \u2103");
         humidity.setText("Luftfeuchtigkeit: " + days.get(3).getHumidity() + "%");
-        sunrise.setText("Sonnenaufgang um: " + days.get(3).getSUNRISE() + " Uhr");
-        sunset.setText("Sonnenuntergang um: " + days.get(3).getSUNSET() + " Uhr");
-        moonphase.setText("Mondphase: " + days.get(3).getMoonphase());
-        feelsLike.setText("Temperatur fuehlt sich an wie " + days.get(3).getFeelsLike() + " \u2103");
+        sunrise.setText("Sonnenaufgang um:\n " + days.get(3).getSUNRISE() + " Uhr");
+        sunset.setText("Sonnenuntergang um:\n " + days.get(3).getSUNSET() + " Uhr");
+        moonphase.setText("Mondphase:\n " + days.get(3).getMoonphase());
+        feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(3).getFeelsLike() + " \u2103");
         changeImage(3, days.get(3).getCurrentTemp());
 
         bp4Pressed = true;
@@ -374,10 +378,10 @@ public class MainWindow implements Initializable {
         minTemp.setText("minimale Temperatur: " + days.get(4).getMIN_TEMP() + " \u2103");
         maxTemp.setText("maximale Temperatur: " + days.get(4).getMAX_TEMP() + " \u2103");
         humidity.setText("Luftfeuchtigkeit: " + days.get(4).getHumidity() + "%");
-        sunrise.setText("Sonnenaufgang um: " + days.get(4).getSUNRISE() + " Uhr");
-        sunset.setText("Sonnenuntergang um: " + days.get(4).getSUNSET() + " Uhr");
-        moonphase.setText("Mondphase: " + days.get(4).getMoonphase());
-        feelsLike.setText("Temperatur fuehlt sich an wie " + days.get(4).getFeelsLike() + " \u2103");
+        sunrise.setText("Sonnenaufgang um:\n " + days.get(4).getSUNRISE() + " Uhr");
+        sunset.setText("Sonnenuntergang um:\n " + days.get(4).getSUNSET() + " Uhr");
+        moonphase.setText("Mondphase:\n " + days.get(4).getMoonphase());
+        feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(4).getFeelsLike() + " \u2103");
         changeImage(4, days.get(4).getCurrentTemp());
 
         bp5Pressed = true;
@@ -412,10 +416,10 @@ public class MainWindow implements Initializable {
         minTemp.setText("minimale Temperatur: " + days.get(5).getMIN_TEMP() + " \u2103");
         maxTemp.setText("maximale Temperatur: " + days.get(5).getMAX_TEMP() + " \u2103");
         humidity.setText("Luftfeuchtigkeit: " + days.get(5).getHumidity() + "%");
-        sunrise.setText("Sonnenaufgang um: " + days.get(5).getSUNRISE() + " Uhr");
-        sunset.setText("Sonnenuntergang um: " + days.get(5).getSUNSET() + " Uhr");
-        moonphase.setText("Mondphase: " + days.get(5).getMoonphase());
-        feelsLike.setText("Temperatur fuehlt sich an wie " + days.get(5).getFeelsLike() + " \u2103");
+        sunrise.setText("Sonnenaufgang um:\n " + days.get(5).getSUNRISE() + " Uhr");
+        sunset.setText("Sonnenuntergang um:\n " + days.get(5).getSUNSET() + " Uhr");
+        moonphase.setText("Mondphase:\n " + days.get(5).getMoonphase());
+        feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(5).getFeelsLike() + " \u2103");
         changeImage(5, days.get(5).getCurrentTemp());
 
         bp6Pressed = true;
@@ -504,13 +508,6 @@ public class MainWindow implements Initializable {
         }
 
     }
-
-    public void changeIconWhenNight(int currentDay) {
-
-    }
-
-    // "Main" method of the controller
-
 
     public void borderPanePressed() {
         if(bp1Pressed) {

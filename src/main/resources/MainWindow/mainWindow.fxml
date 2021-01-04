@@ -18,6 +18,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.Region?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="myBorderPane" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Frontend.MainWindow">
    <top>
       <MenuBar style="-fx-background-color: #85c0ff;" BorderPane.alignment="CENTER">
@@ -45,51 +46,52 @@
    </top>
 
    <center>
-        <HBox spacing="100" BorderPane.alignment="CENTER">
-             <padding>
-                 <Insets left="23"/>
-             </padding>
-             <VBox spacing="20">
-                 <padding>
-                     <Insets top="15" />
-                 </padding>
-                 <Label fx:id="minTemp" layoutX="46.0" layoutY="49.0" styleClass="displayDetails" text="Label" />
-                 <Label fx:id="maxTemp" layoutX="46.0" layoutY="84.0" styleClass="displayDetails" text="Label" />
-                 <Label fx:id="detail" layoutX="46.0" layoutY="122.0" styleClass="displayDetails" text="Label" />
-             </VBox>
+       <HBox fx:id="weatherInfo" spacing="80" alignment="CENTER">
+           <VBox fx:id="leftInfos" spacing="20">
+               <padding>
+                   <Insets top="15"/>
+               </padding>
 
-             <VBox spacing="5">
-                 <Label fx:id="temp" prefHeight="56.0" prefWidth="167.0" styleClass="displayTemp" text="25 Grad" textFill="WHITE">
-                     <font>
-                         <Font size="45.0" />
-                     </font>
-                 </Label>
+               <Label fx:id="minTemp" layoutX="46.0" layoutY="49.0" styleClass="displayDetails" text="Label" />
+               <Label fx:id="maxTemp" layoutX="46.0" layoutY="84.0" styleClass="displayDetails" text="Label" />
+               <Label fx:id="humidity" layoutX="46.0" layoutY="122.0" styleClass="displayDetails" text="Label" />
+               <Label fx:id="rain" layoutX="46.0" layoutY="122.0" styleClass="displayDetails" text="Label" />
+           </VBox>
 
-                 <HBox spacing="5">
-                     <Label fx:id="dayOne" layoutX="245.0" layoutY="66.0" styleClass="displayDay" text="Montag 27.08.2020" textFill="WHITE" />
-                     <Label fx:id="displayDate" layoutX="340.0" layoutY="66.0" styleClass="displayDate" text="27.08.2020" textFill="WHITE" />
-                 </HBox>
+           <VBox fx:id="centerInfos" spacing="5">
+               <Label fx:id="temp" prefHeight="56.0" prefWidth="167.0" styleClass="displayTemp" text="25 Grad" textFill="WHITE">
+                   <font>
+                       <Font size="45.0" />
+                   </font>
+               </Label>
 
-                 <ImageView fx:id="image" fitHeight="101.0" fitWidth="111.0" layoutX="237.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                         <Image fx:id="img" url="/img/sun-icon.png" />
-                     </image>
-                 </ImageView>
-             </VBox>
+               <HBox spacing="5">
+                   <Label fx:id="dayOne" layoutX="245.0" layoutY="66.0" styleClass="displayDay" text="Montag 27.08.2020" textFill="WHITE" />
+                   <Label fx:id="displayDate" layoutX="340.0" layoutY="66.0" styleClass="displayDate" text="27.08.2020" textFill="WHITE" />
+               </HBox>
 
-             <VBox spacing="20">
-                 <padding>
-                     <Insets top="15" />
-                 </padding>
-                 <Label layoutX="490.0" layoutY="49.0" styleClass="displayDetails" text="Label" />
-                 <Label layoutX="490.0" layoutY="84.0" styleClass="displayDetails" text="Label" />
-                 <Label layoutX="490.0" layoutY="122.0" styleClass="displayDetails" text="Label" />
-             </VBox>
-        </HBox>
+               <ImageView BorderPane.alignment="BASELINE_CENTER" fx:id="image" fitHeight="101.0" fitWidth="111.0" layoutX="237.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
+                   <image>
+                       <Image fx:id="img" url="/img/sun-icon.png" />
+                   </image>
+               </ImageView>
+           </VBox>
+
+           <VBox fx:id="rightInfos" spacing="20">
+               <padding>
+                   <Insets top="15"/>
+               </padding>
+
+               <Label fx:id="sunrise" layoutX="490.0" layoutY="49.0" styleClass="displayDetails" text="Label" />
+               <Label fx:id="sunset" layoutX="490.0" layoutY="84.0" styleClass="displayDetails" text="Label" />
+               <Label fx:id="moonphase" layoutX="490.0" layoutY="122.0" styleClass="displayDetails" text="Label" />
+               <Label fx:id="feelsLike" layoutX="490.0" layoutY="122.0" styleClass="displayDetails" text="Label" />
+           </VBox>
+       </HBox>
    </center>
 
     <bottom>
-        <HBox spacing="27" alignment="BOTTOM_CENTER">
+        <HBox fx:id="nextWeatherInfo" spacing="27" alignment="BOTTOM_CENTER">
             <padding>
                 <Insets bottom="10" />
             </padding>

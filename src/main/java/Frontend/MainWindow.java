@@ -151,9 +151,6 @@ public class MainWindow implements Initializable {
     @FXML
     private VBox rightInfos;
 
-    // Sets the days based on int values on to tge GUI
-    // dayfx = Label of the day
-    // controllNumber = used to change from dayOne to dayTwo and so on...
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -193,6 +190,10 @@ public class MainWindow implements Initializable {
         setFadeAnimation(nextWeatherInfo, 1200);
     }
 
+
+    // Sets the days based on int values on to tge GUI
+    // dayfx = Label of the day
+    // controllNumber = used to change from dayOne to dayTwo and so on...
     @FXML
     private void setDays(Label dayfx, int controllNumber) {
 
@@ -472,14 +473,33 @@ public class MainWindow implements Initializable {
         Image cloudy = new Image("/img/clouds.png");
         Image cloudyRain = new Image("/img/cloudy_rain.png");
         Image thunderstorm = new Image("/img/thunderstorm.png");
-        //Image snowy = new Image("/img/snowy.png");
+        Image snowy = new Image("/img/snowy.png");
 
         // Checks which Image is currently displayed
         String checkImage = "";
 
 
         // Sets image based on current temp/narrative
-        if (0 < currentTemp && currentTemp < 9) {
+        if(days.get(currentDay).getNarrative().toLowerCase().contains("schauer".toLowerCase())) {
+            image.setImage(cloudyRain);
+            checkImage = "cloudyRain";
+        } else if (days.get(currentDay).getNarrative().toLowerCase().contains("klar".toLowerCase())) {
+            image.setImage(sunny);
+            checkImage = "sunny";
+        } else if (days.get(currentDay).getNarrative().toLowerCase().contains("bedeckt".toLowerCase())) {
+            image.setImage(cloudy);
+            checkImage = "cloudy";
+        } else if (days.get(currentDay).getNarrative().toLowerCase().contains("Schnee".toLowerCase())) {
+            image.setImage(snowy);
+            checkImage = "snowy";
+        } else if (days.get(currentDay).getNarrative().toLowerCase().contains("gewitter".toLowerCase())){
+            image.setImage(thunderstorm);
+            checkImage = "thunderstorm";
+        } else {
+            image.setImage(cloudy);
+            checkImage = "cloudy";
+        }
+        /*if (0 < currentTemp && currentTemp < 9) {
             image.setImage(cloudyRain);
             checkImage = "cloudyRain";
         } else if (currentTemp >= 9 && currentTemp <= 20 ) {
@@ -491,7 +511,7 @@ public class MainWindow implements Initializable {
         } else {
             image.setImage(thunderstorm);
             checkImage = "thunderstorm";
-        }
+        } */
 
         // Sets images for icon boxes
         switch (checkImage) {
@@ -525,7 +545,7 @@ public class MainWindow implements Initializable {
                     case 5 -> imageNextDay6.setImage(sunny);
                 }
                 break;
-            default:
+            case "thunderstorm":
                 switch (currentDay) {
                     case 0 -> imageNextDay1.setImage(thunderstorm);
                     case 1 -> imageNextDay2.setImage(thunderstorm);
@@ -535,6 +555,15 @@ public class MainWindow implements Initializable {
                     case 5 -> imageNextDay6.setImage(thunderstorm);
                 }
                 break;
+            case "snowy":
+                switch (currentDay) {
+                    case 0 -> imageNextDay1.setImage(snowy);
+                    case 1 -> imageNextDay2.setImage(snowy);
+                    case 2 -> imageNextDay3.setImage(snowy);
+                    case 3 -> imageNextDay4.setImage(snowy);
+                    case 4 -> imageNextDay5.setImage(snowy);
+                    case 5 -> imageNextDay6.setImage(snowy);
+                }
         }
 
     }

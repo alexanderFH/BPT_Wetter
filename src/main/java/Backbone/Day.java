@@ -10,6 +10,7 @@ public class Day {
     private final double MAX_TEMP;
     private final long SUNSET;
     private final long SUNRISE;
+    private String day;
     private double feelsLike;
     private double currentTemp = -999;
     private double humidity;
@@ -17,30 +18,10 @@ public class Day {
     private String narrative;
     private double rain;
 
-    //windgesch / richtung
-
-    /**
-     * Constructor for the current condition API (Different API with access to different informations)
-     * @param MIN_TEMP
-     * @param MAX_TEMP
-     * @param feelsLike
-     * @param currentTemp
-     * @param humidity
-     * @param SUNRISE
-     * @param SUNSET
-     */
-    public Day(double MIN_TEMP, double MAX_TEMP, double feelsLike, double currentTemp, double humidity, long SUNRISE, long SUNSET) {
-        this.MIN_TEMP = MIN_TEMP;
-        this.MAX_TEMP = MAX_TEMP;
-        this.feelsLike = feelsLike;
-        this.currentTemp = currentTemp;
-        this.humidity = humidity;
-        this.SUNRISE = SUNRISE;
-        this.SUNSET = SUNSET;
-    }
 
     /**
      * Constructor for the weather forecast API
+     *
      * @param MIN_TEMP
      * @param MAX_TEMP
      * @param narrative
@@ -48,7 +29,8 @@ public class Day {
      * @param SUNRISE
      * @param SUNSET
      */
-    public Day(double MIN_TEMP, double MAX_TEMP, String narrative, String moonphase, long SUNRISE, long SUNSET, double rain) {
+    public Day(String day, double MIN_TEMP, double MAX_TEMP, String narrative, String moonphase, long SUNRISE, long SUNSET, double rain) {
+        this.day = day;
         this.MIN_TEMP = MIN_TEMP;
         this.MAX_TEMP = MAX_TEMP;
         this.narrative = narrative;
@@ -71,7 +53,7 @@ public class Day {
         return currentTemp;
     }
 
-    public void setCurrentTemp(int currentTemp) {
+    public void setCurrentTemp(double currentTemp) {
         this.currentTemp = currentTemp;
     }
 
@@ -79,7 +61,7 @@ public class Day {
         return feelsLike;
     }
 
-    public void setFeelsLike(int feelsLike) {
+    public void setFeelsLike(double feelsLike) {
         this.feelsLike = feelsLike;
     }
 
@@ -103,15 +85,15 @@ public class Day {
         return humidity;
     }
 
-    public void setHumidity(int humidity) {
+    public void setHumidity(double humidity) {
         this.humidity = humidity;
     }
 
-    public String getSUNRISE(){
+    public String getSUNRISE() {
         return UTC_to_String(SUNRISE);
     }
 
-    public String getSUNSET(){
+    public String getSUNSET() {
         return UTC_to_String(SUNSET);
     }
 
@@ -123,14 +105,33 @@ public class Day {
         this.rain = rain;
     }
 
-    private String UTC_to_String(long utc){
+    public String getDayName() {
+        return day;
+    }
+
+    private String UTC_to_String(long utc) {
         ZonedDateTime zo = ZonedDateTime.ofInstant(Instant.ofEpochSecond(utc), ZoneId.systemDefault());
         return DateTimeFormatter.ofPattern("HH:mm:ss").format(zo);
     }
 
+    public String toStringWithUnit(String unit) {
+        return day + ":\nMinimale Temperatur: " + MIN_TEMP + unit +
+                "\nMaximale Temperatur: " + MAX_TEMP + unit +
+                "\nMondphase: " + moonphase +
+                "\nRegenwahrscheinlichkeit: " + rain +
+                "\nSonnenaufgang: " + getSUNRISE() +
+                "\nSonnenuntergang: " + getSUNSET();
+    }
+
     @Override
     public String toString() {
-        return "- MinTemp: " + MIN_TEMP + " - MaxTemp: " + MAX_TEMP + "\n" +
-                "Narrative: " + narrative;
+        return day + ":\nMinimale Temperatur: " + MIN_TEMP +
+                "\nMaximale Temperatur: " + MAX_TEMP +
+                "\nMondphase: " + moonphase +
+                "\nRegenwahrscheinlichkeit: " + rain +
+                "\nSonnenaufgang: " + getSUNRISE() +
+                "\nSonnenuntergang: " + getSUNSET();
     }
+
+
 }

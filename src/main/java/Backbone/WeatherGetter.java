@@ -3,6 +3,7 @@ package Backbone;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import javax.swing.*;
 import java.io.*;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -10,12 +11,8 @@ import java.util.ArrayList;
 
 public class WeatherGetter {
     public static void main(String[] args) throws IOException {
-        ArrayList<Day> days = getWeatherJson("2325", "AT",true);
-        for (Day day : days) {
-            System.out.println(day.getMIN_TEMP());
-            System.out.println(day.getMoonphase());
-            System.out.println(day.getSUNRISE());
-        }
+        ArrayList<Day> days = getWeatherJson("2325", "AT", true);
+        printWeatherToFile("1220","AT",true);
         // ArrayList<Backbone.Day> days = getWeatherJson("33.74,-84.39");
         //getWeatherJson("1220", "AT");
         //WeatherGetter w = new WeatherGetter();
@@ -42,11 +39,10 @@ public class WeatherGetter {
 
     public static ArrayList<Day> getWeatherJson(String plz, String country, boolean celsius) {
         ArrayList<Day> back = new ArrayList<>();
-        Day today = getCurrentWeather(plz, country, celsius);
         String unit = "m";
-        if(!celsius)
+        if (!celsius)
             unit = "e";
-        try (InputStream is = new URL("https://api.weather.com/v3/wx/forecast/daily/5day?postalKey=" + plz + ":" + country + "&format=json&units="+unit+"&language=de-DE&apiKey=1531e846099f413eb1e846099ff13ef6").openStream()) {
+        try (InputStream is = new URL("https://api.weather.com/v3/wx/forecast/daily/5day?postalKey=" + plz + ":" + country + "&format=json&units=" + unit + "&language=de-DE&apiKey=1531e846099f413eb1e846099ff13ef6").openStream()) {
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
             String jsonString = readAll(rd);
             JSONObject weatherData = new JSONObject(jsonString);
@@ -58,39 +54,17 @@ public class WeatherGetter {
             JSONArray sunrise = weatherData.getJSONArray("sunriseTimeUtc");
             JSONArray sunset = weatherData.getJSONArray("sunsetTimeUtc");
             JSONArray rain = weatherData.getJSONArray("qpf");
-            today.setMoonphase(moon.getString(0));
-            today.setNarrative(nar.getString(0));
-            today.setRain(rain.getDouble(0));
-            back.add(today);
-            for (int i = 1; i < dayName.length(); i++) {
-                back.add(new Day(tempMin.getDouble(i), tempMax.getDouble(i), nar.getString(i), moon.getString(i), sunrise.getLong(i), sunset.getLong(i), rain.getDouble(i)));
+            for (int i = 0; i < dayName.length(); i++) {
+                back.add(new Day(dayName.getString(i), tempMin.getDouble(i), tempMax.getDouble(i), nar.getString(i), moon.getString(i), sunrise.getLong(i), sunset.getLong(i), rain.getDouble(i)));
             }
+            getCurrentWeather(plz, country, celsius, back.get(0));
         } catch (Exception e) {
             System.out.println(e);
         }
         return back;
     }
 
-    protected static void getWeather(String plz, String country) {
-        try (InputStream is = new URL("http://api.openweathermap.org/data/2.5/forecast?zip=" + plz + "," + country + "&appid=6b5717bc865ffcb87230cfbcf6263078&units=metric&lang=de").openStream()) {
-            BufferedReader rd = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
-            String jsonString = readAll(rd);
-            JSONObject weatherData = new JSONObject(jsonString);
-            System.out.println("-");
-            System.out.println(weatherData);
-            System.out.println(".");
-            JSONArray test = weatherData.getJSONArray("list");
-            System.out.println(test.length());
-            // JSONObject weather = weatherData.getJSONArray("weather").getJSONObject(0);
-            // JSONObject temp = weatherData.getJSONObject("main");
-        } catch (Exception e) {
-            System.err.println("Da lief etwas schief!");
-            e.printStackTrace();
-        }
-    }
-
-    protected static Day getCurrentWeather(String plz, String country, boolean celsius) {
-        Day today = null;
+    protected static void getCurrentWeather(String plz, String country, boolean celsius, Day day) {
         String unit = "metric";
         if (!celsius)
             unit = "imperial";
@@ -99,13 +73,38 @@ public class WeatherGetter {
             String jsonString = rd.readLine();
             JSONObject weatherData = new JSONObject(jsonString);
             JSONObject temp = weatherData.getJSONObject("main");
-            JSONObject sys = weatherData.getJSONObject("sys");
-            today = new Day(temp.getDouble("temp_min"), temp.getDouble("temp_max"), temp.getDouble("feels_like"), temp.getDouble("temp"), temp.getDouble("humidity"), sys.getLong("sunrise"), sys.getLong("sunset"));
+            day.setFeelsLike(temp.getDouble("feels_like"));
+            day.setCurrentTemp(temp.getDouble("temp"));
+            day.setHumidity(temp.getDouble("humidity"));
         } catch (Exception e) {
             System.err.println("Da lief etwas schief!");
             e.printStackTrace();
         }
-        return today;
+    }
+
+    public static void printWeatherToFile(String plz, String country, boolean celsius) {
+        ArrayList<Day> forecast = getWeatherJson(plz, country, celsius);
+        String unit = " \u2103";
+        if(!celsius)
+            unit = " Fahrenheit"; //TODO Richtiges Zeichen suchen!
+        try {
+            JFileChooser f = new JFileChooser();
+            f.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            f.setDialogTitle("Bitte wählen Sie einen Speicherort");
+            f.showSaveDialog(null);
+            if(f.getSelectedFile()==null){
+                JOptionPane.showMessageDialog(null, "Kein gültiger Speicherort ausgewählt!", "Achtung", JOptionPane.ERROR_MESSAGE);
+            }else {
+                PrintWriter writer = new PrintWriter(f.getSelectedFile(), "UTF-8");
+                for (Day day : forecast) {
+                    writer.println(day.toStringWithUnit(unit) + "\n");
+                }
+                writer.close();
+            }
+        } catch (IOException e) {
+            System.err.println("Fehler beim File writen");
+            e.printStackTrace();
+        }
     }
 
 

@@ -12,7 +12,10 @@ import java.util.ArrayList;
 public class WeatherGetter {
     public static void main(String[] args) throws IOException {
         ArrayList<Day> days = getWeatherJson("2325", "AT", true);
-        printWeatherToFile("1220","AT",true);
+        System.out.println(days.size());
+        for (Day day : days)
+            System.out.println(day);
+        // printWeatherToFile("1220","AT",true);
         // ArrayList<Backbone.Day> days = getWeatherJson("33.74,-84.39");
         //getWeatherJson("1220", "AT");
         //WeatherGetter w = new WeatherGetter();
@@ -55,7 +58,11 @@ public class WeatherGetter {
             JSONArray sunset = weatherData.getJSONArray("sunsetTimeUtc");
             JSONArray rain = weatherData.getJSONArray("qpf");
             for (int i = 0; i < dayName.length(); i++) {
-                back.add(new Day(dayName.getString(i), tempMin.getDouble(i), tempMax.getDouble(i), nar.getString(i), moon.getString(i), sunrise.getLong(i), sunset.getLong(i), rain.getDouble(i)));
+                if (tempMax.get(i).equals(null))
+                    back.add(new Day(dayName.getString(i), 0, 0, nar.getString(i), moon.getString(i), sunrise.getLong(i), sunset.getLong(i), rain.getDouble(i)));
+                else
+                    back.add(new Day(dayName.getString(i), tempMin.getDouble(i), tempMax.getDouble(i), nar.getString(i), moon.getString(i), sunrise.getLong(i), sunset.getLong(i), rain.getDouble(i)));
+
             }
             getCurrentWeather(plz, country, celsius, back.get(0));
         } catch (Exception e) {
@@ -76,6 +83,8 @@ public class WeatherGetter {
             day.setFeelsLike(temp.getDouble("feels_like"));
             day.setCurrentTemp(temp.getDouble("temp"));
             day.setHumidity(temp.getDouble("humidity"));
+            day.setMIN_TEMP(temp.getDouble("temp_min"));
+            day.setMAX_TEMP(temp.getDouble("temp_max"));
         } catch (Exception e) {
             System.err.println("Da lief etwas schief!");
             e.printStackTrace();
@@ -85,16 +94,16 @@ public class WeatherGetter {
     public static void printWeatherToFile(String plz, String country, boolean celsius) {
         ArrayList<Day> forecast = getWeatherJson(plz, country, celsius);
         String unit = " \u2103";
-        if(!celsius)
+        if (!celsius)
             unit = " Fahrenheit"; //TODO Richtiges Zeichen suchen!
         try {
             JFileChooser f = new JFileChooser();
             f.setFileSelectionMode(JFileChooser.FILES_ONLY);
             f.setDialogTitle("Bitte wählen Sie einen Speicherort");
             f.showSaveDialog(null);
-            if(f.getSelectedFile()==null){
+            if (f.getSelectedFile() == null) {
                 JOptionPane.showMessageDialog(null, "Kein gültiger Speicherort ausgewählt!", "Achtung", JOptionPane.ERROR_MESSAGE);
-            }else {
+            } else {
                 PrintWriter writer = new PrintWriter(f.getSelectedFile(), "UTF-8");
                 for (Day day : forecast) {
                     writer.println(day.toStringWithUnit(unit) + "\n");

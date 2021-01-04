@@ -6,8 +6,8 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Day {
-    private final double MIN_TEMP;
-    private final double MAX_TEMP;
+    private double MIN_TEMP;
+    private double MAX_TEMP;
     private final long SUNSET;
     private final long SUNRISE;
     private String day;
@@ -107,6 +107,14 @@ public class Day {
 
     public String getDayName() {
         return day;
+    }
+
+    public void setMIN_TEMP(double MIN_TEMP) {
+        this.MIN_TEMP = MIN_TEMP;
+    }
+
+    public void setMAX_TEMP(double MAX_TEMP) {
+        this.MAX_TEMP = MAX_TEMP;
     }
 
     private String UTC_to_String(long utc) {

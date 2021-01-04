@@ -1,6 +1,21 @@
 
 .myBorderPane {
-    -fx-background-image: url("/img/sonne_bg.jpg");
+    -fx-background-image: url("/img/backgrounds/sonne_bg.jpg");
+}
+
+.myBorderPaneNight {
+    -fx-background-image: url("/img/backgrounds/nachtbild3.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 710 420;
+    -fx-background-position: center center;
+}
+
+.menuBar {
+    -fx-background-color: #85c0ff;
+}
+
+.menuBarNight {
+    -fx-background-color: #fff;
 }
 
 .subPane {
@@ -24,14 +39,17 @@
 
 .displayDay {
     -fx-font-size: 17px;
+
 }
 
 .displayDate {
     -fx-font-size: 17px;
+
 }
 
 .displayDetails {
     -fx-text-fill: white;
+
 }
 
 .testMe {

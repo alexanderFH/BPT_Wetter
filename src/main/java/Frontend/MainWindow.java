@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,6 +22,7 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -127,6 +129,8 @@ public class MainWindow implements Initializable {
     private boolean bp6Pressed;
 
     @FXML
+    private BorderPane mainBorderPane;
+    @FXML
     private BorderPane bp1;
     @FXML
     private BorderPane bp2;
@@ -140,7 +144,9 @@ public class MainWindow implements Initializable {
     private BorderPane bp6;
 
     @FXML
-    private HBox weatherInfo;
+    private Pane weatherInfo;
+    @FXML
+    private Pane moonIcon;
     @FXML
     private HBox nextWeatherInfo;
 
@@ -150,6 +156,9 @@ public class MainWindow implements Initializable {
     private VBox centerInfos;
     @FXML
     private VBox rightInfos;
+
+    @FXML
+    private MenuBar menuBar;
 
 
     @Override
@@ -186,8 +195,15 @@ public class MainWindow implements Initializable {
 
         bp1.getStyleClass().add("clickedOnPane");
 
-        setFadeAnimation(weatherInfo, 1200);
-        setFadeAnimation(nextWeatherInfo, 1200);
+        setFadeAnimation(weatherInfo, 1500);
+        setFadeAnimation(nextWeatherInfo, 1500);
+
+        changeIconWhenNight(0,0);
+        changeIconWhenNight(1,1);
+        changeIconWhenNight(2,2);
+        changeIconWhenNight(3,3);
+        changeIconWhenNight(4,4);
+        changeIconWhenNight(5,5);
     }
 
 
@@ -250,6 +266,7 @@ public class MainWindow implements Initializable {
         feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(0).getFeelsLike() + " \u2103");
         //detail.setText(days.get(0).getNarrative());
         changeImage(0, days.get(0).getCurrentTemp());
+        changeIconWhenNight(0,0);
 
         bp1Pressed = true;
         bp2Pressed = false;
@@ -259,7 +276,7 @@ public class MainWindow implements Initializable {
         bp6Pressed = false;
         borderPanePressed();
 
-        setFadeAnimation(weatherInfo, 1200);
+        setFadeAnimation(weatherInfo, 1000);
     }
 
     @FXML
@@ -290,6 +307,7 @@ public class MainWindow implements Initializable {
         moonphase.setText("Mondphase:\n " + days.get(1).getMoonphase());
         feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(1).getFeelsLike() + " \u2103");
         changeImage(1, days.get(1).getCurrentTemp());
+        changeIconWhenNight(1,1);
 
         bp2Pressed = true;
         bp1Pressed = false;
@@ -299,7 +317,7 @@ public class MainWindow implements Initializable {
         bp6Pressed = false;
         borderPanePressed();
 
-        setFadeAnimation(weatherInfo, 1200);
+        setFadeAnimation(weatherInfo, 1000);
     }
 
     @FXML
@@ -330,6 +348,7 @@ public class MainWindow implements Initializable {
         moonphase.setText("Mondphase:\n " + days.get(2).getMoonphase());
         feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(2).getFeelsLike() + " \u2103");
         changeImage(2, days.get(2).getCurrentTemp());
+        changeIconWhenNight(2,2);
 
         bp3Pressed = true;
         bp1Pressed = false;
@@ -339,7 +358,7 @@ public class MainWindow implements Initializable {
         bp6Pressed = false;
         borderPanePressed();
 
-        setFadeAnimation(weatherInfo, 1200);
+        setFadeAnimation(weatherInfo, 1000);
     }
 
     @FXML
@@ -370,6 +389,7 @@ public class MainWindow implements Initializable {
         moonphase.setText("Mondphase:\n " + days.get(3).getMoonphase());
         feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(3).getFeelsLike() + " \u2103");
         changeImage(3, days.get(3).getCurrentTemp());
+        changeIconWhenNight(3,3);
 
         bp4Pressed = true;
         bp1Pressed = false;
@@ -379,7 +399,7 @@ public class MainWindow implements Initializable {
         bp6Pressed = false;
         borderPanePressed();
 
-        setFadeAnimation(weatherInfo, 1200);
+        setFadeAnimation(weatherInfo, 1000);
     }
 
     @FXML
@@ -410,6 +430,7 @@ public class MainWindow implements Initializable {
         moonphase.setText("Mondphase:\n " + days.get(4).getMoonphase());
         feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(4).getFeelsLike() + " \u2103");
         changeImage(4, days.get(4).getCurrentTemp());
+        changeIconWhenNight(4,4);
 
         bp5Pressed = true;
         bp1Pressed = false;
@@ -419,7 +440,7 @@ public class MainWindow implements Initializable {
         bp6Pressed = false;
         borderPanePressed();
 
-        setFadeAnimation(weatherInfo, 1200);
+        setFadeAnimation(weatherInfo, 1000);
     }
 
     @FXML
@@ -450,6 +471,7 @@ public class MainWindow implements Initializable {
         moonphase.setText("Mondphase:\n " + days.get(5).getMoonphase());
         feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(5).getFeelsLike() + " \u2103");
         changeImage(5, days.get(5).getCurrentTemp());
+        changeIconWhenNight(5,5);
 
         bp6Pressed = true;
         bp1Pressed = false;
@@ -459,7 +481,7 @@ public class MainWindow implements Initializable {
         bp5Pressed = false;
         borderPanePressed();
 
-        setFadeAnimation(weatherInfo, 1200);
+        setFadeAnimation(weatherInfo, 1000);
     }
 
     // Change image based on currentTemp/narrative
@@ -566,6 +588,149 @@ public class MainWindow implements Initializable {
                 }
         }
 
+    }
+
+    public void changeIconWhenNight(int currentDay, int index) {
+
+        /*ZonedDateTime zo = ZonedDateTime.ofInstant(Instant.ofEpochSecond(), ZoneId.systemDefault());
+        ZonedDateTime no = ZonedDateTime.now();*/
+        String mondphase = "";
+
+        Image vollmond = new Image("/img/moonphases/vollmond.png");
+        Image abHalbmond = new Image("/img/moonphases/abHalbmond.png");
+        Image abSichelmond = new Image("/img/moonphases/abSichelmond.png");
+        Image abDreiviertel = new Image("/img/moonphases/abDreiViertelmond.png");
+        Image neumond = new Image("/img/moonphases/neumond.png");
+        Image zuDreiviertel = new Image("/img/moonphases/zuDreiViertelmond.png");
+        Image zuHalbmond = new Image("/img/moonphases/zuHalbmond.png");
+        Image zuSichelmond = new Image("/img/moonphases/zuSichelmond.png");
+
+        Timestamp ts1 = Timestamp.valueOf("2020-04-01 07:01:15");
+        Timestamp ts2 = Timestamp.valueOf("2020-04-01 08:01:16");
+        //compares ts1 with ts2
+        int b3 = ts1.compareTo(ts2);
+        if(b3==0){
+            System.out.println("Both values are equal");
+        }
+        else if(b3>0){
+            mainBorderPane.getStyleClass().removeAll("myBorderPane");
+            mainBorderPane.getStyleClass().add("myBorderPaneNight");
+
+            menuBar.getStyleClass().removeAll("menuBar");
+            menuBar.getStyleClass().add("menuBarNight");
+
+            System.out.println("TimeSpan1 value is greater");
+            if(days.get(index).getMoonphase().equals("abnehmender Halbmond")) {
+                mondphase = "abHalbmond";
+                image.setImage(abHalbmond);
+            } else if(days.get(index).getMoonphase().equals("abnehmender Sichelmond")) {
+                mondphase = "abSichelmond";
+                image.setImage(abSichelmond);
+            } else if(days.get(index).getMoonphase().equals("abnehmender Dreiviertelmond")) {
+                mondphase = "abDreiviertelmond";
+                image.setImage(abDreiviertel);
+            } else if(days.get(index).getMoonphase().equals("letztes Viertel")) {
+                mondphase = "letztesViertel";
+                image.setImage(vollmond);
+            } else if(days.get(index).getMoonphase().equals("zunehmender Sichelmond")) {
+                mondphase = "zuSichelmond";
+                image.setImage(zuSichelmond);
+            } else if(days.get(index).getMoonphase().equals("zunehmender Halbmond")) {
+                mondphase = "zuHalbmond";
+                image.setImage(zuHalbmond);
+            } else if(days.get(index).getMoonphase().equals("zunehmender Dreiviertelmond")) {
+                mondphase = "zuDreiviertelmond";
+                image.setImage(zuDreiviertel);
+            } else if(days.get(index).getMoonphase().equals("neumond")) {
+                mondphase = "neumond";
+                image.setImage(neumond);
+            }
+        }
+        else{
+            System.out.println("TimeSpan2 value is greater");
+        }
+        switch (mondphase) {
+            case "abHalbmond":
+                switch (currentDay) {
+                    case 0 -> imageNextDay1.setImage(abHalbmond);
+                    case 1 -> imageNextDay2.setImage(abHalbmond);
+                    case 2 -> imageNextDay3.setImage(abHalbmond);
+                    case 3 -> imageNextDay4.setImage(abHalbmond);
+                    case 4 -> imageNextDay5.setImage(abHalbmond);
+                    case 5 -> imageNextDay6.setImage(abHalbmond);
+                }
+                break;
+            case "abSichelmond":
+                switch (currentDay) {
+                    case 0 -> imageNextDay1.setImage(abSichelmond);
+                    case 1 -> imageNextDay2.setImage(abSichelmond);
+                    case 2 -> imageNextDay3.setImage(abSichelmond);
+                    case 3 -> imageNextDay4.setImage(abSichelmond);
+                    case 4 -> imageNextDay5.setImage(abSichelmond);
+                    case 5 -> imageNextDay6.setImage(abSichelmond);
+                }
+                break;
+            case "abDreiviertelmond":
+                switch (currentDay) {
+                    case 0 -> imageNextDay1.setImage(abDreiviertel);
+                    case 1 -> imageNextDay2.setImage(abDreiviertel);
+                    case 2 -> imageNextDay3.setImage(abDreiviertel);
+                    case 3 -> imageNextDay4.setImage(abDreiviertel);
+                    case 4 -> imageNextDay5.setImage(abDreiviertel);
+                    case 5 -> imageNextDay6.setImage(abDreiviertel);
+                }
+                break;
+            case "letztesViertel":
+                switch (currentDay) {
+                    case 0 -> imageNextDay1.setImage(vollmond);
+                    case 1 -> imageNextDay2.setImage(vollmond);
+                    case 2 -> imageNextDay3.setImage(vollmond);
+                    case 3 -> imageNextDay4.setImage(vollmond);
+                    case 4 -> imageNextDay5.setImage(vollmond);
+                    case 5 -> imageNextDay6.setImage(vollmond);
+                }
+                break;
+            case "zuSichelmond":
+                switch (currentDay) {
+                    case 0 -> imageNextDay1.setImage(zuSichelmond);
+                    case 1 -> imageNextDay2.setImage(zuSichelmond);
+                    case 2 -> imageNextDay3.setImage(zuSichelmond);
+                    case 3 -> imageNextDay4.setImage(zuSichelmond);
+                    case 4 -> imageNextDay5.setImage(zuSichelmond);
+                    case 5 -> imageNextDay6.setImage(zuSichelmond);
+                }
+                break;
+            case "zuHalbmond":
+                switch (currentDay) {
+                    case 0 -> imageNextDay1.setImage(zuHalbmond);
+                    case 1 -> imageNextDay2.setImage(zuHalbmond);
+                    case 2 -> imageNextDay3.setImage(zuHalbmond);
+                    case 3 -> imageNextDay4.setImage(zuHalbmond);
+                    case 4 -> imageNextDay5.setImage(zuHalbmond);
+                    case 5 -> imageNextDay6.setImage(zuHalbmond);
+                }
+                break;
+            case "zuDreiviertelmond":
+                switch (currentDay) {
+                    case 0 -> imageNextDay1.setImage(zuDreiviertel);
+                    case 1 -> imageNextDay2.setImage(zuDreiviertel);
+                    case 2 -> imageNextDay3.setImage(zuDreiviertel);
+                    case 3 -> imageNextDay4.setImage(zuDreiviertel);
+                    case 4 -> imageNextDay5.setImage(zuDreiviertel);
+                    case 5 -> imageNextDay6.setImage(zuDreiviertel);
+                }
+                break;
+            case "neumond":
+                switch (currentDay) {
+                    case 0 -> imageNextDay1.setImage(neumond);
+                    case 1 -> imageNextDay2.setImage(neumond);
+                    case 2 -> imageNextDay3.setImage(neumond);
+                    case 3 -> imageNextDay4.setImage(neumond);
+                    case 4 -> imageNextDay5.setImage(neumond);
+                    case 5 -> imageNextDay6.setImage(neumond);
+                }
+                break;
+        }
     }
 
     public void borderPanePressed() {

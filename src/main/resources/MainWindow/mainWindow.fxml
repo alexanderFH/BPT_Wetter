@@ -19,9 +19,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.Region?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="myBorderPane" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Frontend.MainWindow">
+<BorderPane fx:id="mainBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="myBorderPane" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Frontend.MainWindow">
    <top>
-      <MenuBar style="-fx-background-color: #85c0ff;" BorderPane.alignment="CENTER">
+      <MenuBar fx:id="menuBar" styleClass="menuBar" BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="File">
               <items>
@@ -46,19 +46,16 @@
    </top>
 
    <center>
-       <HBox fx:id="weatherInfo" spacing="80" alignment="CENTER">
-           <VBox fx:id="leftInfos" spacing="20">
-               <padding>
-                   <Insets top="15"/>
-               </padding>
-
+       <Pane fx:id="weatherInfo">
+           <VBox fx:id="leftInfos" spacing="30" layoutX="29" layoutY="30">
                <Label fx:id="minTemp" layoutX="46.0" layoutY="49.0" styleClass="displayDetails" text="Label" />
                <Label fx:id="maxTemp" layoutX="46.0" layoutY="84.0" styleClass="displayDetails" text="Label" />
                <Label fx:id="humidity" layoutX="46.0" layoutY="122.0" styleClass="displayDetails" text="Label" />
                <Label fx:id="rain" layoutX="46.0" layoutY="122.0" styleClass="displayDetails" text="Label" />
            </VBox>
 
-           <VBox fx:id="centerInfos" spacing="5">
+
+           <VBox fx:id="centerInfos" spacing="5" layoutX="295" layoutY="15">
                <Label fx:id="temp" prefHeight="56.0" prefWidth="167.0" styleClass="displayTemp" text="25 Grad" textFill="WHITE">
                    <font>
                        <Font size="45.0" />
@@ -69,25 +66,21 @@
                    <Label fx:id="dayOne" layoutX="245.0" layoutY="66.0" styleClass="displayDay" text="Montag 27.08.2020" textFill="WHITE" />
                    <Label fx:id="displayDate" layoutX="340.0" layoutY="66.0" styleClass="displayDate" text="27.08.2020" textFill="WHITE" />
                </HBox>
-
                <ImageView BorderPane.alignment="BASELINE_CENTER" fx:id="image" fitHeight="101.0" fitWidth="111.0" layoutX="237.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
                    <image>
                        <Image fx:id="img" url="/img/sun-icon.png" />
                    </image>
                </ImageView>
+
            </VBox>
 
-           <VBox fx:id="rightInfos" spacing="20">
-               <padding>
-                   <Insets top="15"/>
-               </padding>
-
+           <VBox fx:id="rightInfos" spacing="20" layoutX="560" layoutY="30">
                <Label fx:id="sunrise" layoutX="490.0" layoutY="49.0" styleClass="displayDetails" text="Label" />
                <Label fx:id="sunset" layoutX="490.0" layoutY="84.0" styleClass="displayDetails" text="Label" />
                <Label fx:id="moonphase" layoutX="490.0" layoutY="122.0" styleClass="displayDetails" text="Label" />
                <Label fx:id="feelsLike" layoutX="490.0" layoutY="122.0" styleClass="displayDetails" text="Label" />
            </VBox>
-       </HBox>
+       </Pane>
    </center>
 
     <bottom>
@@ -109,6 +102,9 @@
                         </image>
                     </ImageView>
                 </bottom>
+                <padding>
+                    <Insets bottom="8"/>
+                </padding>
             </BorderPane>
 
             <BorderPane fx:id="bp2" layoutX="136.0" layoutY="246.0" onMouseClicked="#changeDayTwo" prefHeight="116.0" prefWidth="86.0" style="-fx-background-color: #FFF;" styleClass="subPane">
@@ -125,6 +121,9 @@
                         </image>
                     </ImageView>
                 </bottom>
+                <padding>
+                    <Insets bottom="8"/>
+                </padding>
             </BorderPane>
 
             <BorderPane fx:id="bp3" layoutX="257.0" layoutY="246.0" onMouseClicked="#changeDayThree" prefHeight="116.0" prefWidth="86.0" style="-fx-background-color: #FFF;" styleClass="subPane">
@@ -141,6 +140,9 @@
                         </image>
                     </ImageView>
                 </bottom>
+                <padding>
+                    <Insets bottom="8"/>
+                </padding>
             </BorderPane>
 
             <BorderPane fx:id="bp4" layoutX="382.0" layoutY="246.0" onMouseClicked="#changeDayFour" prefHeight="116.0" prefWidth="86.0" style="-fx-background-color: #FFF;" styleClass="subPane">
@@ -157,6 +159,9 @@
                         </image>
                     </ImageView>
                 </bottom>
+                <padding>
+                    <Insets bottom="8"/>
+                </padding>
             </BorderPane>
 
             <BorderPane fx:id="bp5" layoutX="504.0" layoutY="246.0" onMouseClicked="#changeDayFive" prefHeight="116.0" prefWidth="86.0" style="-fx-background-color: #FFF;" styleClass="subPane">
@@ -173,6 +178,9 @@
                         </image>
                     </ImageView>
                 </bottom>
+                <padding>
+                    <Insets bottom="8"/>
+                </padding>
             </BorderPane>
 
             <BorderPane fx:id="bp6" layoutX="504.0" layoutY="246.0" onMouseClicked="#changeDaySix" prefHeight="116.0" prefWidth="86.0" style="-fx-background-color: #FFF;" styleClass="subPane">
@@ -189,6 +197,9 @@
                         </image>
                     </ImageView>
                 </bottom>
+                <padding>
+                    <Insets bottom="8"/>
+                </padding>
             </BorderPane>
         </HBox>
     </bottom>

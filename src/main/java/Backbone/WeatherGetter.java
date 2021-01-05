@@ -1,5 +1,7 @@
 package Backbone;
 
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -10,11 +12,14 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class WeatherGetter {
+    private static final String weatherAPIKey = "d3d0b6bdc95a468f90b6bdc95a468f52";
+    private static final String openWeatherAPIKey = "6b5717bc865ffcb87230cfbcf6263078";
     public static void main(String[] args) throws IOException {
-        ArrayList<Day> days = getWeatherJson("2325", "AT", true);
-        System.out.println(days.size());
-        for (Day day : days)
-            System.out.println(day);
+    //    ArrayList<Day> days = getWeatherJson("2325", "AT", false);
+      //  System.out.println(days.size());
+        printWeatherToFile("2325","AT",false);
+     //   for (Day day : days)
+       //     System.out.println(day);
         // printWeatherToFile("1220","AT",true);
         // ArrayList<Backbone.Day> days = getWeatherJson("33.74,-84.39");
         //getWeatherJson("1220", "AT");
@@ -45,7 +50,7 @@ public class WeatherGetter {
         String unit = "m";
         if (!celsius)
             unit = "e";
-        try (InputStream is = new URL("https://api.weather.com/v3/wx/forecast/daily/5day?postalKey=" + plz + ":" + country + "&format=json&units=" + unit + "&language=de-DE&apiKey=1531e846099f413eb1e846099ff13ef6").openStream()) {
+        try (InputStream is = new URL("https://api.weather.com/v3/wx/forecast/daily/5day?postalKey=" + plz + ":" + country + "&format=json&units=" + unit + "&language=de-DE&apiKey="+weatherAPIKey).openStream()) {
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
             String jsonString = readAll(rd);
             JSONObject weatherData = new JSONObject(jsonString);
@@ -75,7 +80,7 @@ public class WeatherGetter {
         String unit = "metric";
         if (!celsius)
             unit = "imperial";
-        try (InputStream is = new URL("http://api.openweathermap.org/data/2.5/weather?zip=" + plz + "," + country + "&appid=6b5717bc865ffcb87230cfbcf6263078&units=" + unit + "&lang=de").openStream()) {
+        try (InputStream is = new URL("http://api.openweathermap.org/data/2.5/weather?zip=" + plz + "," + country + "&appid="+openWeatherAPIKey+"&units=" + unit + "&lang=de").openStream()) {
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
             String jsonString = rd.readLine();
             JSONObject weatherData = new JSONObject(jsonString);
@@ -97,14 +102,14 @@ public class WeatherGetter {
         if (!celsius)
             unit = " Fahrenheit"; //TODO Richtiges Zeichen suchen!
         try {
-            JFileChooser f = new JFileChooser();
-            f.setFileSelectionMode(JFileChooser.FILES_ONLY);
-            f.setDialogTitle("Bitte wählen Sie einen Speicherort");
-            f.showSaveDialog(null);
-            if (f.getSelectedFile() == null) {
+            FileChooser fx = new FileChooser();
+            fx.setTitle("Bitte wählen Sie einen Speicherort");
+            fx.setInitialFileName("Wetter.txt");
+            File file = fx.showSaveDialog(null);
+            if (file == null) {
                 JOptionPane.showMessageDialog(null, "Kein gültiger Speicherort ausgewählt!", "Achtung", JOptionPane.ERROR_MESSAGE);
             } else {
-                PrintWriter writer = new PrintWriter(f.getSelectedFile(), "UTF-8");
+                PrintWriter writer = new PrintWriter(file, "UTF-8");
                 for (Day day : forecast) {
                     writer.println(day.toStringWithUnit(unit) + "\n");
                 }

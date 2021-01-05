@@ -1,6 +1,31 @@
 
-.myBorderPane {
+.myBorderPaneSunny {
     -fx-background-image: url("/img/backgrounds/sonne_bg.jpg");
+}
+
+.myBorderPaneCloudy {
+    -fx-background-image: url("/img/backgrounds/cloudy2.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 710 420;
+    -fx-background-position: center center;
+}
+
+.myBorderPaneCloudyRain {
+    -fx-background-image: url("/img/backgrounds/rain.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 710 420;
+    -fx-background-position: center center;
+}
+
+.myBorderPaneSnowy {
+    -fx-background-image: url("/img/backgrounds/snowy_bg.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 710 420;
+    -fx-background-position: center center;
+}
+
+.myBorderPaneThunder {
+    -fx-background-image: url("/img/backgrounds/thunder.jpg");
 }
 
 .myBorderPaneNight {
@@ -11,12 +36,9 @@
 }
 
 .menuBar {
-    -fx-background-color: #85c0ff;
-}
-
-.menuBarNight {
     -fx-background-color: #fff;
 }
+
 
 .subPane {
     -fx-background-radius: 10 10 10 10;
@@ -49,7 +71,7 @@
 
 .displayDetails {
     -fx-text-fill: white;
-
+    -fx-font-weight: bold;
 }
 
 .testMe {

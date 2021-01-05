@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.ZoneId;
@@ -232,12 +233,17 @@ public class MainWindow implements Initializable {
         setFadeAnimation(weatherInfo, 1500);
         setFadeAnimation(nextWeatherInfo, 1500);
 
-        changeIconWhenNight(0,0);
-        changeIconWhenNight(1,1);
-        changeIconWhenNight(2,2);
-        changeIconWhenNight(3,3);
-        changeIconWhenNight(4,4);
-        changeIconWhenNight(5,5);
+        try {
+            changeIconWhenNight(0,0);
+            changeIconWhenNight(1,1);
+            changeIconWhenNight(2,2);
+            changeIconWhenNight(3,3);
+            changeIconWhenNight(4,4);
+            changeIconWhenNight(5,5);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
     }
 
 
@@ -278,7 +284,7 @@ public class MainWindow implements Initializable {
     }
 
     @FXML
-    private void changeToFirstDay() {
+    private void changeToFirstDay() throws ParseException {
 
         displayDate.setText(dateFormat.format(currentDate));
 
@@ -314,7 +320,7 @@ public class MainWindow implements Initializable {
     }
 
     @FXML
-    private void changeDayTwo() {
+    private void changeDayTwo() throws ParseException {
         Calendar c = Calendar.getInstance();
         c.setTime(currentDate);
         c.add(Calendar.DATE, 1);
@@ -355,7 +361,7 @@ public class MainWindow implements Initializable {
     }
 
     @FXML
-    private void changeDayThree() {
+    private void changeDayThree() throws ParseException {
         Calendar c = Calendar.getInstance();
         c.setTime(currentDate);
         c.add(Calendar.DATE, 2);
@@ -396,7 +402,7 @@ public class MainWindow implements Initializable {
     }
 
     @FXML
-    private void changeDayFour() {
+    private void changeDayFour() throws ParseException {
         Calendar c = Calendar.getInstance();
         c.setTime(currentDate);
         c.add(Calendar.DATE, 3);
@@ -437,7 +443,7 @@ public class MainWindow implements Initializable {
     }
 
     @FXML
-    private void changeDayFive() {
+    private void changeDayFive() throws ParseException {
         Calendar c = Calendar.getInstance();
         c.setTime(currentDate);
         c.add(Calendar.DATE, 4);
@@ -478,7 +484,7 @@ public class MainWindow implements Initializable {
     }
 
     @FXML
-    private void changeDaySix() {
+    private void changeDaySix() throws ParseException {
         Calendar c = Calendar.getInstance();
         c.setTime(currentDate);
         c.add(Calendar.DATE, 5);
@@ -539,18 +545,36 @@ public class MainWindow implements Initializable {
         if(days.get(currentDay).getNarrative().toLowerCase().contains("schauer".toLowerCase())) {
             image.setImage(cloudyRain);
             checkImage = "cloudyRain";
+
+            mainBorderPane.getStyleClass().removeAll("myBorderPaneCloudy", "myBorderPaneCloudySunny", "myBorderPaneSnowy", "myBorderPaneThunder");
+            mainBorderPane.getStyleClass().add("myBorderPaneCloudyRain");
+
         } else if (days.get(currentDay).getNarrative().toLowerCase().contains("klar".toLowerCase())) {
             image.setImage(sunny);
             checkImage = "sunny";
+            mainBorderPane.getStyleClass().removeAll("myBorderPaneCloudy", "myBorderPaneCloudyRain", "myBorderPaneSnowy", "myBorderPaneThunder");
+            mainBorderPane.getStyleClass().add("myBorderPaneSunny");
+
         } else if (days.get(currentDay).getNarrative().toLowerCase().contains("bedeckt".toLowerCase())) {
             image.setImage(cloudy);
             checkImage = "cloudy";
+            mainBorderPane.getStyleClass().removeAll("myBorderPaneSunny", "myBorderPaneCloudyRain", "myBorderPaneSnowy", "myBorderPaneThunder");
+            mainBorderPane.getStyleClass().add("myBorderPaneCloudy");
+
+
         } else if (days.get(currentDay).getNarrative().toLowerCase().contains("Schnee".toLowerCase())) {
             image.setImage(snowy);
             checkImage = "snowy";
+            mainBorderPane.getStyleClass().removeAll("myBorderPaneCloudy", "myBorderPaneCloudyRain", "myBorderPaneSunny", "myBorderPaneThunder");
+            mainBorderPane.getStyleClass().add("myBorderPaneSnowy");
+
+
         } else if (days.get(currentDay).getNarrative().toLowerCase().contains("gewitter".toLowerCase())){
             image.setImage(thunderstorm);
             checkImage = "thunderstorm";
+
+            mainBorderPane.getStyleClass().removeAll("myBorderPaneSunny", "myBorderPaneCloudyRain", "myBorderPaneSnowy", "myBorderPaneCloudy");
+            mainBorderPane.getStyleClass().add("myBorderPaneThunder");
         } else {
             image.setImage(cloudy);
             checkImage = "cloudy";
@@ -624,10 +648,16 @@ public class MainWindow implements Initializable {
 
     }
 
-    public void changeIconWhenNight(int currentDay, int index) {
+    public void changeIconWhenNight(int currentDay, int index) throws ParseException {
 
-        /*ZonedDateTime zo = ZonedDateTime.ofInstant(Instant.ofEpochSecond(), ZoneId.systemDefault());
-        ZonedDateTime no = ZonedDateTime.now();*/
+        Date date1 = new SimpleDateFormat("HH:mm:ss").parse(days.get(index).getSUNSET());
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date1);
+        long seconds = calendar.get(Calendar.SECOND);
+
+        ZonedDateTime zo = ZonedDateTime.ofInstant(Instant.ofEpochSecond(seconds), ZoneId.systemDefault());
+        ZonedDateTime no = ZonedDateTime.now();
         String mondphase = "";
 
         Image vollmond = new Image("/img/moonphases/vollmond.png");
@@ -639,14 +669,9 @@ public class MainWindow implements Initializable {
         Image zuHalbmond = new Image("/img/moonphases/zuHalbmond.png");
         Image zuSichelmond = new Image("/img/moonphases/zuSichelmond.png");
 
-        Timestamp ts1 = Timestamp.valueOf("2020-04-01 07:01:15");
-        Timestamp ts2 = Timestamp.valueOf("2020-04-01 08:01:16");
-        //compares ts1 with ts2
-        int b3 = ts1.compareTo(ts2);
-        if(b3==0){
-            System.out.println("Both values are equal");
-        }
-        else if(b3>0){
+        //normally there is: no.isAfter(zo)
+        // but for further implementation its set to no.isBefore(zo)
+        if(no.isBefore(zo)){
             mainBorderPane.getStyleClass().removeAll("myBorderPane");
             mainBorderPane.getStyleClass().add("myBorderPaneNight");
 

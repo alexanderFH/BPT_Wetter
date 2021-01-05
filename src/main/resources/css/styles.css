@@ -1,6 +1,9 @@
 
 .myBorderPaneSunny {
-    -fx-background-image: url("/img/backgrounds/sonne_bg.jpg");
+    -fx-background-image: url("/img/backgrounds/klar.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 710 420;
+    -fx-background-position: center center;
 }
 
 .myBorderPaneCloudy {
@@ -46,7 +49,7 @@
 }
 
 .subPane:hover {
-    -fx-effect: dropshadow(three-pass-box, #5c98ff, 30, 0.5, 0, 0);
+    -fx-effect: dropshadow(three-pass-box, #89C4F4, 30, 0.5, 0, 0);
     -fx-cursor: hand;
     -fx-opacity: 1;
     /*-fx-end-margin: 10px;
@@ -57,21 +60,23 @@
 .displayTemp {
     -fx-text-alignment: center;
     -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
 }
 
 .displayDay {
     -fx-font-size: 17px;
-
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
 }
 
 .displayDate {
     -fx-font-size: 17px;
-
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
 }
 
 .displayDetails {
     -fx-text-fill: white;
     -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
 }
 
 .testMe {
@@ -80,5 +85,5 @@
 
 .clickedOnPane {
     -fx-opacity: 1;
-    -fx-effect: dropshadow(three-pass-box, #5c98ff, 30, 0.5, 0, 0);
+    -fx-effect: dropshadow(three-pass-box, #89C4F4, 30, 0.5, 0, 0);
 }

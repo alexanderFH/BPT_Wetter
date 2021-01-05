@@ -845,15 +845,15 @@ public class MainWindow implements Initializable {
 
     public void setRainLabel(int index) {
         if(days.get(index).getRain() < 1) {
-            rain.setText("Leichter Regen moeglich");
+            rain.setText("Regen: leichter Regen moeglich");
         } else if(days.get(index).getRain() >= 1 && days.get(index).getRain() < 2) {
-            rain.setText("Regen moeglich");
+            rain.setText("Regen: Regen moeglich");
         } else if(days.get(index).getRain() >= 2 && days.get(index).getRain() < 3) {
-            rain.setText("Mittelstarker Regen moeglich");
+            rain.setText("Regen: mittelstarker Regen moeglich");
         } else if(days.get(index).getRain() >= 3 && days.get(index).getRain() < 4) {
-            rain.setText("Starker Regen moeglich");
+            rain.setText("Regen: starker Regen moeglich");
         } else if(days.get(index).getRain() >= 4) {
-            rain.setText("Starker Regen bis hinzu Hagel\n moeglich");
+            rain.setText("Regen: starker Regen bis hinzu Hagel\n moeglich");
         }
     }
 

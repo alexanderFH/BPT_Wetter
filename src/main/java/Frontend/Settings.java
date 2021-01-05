@@ -1,5 +1,6 @@
 package Frontend;
 
+import Backbone.WeatherGetter;
 import javafx.application.Application;
 
 import javafx.event.ActionEvent;
@@ -28,10 +29,21 @@ public class Settings implements Initializable{
     @FXML
     private ColorPicker Colourpick;
 
-    private String getUnit() {
+    MainWindow mainWindow = new MainWindow();
+
+    // true for Celsius and false for Fahrenheit
+    protected boolean declareUnit;
+
+    private void getUnit() {
         Temperature.getItems().add("Celsius");
         Temperature.getItems().add("Fahrenheit");
-        return (String) Temperature.getValue();
+    }
+    @FXML
+    protected void setUnit() {
+        if (!this.declareUnit)
+            mainWindow.unit = " \u2109";
+        if (this.declareUnit)
+            mainWindow.unit = " \u2013";
     }
 
     //@Override
@@ -53,6 +65,21 @@ public class Settings implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-    String unit = getUnit();
+        getUnit();
+
+        // Gets current unit Celsius or Fahrenheit
+        Temperature.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.toString().toLowerCase().equals("fahrenheit")) {
+                declareUnit = false;
+                setUnit();
+                System.out.println("Fahrenheit");
+            }
+            if (newValue.toString().toLowerCase().equals("celsius")) {
+                declareUnit = true;
+                setUnit();
+                System.out.println("Celsius");
+            }
+
+        });
     }
 }

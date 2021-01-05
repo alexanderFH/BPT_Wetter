@@ -160,13 +160,47 @@ public class MainWindow implements Initializable {
     @FXML
     private MenuBar menuBar;
 
+    @FXML
+    protected static String unit = " \u2103";
+
+
+    @FXML
+    private static String setUnit(String unit) {
+        System.out.println("Test");
+        return unit;
+    }
+
+    @FXML
+    private boolean test() {
+        Settings settings = new Settings();
+        if (settings.declareUnit) {
+            return true;
+        } else if (!settings.declareUnit) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        boolean r = test();
+
+        if (r) {
+            String unit = " \u2103";
+            days = WeatherGetter.getWeatherJson("1220", "AT",true);
+        } else {
+            String unit = " \u2019";
+            days = WeatherGetter.getWeatherJson("1220", "AT",false);
+        }
 
         currentDate = new Date();
-        days = WeatherGetter.getWeatherJson("1220", "AT",true);
         displayDate.setText(dateFormat.format(currentDate));
+
+
 
         setDays(dayOne, 0);
         setDays(dayOne2, 0);
@@ -177,14 +211,14 @@ public class MainWindow implements Initializable {
         setDays(daySix, 5);
 
         setCurrentTempLabel();
-        minTemp.setText("minimale Temperatur: " + days.get(0).getMIN_TEMP() + " \u2103");
-        maxTemp.setText("maximale Temperatur: " + days.get(0).getMAX_TEMP() + " \u2103");
+        minTemp.setText("minimale Temperatur: " + days.get(0).getMIN_TEMP() + unit);
+        maxTemp.setText("maximale Temperatur: " + days.get(0).getMAX_TEMP() + unit);
         setRainLabel(0);
         humidity.setText("Luftfeuchtigkeit: " + days.get(0).getHumidity() + "%");
         sunrise.setText("Sonnenaufgang um:\n " + days.get(0).getSUNRISE() + " Uhr");
         sunset.setText("Sonnenuntergang um:\n " + days.get(0).getSUNSET() + " Uhr");
         moonphase.setText("Mondphase:\n " + days.get(0).getMoonphase());
-        feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(0).getFeelsLike() + " \u2103");
+        feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(0).getFeelsLike() + unit);
 
         changeImage(1, days.get(1).getCurrentTemp());
         changeImage(2, days.get(2).getCurrentTemp());
@@ -252,18 +286,18 @@ public class MainWindow implements Initializable {
         if(days.get(0).getCurrentTemp() == -999) {
             double minT = days.get(0).getMIN_TEMP();
             double maxT = days.get(0).getMAX_TEMP();
-            temp.setText((minT+maxT)/2 + " \u2103");
+            temp.setText((minT+maxT)/2 + unit);
         } else {
-            temp.setText(days.get(0).getCurrentTemp() + " \u2103");
+            temp.setText(days.get(0).getCurrentTemp() + unit);
         }
         setRainLabel(0);
-        minTemp.setText("minimale Temperatur: " + days.get(0).getMIN_TEMP() + " \u2103");
-        maxTemp.setText("maximale Temperatur: " + days.get(0).getMAX_TEMP() + " \u2103");
+        minTemp.setText("minimale Temperatur: " + days.get(0).getMIN_TEMP() + unit);
+        maxTemp.setText("maximale Temperatur: " + days.get(0).getMAX_TEMP() + unit);
         humidity.setText("Luftfeuchtigkeit: " + days.get(0).getHumidity() + "%");
         sunrise.setText("Sonnenaufgang um:\n " + days.get(0).getSUNRISE() + " Uhr");
         sunset.setText("Sonnenuntergang um:\n " + days.get(0).getSUNSET() + " Uhr");
         moonphase.setText("Mondphase:\n " + days.get(0).getMoonphase());
-        feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(0).getFeelsLike() + " \u2103");
+        feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(0).getFeelsLike() + unit);
         //detail.setText(days.get(0).getNarrative());
         changeImage(0, days.get(0).getCurrentTemp());
         changeIconWhenNight(0,0);
@@ -293,19 +327,19 @@ public class MainWindow implements Initializable {
         if(days.get(1).getCurrentTemp() == -999) {
             double minT = days.get(1).getMIN_TEMP();
             double maxT = days.get(1).getMAX_TEMP();
-            temp.setText((minT+maxT)/2 + " \u2103");
+            temp.setText((minT+maxT)/2 + unit);
         } else {
-            temp.setText(days.get(1).getCurrentTemp() + " \u2103");
+            temp.setText(days.get(1).getCurrentTemp() + unit);
         }
 
         setRainLabel(1);
-        minTemp.setText("minimale Temperatur: " + days.get(1).getMIN_TEMP() + " \u2103");
-        maxTemp.setText("maximale Temperatur: " + days.get(1).getMAX_TEMP() + " \u2103");
+        minTemp.setText("minimale Temperatur: " + days.get(1).getMIN_TEMP() + unit);
+        maxTemp.setText("maximale Temperatur: " + days.get(1).getMAX_TEMP() + unit);
         humidity.setText("Luftfeuchtigkeit: " + days.get(1).getHumidity() + "%");
         sunrise.setText("Sonnenaufgang um:\n " + days.get(1).getSUNRISE() + " Uhr");
         sunset.setText("Sonnenuntergang um:\n " + days.get(1).getSUNSET() + " Uhr");
         moonphase.setText("Mondphase:\n " + days.get(1).getMoonphase());
-        feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(1).getFeelsLike() + " \u2103");
+        feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(1).getFeelsLike() + unit);
         changeImage(1, days.get(1).getCurrentTemp());
         changeIconWhenNight(1,1);
 
@@ -334,19 +368,19 @@ public class MainWindow implements Initializable {
         if(days.get(2).getCurrentTemp() == -999) {
             double minT = days.get(2).getMIN_TEMP();
             double maxT = days.get(2).getMAX_TEMP();
-            temp.setText((minT+maxT)/2 + " \u2103");
+            temp.setText((minT+maxT)/2 + unit);
         } else {
-            temp.setText(days.get(2).getCurrentTemp() + " \u2103");
+            temp.setText(days.get(2).getCurrentTemp() + unit);
         }
 
         setRainLabel(2);
-        minTemp.setText("minimale Temperatur: " + days.get(2).getMIN_TEMP() + " \u2103");
-        maxTemp.setText("maximale Temperatur: " + days.get(2).getMAX_TEMP() + " \u2103");
+        minTemp.setText("minimale Temperatur: " + days.get(2).getMIN_TEMP() + unit);
+        maxTemp.setText("maximale Temperatur: " + days.get(2).getMAX_TEMP() + unit);
         humidity.setText("Luftfeuchtigkeit: " + days.get(2).getHumidity() + "%");
         sunrise.setText("Sonnenaufgang um:\n " + days.get(2).getSUNRISE() + " Uhr");
         sunset.setText("Sonnenuntergang um:\n " + days.get(2).getSUNSET() + " Uhr");
         moonphase.setText("Mondphase:\n " + days.get(2).getMoonphase());
-        feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(2).getFeelsLike() + " \u2103");
+        feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(2).getFeelsLike() + unit);
         changeImage(2, days.get(2).getCurrentTemp());
         changeIconWhenNight(2,2);
 
@@ -375,19 +409,19 @@ public class MainWindow implements Initializable {
         if(days.get(3).getCurrentTemp() == -999) {
             double minT = days.get(3).getMIN_TEMP();
             double maxT = days.get(3).getMAX_TEMP();
-            temp.setText((minT+maxT)/2 + " \u2103");
+            temp.setText((minT+maxT)/2 + unit);
         } else {
-            temp.setText(days.get(3).getCurrentTemp() + " \u2103");
+            temp.setText(days.get(3).getCurrentTemp() + unit);
         }
 
         setRainLabel(3);
-        minTemp.setText("minimale Temperatur: " + days.get(3).getMIN_TEMP() + " \u2103");
-        maxTemp.setText("maximale Temperatur: " + days.get(3).getMAX_TEMP() + " \u2103");
+        minTemp.setText("minimale Temperatur: " + days.get(3).getMIN_TEMP() + unit);
+        maxTemp.setText("maximale Temperatur: " + days.get(3).getMAX_TEMP() + unit);
         humidity.setText("Luftfeuchtigkeit: " + days.get(3).getHumidity() + "%");
         sunrise.setText("Sonnenaufgang um:\n " + days.get(3).getSUNRISE() + " Uhr");
         sunset.setText("Sonnenuntergang um:\n " + days.get(3).getSUNSET() + " Uhr");
         moonphase.setText("Mondphase:\n " + days.get(3).getMoonphase());
-        feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(3).getFeelsLike() + " \u2103");
+        feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(3).getFeelsLike() + unit);
         changeImage(3, days.get(3).getCurrentTemp());
         changeIconWhenNight(3,3);
 
@@ -416,19 +450,19 @@ public class MainWindow implements Initializable {
         if(days.get(4).getCurrentTemp() == -999) {
             double minT = days.get(4).getMIN_TEMP();
             double maxT = days.get(4).getMAX_TEMP();
-            temp.setText((minT+maxT)/2 + " \u2103");
+            temp.setText((minT+maxT)/2 + unit);
         } else {
-            temp.setText(days.get(4).getCurrentTemp() + " \u2103");
+            temp.setText(days.get(4).getCurrentTemp() + unit);
         }
 
         setRainLabel(4);
-        minTemp.setText("minimale Temperatur: " + days.get(4).getMIN_TEMP() + " \u2103");
-        maxTemp.setText("maximale Temperatur: " + days.get(4).getMAX_TEMP() + " \u2103");
+        minTemp.setText("minimale Temperatur: " + days.get(4).getMIN_TEMP() + unit);
+        maxTemp.setText("maximale Temperatur: " + days.get(4).getMAX_TEMP() + unit);
         humidity.setText("Luftfeuchtigkeit: " + days.get(4).getHumidity() + "%");
         sunrise.setText("Sonnenaufgang um:\n " + days.get(4).getSUNRISE() + " Uhr");
         sunset.setText("Sonnenuntergang um:\n " + days.get(4).getSUNSET() + " Uhr");
         moonphase.setText("Mondphase:\n " + days.get(4).getMoonphase());
-        feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(4).getFeelsLike() + " \u2103");
+        feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(4).getFeelsLike() + unit);
         changeImage(4, days.get(4).getCurrentTemp());
         changeIconWhenNight(4,4);
 
@@ -457,19 +491,19 @@ public class MainWindow implements Initializable {
         if(days.get(5).getCurrentTemp() == -999) {
             double minT = days.get(5).getMIN_TEMP();
             double maxT = days.get(5).getMAX_TEMP();
-            temp.setText((minT+maxT)/2 + " \u2103");
+            temp.setText((minT+maxT)/2 + unit);
         } else {
-            temp.setText(days.get(5).getCurrentTemp() + " \u2103");
+            temp.setText(days.get(5).getCurrentTemp() + unit);
         }
 
         setRainLabel(5);
-        minTemp.setText("minimale Temperatur: " + days.get(5).getMIN_TEMP() + " \u2103");
-        maxTemp.setText("maximale Temperatur: " + days.get(5).getMAX_TEMP() + " \u2103");
+        minTemp.setText("minimale Temperatur: " + days.get(5).getMIN_TEMP() + unit);
+        maxTemp.setText("maximale Temperatur: " + days.get(5).getMAX_TEMP() + unit);
         humidity.setText("Luftfeuchtigkeit: " + days.get(5).getHumidity() + "%");
         sunrise.setText("Sonnenaufgang um:\n " + days.get(5).getSUNRISE() + " Uhr");
         sunset.setText("Sonnenuntergang um:\n " + days.get(5).getSUNSET() + " Uhr");
         moonphase.setText("Mondphase:\n " + days.get(5).getMoonphase());
-        feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(5).getFeelsLike() + " \u2103");
+        feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(5).getFeelsLike() + unit);
         changeImage(5, days.get(5).getCurrentTemp());
         changeIconWhenNight(5,5);
 
@@ -802,52 +836,52 @@ public class MainWindow implements Initializable {
         if(days.get(0).getCurrentTemp() == -999) {
             double minT = days.get(0).getMIN_TEMP();
             double maxT = days.get(0).getMAX_TEMP();
-            temp.setText((minT+maxT)/2 + " \u2103");
-            nextDayTemp1.setText((minT+maxT)/2 + " \u2103");
+            temp.setText((minT+maxT)/2 + unit);
+            nextDayTemp1.setText((minT+maxT)/2 + unit);
 
         } else {
-            temp.setText(days.get(0).getCurrentTemp() + " \u2103");
-            nextDayTemp1.setText(days.get(0).getCurrentTemp() + " \u2103");
+            temp.setText(days.get(0).getCurrentTemp() + unit);
+            nextDayTemp1.setText(days.get(0).getCurrentTemp() + unit);
         }
 
         if(days.get(1).getCurrentTemp() == -999) {
             double minT = days.get(1).getMIN_TEMP();
             double maxT = days.get(1).getMAX_TEMP();
-            nextDayTemp2.setText((minT+maxT)/2 + " \u2103");
+            nextDayTemp2.setText((minT+maxT)/2 + unit);
         } else {
-            nextDayTemp2.setText(days.get(1).getCurrentTemp() + " \u2103");
+            nextDayTemp2.setText(days.get(1).getCurrentTemp() + unit);
         }
 
         if(days.get(2).getCurrentTemp() == -999) {
             double minT = days.get(2).getMIN_TEMP();
             double maxT = days.get(2).getMAX_TEMP();
-            nextDayTemp3.setText((minT+maxT)/2 + " \u2103");
+            nextDayTemp3.setText((minT+maxT)/2 + unit);
         } else {
-            nextDayTemp3.setText(days.get(2).getCurrentTemp() + " \u2103");
+            nextDayTemp3.setText(days.get(2).getCurrentTemp() + unit);
         }
 
         if(days.get(3).getCurrentTemp() == -999) {
             double minT = days.get(3).getMIN_TEMP();
             double maxT = days.get(3).getMAX_TEMP();
-            nextDayTemp4.setText((minT+maxT)/2 + " \u2103");
+            nextDayTemp4.setText((minT+maxT)/2 + unit);
         } else {
-            nextDayTemp4.setText(days.get(3).getCurrentTemp() + " \u2103");
+            nextDayTemp4.setText(days.get(3).getCurrentTemp() + unit);
         }
 
         if(days.get(4).getCurrentTemp() == -999) {
             double minT = days.get(4).getMIN_TEMP();
             double maxT = days.get(4).getMAX_TEMP();
-            nextDayTemp5.setText((minT+maxT)/2 + " \u2103");
+            nextDayTemp5.setText((minT+maxT)/2 + unit);
         } else {
-            nextDayTemp5.setText(days.get(4).getCurrentTemp() + " \u2103");
+            nextDayTemp5.setText(days.get(4).getCurrentTemp() + unit);
         }
 
         if(days.get(5).getCurrentTemp() == -999) {
             double minT = days.get(5).getMIN_TEMP();
             double maxT = days.get(5).getMAX_TEMP();
-            nextDayTemp6.setText((minT+maxT)/2 + " \u2103");
+            nextDayTemp6.setText((minT+maxT)/2 + unit);
         } else {
-            nextDayTemp6.setText(days.get(5).getCurrentTemp() + " \u2103");
+            nextDayTemp6.setText(days.get(5).getCurrentTemp() + unit);
         }
     }
 

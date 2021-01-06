@@ -72,6 +72,6 @@ public class Settings implements Initializable {
 
     public void export(ActionEvent actionEvent) {
         System.out.println(actionEvent.getSource().toString());
-        WeatherGetter.printWeatherToFile("1220", "AT", true);
+        WeatherGetter.printWeatherToFile("1220", "AT", declareUnit);
     }
 }

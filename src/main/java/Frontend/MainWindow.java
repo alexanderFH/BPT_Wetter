@@ -189,12 +189,12 @@ public class MainWindow implements Initializable {
         moonphase.setText("Mondphase:\n " + days.get(0).getMoonphase());
         feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(0).getFeelsLike() + unit);
 
-        changeImage(1, days.get(1).getCurrentTemp());
-        changeImage(2, days.get(2).getCurrentTemp());
-        changeImage(3, days.get(3).getCurrentTemp());
-        changeImage(4, days.get(4).getCurrentTemp());
-        changeImage(5, days.get(5).getCurrentTemp());
-        changeImage(0, days.get(0).getCurrentTemp());
+        changeImage(1);
+        changeImage(2);
+        changeImage(3);
+        changeImage(4);
+        changeImage(5);
+        changeImage(0);
 
         bp1.getStyleClass().add("clickedOnPane");
 
@@ -236,7 +236,7 @@ public class MainWindow implements Initializable {
         moonphase.setText("Mondphase:\n " + days.get(0).getMoonphase());
         feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(0).getFeelsLike() + unit);
         //detail.setText(days.get(0).getNarrative());
-        changeImage(0, days.get(0).getCurrentTemp());
+        changeImage(0);
         changeIconWhenNight(0, 0);
 
         bp1Pressed = true;
@@ -277,7 +277,7 @@ public class MainWindow implements Initializable {
         sunset.setText("Sonnenuntergang um:\n " + days.get(1).getSUNSET() + " Uhr");
         moonphase.setText("Mondphase:\n " + days.get(1).getMoonphase());
         feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(1).getFeelsLike() + unit);
-        changeImage(1, days.get(1).getCurrentTemp());
+        changeImage(1);
         changeIconWhenNight(1, 1);
 
         bp2Pressed = true;
@@ -318,7 +318,7 @@ public class MainWindow implements Initializable {
         sunset.setText("Sonnenuntergang um:\n " + days.get(2).getSUNSET() + " Uhr");
         moonphase.setText("Mondphase:\n " + days.get(2).getMoonphase());
         feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(2).getFeelsLike() + unit);
-        changeImage(2, days.get(2).getCurrentTemp());
+        changeImage(2);
         changeIconWhenNight(2, 2);
 
         bp3Pressed = true;
@@ -359,7 +359,7 @@ public class MainWindow implements Initializable {
         sunset.setText("Sonnenuntergang um:\n " + days.get(3).getSUNSET() + " Uhr");
         moonphase.setText("Mondphase:\n " + days.get(3).getMoonphase());
         feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(3).getFeelsLike() + unit);
-        changeImage(3, days.get(3).getCurrentTemp());
+        changeImage(3);
         changeIconWhenNight(3, 3);
 
         bp4Pressed = true;
@@ -400,7 +400,7 @@ public class MainWindow implements Initializable {
         sunset.setText("Sonnenuntergang um:\n " + days.get(4).getSUNSET() + " Uhr");
         moonphase.setText("Mondphase:\n " + days.get(4).getMoonphase());
         feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(4).getFeelsLike() + unit);
-        changeImage(4, days.get(4).getCurrentTemp());
+        changeImage(4);
         changeIconWhenNight(4, 4);
 
         bp5Pressed = true;
@@ -441,7 +441,7 @@ public class MainWindow implements Initializable {
         sunset.setText("Sonnenuntergang um:\n " + days.get(5).getSUNSET() + " Uhr");
         moonphase.setText("Mondphase:\n " + days.get(5).getMoonphase());
         feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(5).getFeelsLike() + unit);
-        changeImage(5, days.get(5).getCurrentTemp());
+        changeImage(5);
         changeIconWhenNight(5, 5);
 
         bp6Pressed = true;
@@ -457,9 +457,8 @@ public class MainWindow implements Initializable {
 
     // Change image based on currentTemp/narrative
     @FXML
-    private void changeImage(int currentDay, double currentTemp) {
-        // Für später --> String narative = days.get(0).getNarrative();
-        //int temp = days.get(currentDay).getCurrentTemp();
+    private void changeImage(int currentDay) {
+
 
         // Declares Images for every Weather icon
         Image sunny = new Image("/img/sunny.png");
@@ -473,34 +472,36 @@ public class MainWindow implements Initializable {
 
 
         // Sets image based on current temp/narrative
-        if (days.get(currentDay).getNarrative().toLowerCase().contains("schauer".toLowerCase())) {
+
+        String nararative = days.get(currentDay).getNarrative().toLowerCase();
+        if (nararative.contains("schauer".toLowerCase())) {
             image.setImage(cloudyRain);
             checkImage = "cloudyRain";
 
             mainBorderPane.getStyleClass().removeAll("myBorderPaneCloudy", "myBorderPaneCloudySunny", "myBorderPaneSnowy", "myBorderPaneThunder");
             mainBorderPane.getStyleClass().add("myBorderPaneCloudyRain");
 
-        } else if (days.get(currentDay).getNarrative().toLowerCase().contains("klar".toLowerCase())) {
+        } else if (nararative.contains("klar".toLowerCase())) {
             image.setImage(sunny);
             checkImage = "sunny";
             mainBorderPane.getStyleClass().removeAll("myBorderPaneCloudy", "myBorderPaneCloudyRain", "myBorderPaneSnowy", "myBorderPaneThunder");
             mainBorderPane.getStyleClass().add("myBorderPaneSunny");
 
-        } else if (days.get(currentDay).getNarrative().toLowerCase().contains("bedeckt".toLowerCase())) {
+        } else if (nararative.contains("bedeckt".toLowerCase())) {
             image.setImage(cloudy);
             checkImage = "cloudy";
             mainBorderPane.getStyleClass().removeAll("myBorderPaneSunny", "myBorderPaneCloudyRain", "myBorderPaneSnowy", "myBorderPaneThunder");
             mainBorderPane.getStyleClass().add("myBorderPaneCloudy");
 
 
-        } else if (days.get(currentDay).getNarrative().toLowerCase().contains("Schnee".toLowerCase())) {
+        } else if (nararative.contains("Schnee".toLowerCase())) {
             image.setImage(snowy);
             checkImage = "snowy";
             mainBorderPane.getStyleClass().removeAll("myBorderPaneCloudy", "myBorderPaneCloudyRain", "myBorderPaneSunny", "myBorderPaneThunder");
             mainBorderPane.getStyleClass().add("myBorderPaneSnowy");
 
 
-        } else if (days.get(currentDay).getNarrative().toLowerCase().contains("gewitter".toLowerCase())) {
+        } else if (nararative.contains("gewitter".toLowerCase())) {
             image.setImage(thunderstorm);
             checkImage = "thunderstorm";
 
@@ -510,19 +511,6 @@ public class MainWindow implements Initializable {
             image.setImage(cloudy);
             checkImage = "cloudy";
         }
-        /*if (0 < currentTemp && currentTemp < 9) {
-            image.setImage(cloudyRain);
-            checkImage = "cloudyRain";
-        } else if (currentTemp >= 9 && currentTemp <= 20 ) {
-            image.setImage(cloudy);
-            checkImage = "cloudy";
-        } else if (currentTemp > 20) {
-            image.setImage(sunny);
-            checkImage = "sunny";
-        } else {
-            image.setImage(thunderstorm);
-            checkImage = "thunderstorm";
-        } */
 
         // Sets images for icon boxes
         switch (checkImage) {

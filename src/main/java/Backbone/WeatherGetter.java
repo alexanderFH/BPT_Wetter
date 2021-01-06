@@ -1,5 +1,6 @@
 package Backbone;
 
+import javafx.scene.control.Alert;
 import javafx.stage.FileChooser;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -107,7 +108,10 @@ public class WeatherGetter {
             fx.setInitialFileName("Wetter.txt");
             File file = fx.showSaveDialog(null);
             if (file == null) {
-                JOptionPane.showMessageDialog(null, "Kein gültiger Speicherort ausgewählt!", "Achtung", JOptionPane.ERROR_MESSAGE);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Export-Fehler");
+                alert.setHeaderText("Es wurde keine gültiger Speicherort ausgewählt!");
+                alert.show();
             } else {
                 PrintWriter writer = new PrintWriter(file, "UTF-8");
                 for (Day day : forecast) {

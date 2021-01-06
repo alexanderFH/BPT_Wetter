@@ -110,7 +110,7 @@ public class WeatherGetter {
             if (file == null) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Export-Fehler");
-                alert.setHeaderText("Es wurde keine gültiger Speicherort ausgewählt!");
+                alert.setHeaderText("Es wurde keine g\u00fcltiger Speicherort ausgew\u00e4hlt!");
                 alert.show();
             } else {
                 PrintWriter writer = new PrintWriter(file, "UTF-8");

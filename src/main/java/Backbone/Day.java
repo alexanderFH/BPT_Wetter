@@ -6,8 +6,8 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Day {
-    private double MIN_TEMP;
-    private double MAX_TEMP;
+    private double min_temp;
+    private double max_temp;
     private final long SUNSET;
     private final long SUNRISE;
     private String day;
@@ -22,17 +22,17 @@ public class Day {
     /**
      * Constructor for the weather forecast API
      *
-     * @param MIN_TEMP
-     * @param MAX_TEMP
+     * @param min_temp
+     * @param max_temp
      * @param narrative
      * @param moonphase
      * @param SUNRISE
      * @param SUNSET
      */
-    public Day(String day, double MIN_TEMP, double MAX_TEMP, String narrative, String moonphase, long SUNRISE, long SUNSET, double rain) {
+    public Day(String day, double min_temp, double max_temp, String narrative, String moonphase, long SUNRISE, long SUNSET, double rain) {
         this.day = day;
-        this.MIN_TEMP = MIN_TEMP;
-        this.MAX_TEMP = MAX_TEMP;
+        this.min_temp = min_temp;
+        this.max_temp = max_temp;
         this.narrative = narrative;
         this.moonphase = moonphase;
         this.SUNRISE = SUNRISE;
@@ -41,12 +41,12 @@ public class Day {
     }
 
 
-    public double getMIN_TEMP() {
-        return MIN_TEMP;
+    public double getMin_temp() {
+        return min_temp;
     }
 
-    public double getMAX_TEMP() {
-        return MAX_TEMP;
+    public double getMax_temp() {
+        return max_temp;
     }
 
     public double getCurrentTemp() {
@@ -109,22 +109,22 @@ public class Day {
         return day;
     }
 
-    public void setMIN_TEMP(double MIN_TEMP) {
-        this.MIN_TEMP = MIN_TEMP;
+    public void setMin_temp(double min_temp) {
+        this.min_temp = min_temp;
     }
 
-    public void setMAX_TEMP(double MAX_TEMP) {
-        this.MAX_TEMP = MAX_TEMP;
+    public void setMax_temp(double max_temp) {
+        this.max_temp = max_temp;
     }
 
-    private String UTC_to_String(long utc) {
+    public static String UTC_to_String(long utc) {
         ZonedDateTime zo = ZonedDateTime.ofInstant(Instant.ofEpochSecond(utc), ZoneId.systemDefault());
         return DateTimeFormatter.ofPattern("HH:mm:ss").format(zo);
     }
 
     public String toStringWithUnit(String unit) {
-        return day + ":\nMinimale Temperatur: " + MIN_TEMP + unit +
-                "\nMaximale Temperatur: " + MAX_TEMP + unit +
+        return day + ":\nMinimale Temperatur: " + min_temp + unit +
+                "\nMaximale Temperatur: " + max_temp + unit +
                 "\nMondphase: " + moonphase +
                 "\nRegenwahrscheinlichkeit: " + rain +
                 "\nSonnenaufgang: " + getSUNRISE() +
@@ -133,8 +133,8 @@ public class Day {
 
     @Override
     public String toString() {
-        return day + ":\nMinimale Temperatur: " + MIN_TEMP +
-                "\nMaximale Temperatur: " + MAX_TEMP +
+        return day + ":\nMinimale Temperatur: " + min_temp +
+                "\nMaximale Temperatur: " + max_temp +
                 "\nMondphase: " + moonphase +
                 "\nRegenwahrscheinlichkeit: " + rain +
                 "\nSonnenaufgang: " + getSUNRISE() +

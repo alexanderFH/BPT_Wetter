@@ -180,8 +180,8 @@ public class MainWindow implements Initializable {
         daySix.setText(days.get(5).getDayName());
 
         setCurrentTempLabel();
-        minTemp.setText("minimale Temperatur: " + days.get(0).getMIN_TEMP() + unit);
-        maxTemp.setText("maximale Temperatur: " + days.get(0).getMAX_TEMP() + unit);
+        minTemp.setText("minimale Temperatur: " + days.get(0).getMin_temp() + unit);
+        maxTemp.setText("maximale Temperatur: " + days.get(0).getMax_temp() + unit);
         setRainLabel(0);
         humidity.setText("Luftfeuchtigkeit: " + days.get(0).getHumidity() + "%");
         sunrise.setText("Sonnenaufgang um:\n " + days.get(0).getSUNRISE() + " Uhr");
@@ -221,15 +221,15 @@ public class MainWindow implements Initializable {
 
         dayOne.setText(dayOne2.getText());
         if (days.get(0).getCurrentTemp() == -999) {
-            double minT = days.get(0).getMIN_TEMP();
-            double maxT = days.get(0).getMAX_TEMP();
+            double minT = days.get(0).getMin_temp();
+            double maxT = days.get(0).getMax_temp();
             temp.setText((minT + maxT) / 2 + unit);
         } else {
             temp.setText(days.get(0).getCurrentTemp() + unit);
         }
         setRainLabel(0);
-        minTemp.setText("minimale Temperatur: " + days.get(0).getMIN_TEMP() + unit);
-        maxTemp.setText("maximale Temperatur: " + days.get(0).getMAX_TEMP() + unit);
+        minTemp.setText("minimale Temperatur: " + days.get(0).getMin_temp() + unit);
+        maxTemp.setText("maximale Temperatur: " + days.get(0).getMax_temp() + unit);
         humidity.setText("Luftfeuchtigkeit: " + days.get(0).getHumidity() + "%");
         sunrise.setText("Sonnenaufgang um:\n " + days.get(0).getSUNRISE() + " Uhr");
         sunset.setText("Sonnenuntergang um:\n " + days.get(0).getSUNSET() + " Uhr");
@@ -262,16 +262,16 @@ public class MainWindow implements Initializable {
 
         dayOne.setText(dayTwo.getText());
         if (days.get(1).getCurrentTemp() == -999) {
-            double minT = days.get(1).getMIN_TEMP();
-            double maxT = days.get(1).getMAX_TEMP();
+            double minT = days.get(1).getMin_temp();
+            double maxT = days.get(1).getMax_temp();
             temp.setText((minT + maxT) / 2 + unit);
         } else {
             temp.setText(days.get(1).getCurrentTemp() + unit);
         }
 
         setRainLabel(1);
-        minTemp.setText("minimale Temperatur: " + days.get(1).getMIN_TEMP() + unit);
-        maxTemp.setText("maximale Temperatur: " + days.get(1).getMAX_TEMP() + unit);
+        minTemp.setText("minimale Temperatur: " + days.get(1).getMin_temp() + unit);
+        maxTemp.setText("maximale Temperatur: " + days.get(1).getMax_temp() + unit);
         humidity.setText("Luftfeuchtigkeit: " + days.get(1).getHumidity() + "%");
         sunrise.setText("Sonnenaufgang um:\n " + days.get(1).getSUNRISE() + " Uhr");
         sunset.setText("Sonnenuntergang um:\n " + days.get(1).getSUNSET() + " Uhr");
@@ -303,16 +303,16 @@ public class MainWindow implements Initializable {
 
         dayOne.setText(dayThree.getText());
         if (days.get(2).getCurrentTemp() == -999) {
-            double minT = days.get(2).getMIN_TEMP();
-            double maxT = days.get(2).getMAX_TEMP();
+            double minT = days.get(2).getMin_temp();
+            double maxT = days.get(2).getMax_temp();
             temp.setText((minT + maxT) / 2 + unit);
         } else {
             temp.setText(days.get(2).getCurrentTemp() + unit);
         }
 
         setRainLabel(2);
-        minTemp.setText("minimale Temperatur: " + days.get(2).getMIN_TEMP() + unit);
-        maxTemp.setText("maximale Temperatur: " + days.get(2).getMAX_TEMP() + unit);
+        minTemp.setText("minimale Temperatur: " + days.get(2).getMin_temp() + unit);
+        maxTemp.setText("maximale Temperatur: " + days.get(2).getMax_temp() + unit);
         humidity.setText("Luftfeuchtigkeit: " + days.get(2).getHumidity() + "%");
         sunrise.setText("Sonnenaufgang um:\n " + days.get(2).getSUNRISE() + " Uhr");
         sunset.setText("Sonnenuntergang um:\n " + days.get(2).getSUNSET() + " Uhr");
@@ -344,16 +344,16 @@ public class MainWindow implements Initializable {
 
         dayOne.setText(dayFour.getText());
         if (days.get(3).getCurrentTemp() == -999) {
-            double minT = days.get(3).getMIN_TEMP();
-            double maxT = days.get(3).getMAX_TEMP();
+            double minT = days.get(3).getMin_temp();
+            double maxT = days.get(3).getMax_temp();
             temp.setText((minT + maxT) / 2 + unit);
         } else {
             temp.setText(days.get(3).getCurrentTemp() + unit);
         }
 
         setRainLabel(3);
-        minTemp.setText("minimale Temperatur: " + days.get(3).getMIN_TEMP() + unit);
-        maxTemp.setText("maximale Temperatur: " + days.get(3).getMAX_TEMP() + unit);
+        minTemp.setText("minimale Temperatur: " + days.get(3).getMin_temp() + unit);
+        maxTemp.setText("maximale Temperatur: " + days.get(3).getMax_temp() + unit);
         humidity.setText("Luftfeuchtigkeit: " + days.get(3).getHumidity() + "%");
         sunrise.setText("Sonnenaufgang um:\n " + days.get(3).getSUNRISE() + " Uhr");
         sunset.setText("Sonnenuntergang um:\n " + days.get(3).getSUNSET() + " Uhr");
@@ -385,16 +385,16 @@ public class MainWindow implements Initializable {
 
         dayOne.setText(dayFive.getText());
         if (days.get(4).getCurrentTemp() == -999) {
-            double minT = days.get(4).getMIN_TEMP();
-            double maxT = days.get(4).getMAX_TEMP();
+            double minT = days.get(4).getMin_temp();
+            double maxT = days.get(4).getMax_temp();
             temp.setText((minT + maxT) / 2 + unit);
         } else {
             temp.setText(days.get(4).getCurrentTemp() + unit);
         }
 
         setRainLabel(4);
-        minTemp.setText("minimale Temperatur: " + days.get(4).getMIN_TEMP() + unit);
-        maxTemp.setText("maximale Temperatur: " + days.get(4).getMAX_TEMP() + unit);
+        minTemp.setText("minimale Temperatur: " + days.get(4).getMin_temp() + unit);
+        maxTemp.setText("maximale Temperatur: " + days.get(4).getMax_temp() + unit);
         humidity.setText("Luftfeuchtigkeit: " + days.get(4).getHumidity() + "%");
         sunrise.setText("Sonnenaufgang um:\n " + days.get(4).getSUNRISE() + " Uhr");
         sunset.setText("Sonnenuntergang um:\n " + days.get(4).getSUNSET() + " Uhr");
@@ -410,7 +410,6 @@ public class MainWindow implements Initializable {
         bp4Pressed = false;
         bp6Pressed = false;
         borderPanePressed();
-
         setFadeAnimation(weatherInfo, 1000);
     }
 
@@ -426,16 +425,16 @@ public class MainWindow implements Initializable {
 
         dayOne.setText(daySix.getText());
         if (days.get(5).getCurrentTemp() == -999) {
-            double minT = days.get(5).getMIN_TEMP();
-            double maxT = days.get(5).getMAX_TEMP();
+            double minT = days.get(5).getMin_temp();
+            double maxT = days.get(5).getMax_temp();
             temp.setText((minT + maxT) / 2 + unit);
         } else {
             temp.setText(days.get(5).getCurrentTemp() + unit);
         }
 
         setRainLabel(5);
-        minTemp.setText("minimale Temperatur: " + days.get(5).getMIN_TEMP() + unit);
-        maxTemp.setText("maximale Temperatur: " + days.get(5).getMAX_TEMP() + unit);
+        minTemp.setText("minimale Temperatur: " + days.get(5).getMin_temp() + unit);
+        maxTemp.setText("maximale Temperatur: " + days.get(5).getMax_temp() + unit);
         humidity.setText("Luftfeuchtigkeit: " + days.get(5).getHumidity() + "%");
         sunrise.setText("Sonnenaufgang um:\n " + days.get(5).getSUNRISE() + " Uhr");
         sunset.setText("Sonnenuntergang um:\n " + days.get(5).getSUNSET() + " Uhr");
@@ -777,8 +776,8 @@ public class MainWindow implements Initializable {
 
     public void setCurrentTempLabel() {
         if (days.get(0).getCurrentTemp() == -999) {
-            double minT = days.get(0).getMIN_TEMP();
-            double maxT = days.get(0).getMAX_TEMP();
+            double minT = days.get(0).getMin_temp();
+            double maxT = days.get(0).getMax_temp();
             temp.setText((minT + maxT) / 2 + unit);
             nextDayTemp1.setText((minT + maxT) / 2 + unit);
 
@@ -788,40 +787,40 @@ public class MainWindow implements Initializable {
         }
 
         if (days.get(1).getCurrentTemp() == -999) {
-            double minT = days.get(1).getMIN_TEMP();
-            double maxT = days.get(1).getMAX_TEMP();
+            double minT = days.get(1).getMin_temp();
+            double maxT = days.get(1).getMax_temp();
             nextDayTemp2.setText((minT + maxT) / 2 + unit);
         } else {
             nextDayTemp2.setText(days.get(1).getCurrentTemp() + unit);
         }
 
         if (days.get(2).getCurrentTemp() == -999) {
-            double minT = days.get(2).getMIN_TEMP();
-            double maxT = days.get(2).getMAX_TEMP();
+            double minT = days.get(2).getMin_temp();
+            double maxT = days.get(2).getMax_temp();
             nextDayTemp3.setText((minT + maxT) / 2 + unit);
         } else {
             nextDayTemp3.setText(days.get(2).getCurrentTemp() + unit);
         }
 
         if (days.get(3).getCurrentTemp() == -999) {
-            double minT = days.get(3).getMIN_TEMP();
-            double maxT = days.get(3).getMAX_TEMP();
+            double minT = days.get(3).getMin_temp();
+            double maxT = days.get(3).getMax_temp();
             nextDayTemp4.setText((minT + maxT) / 2 + unit);
         } else {
             nextDayTemp4.setText(days.get(3).getCurrentTemp() + unit);
         }
 
         if (days.get(4).getCurrentTemp() == -999) {
-            double minT = days.get(4).getMIN_TEMP();
-            double maxT = days.get(4).getMAX_TEMP();
+            double minT = days.get(4).getMin_temp();
+            double maxT = days.get(4).getMax_temp();
             nextDayTemp5.setText((minT + maxT) / 2 + unit);
         } else {
             nextDayTemp5.setText(days.get(4).getCurrentTemp() + unit);
         }
 
         if (days.get(5).getCurrentTemp() == -999) {
-            double minT = days.get(5).getMIN_TEMP();
-            double maxT = days.get(5).getMAX_TEMP();
+            double minT = days.get(5).getMin_temp();
+            double maxT = days.get(5).getMax_temp();
             nextDayTemp6.setText((minT + maxT) / 2 + unit);
         } else {
             nextDayTemp6.setText(days.get(5).getCurrentTemp() + unit);

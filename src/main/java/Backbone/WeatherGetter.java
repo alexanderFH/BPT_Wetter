@@ -1,7 +1,6 @@
 package Backbone;
 
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -89,8 +88,8 @@ public class WeatherGetter {
             day.setFeelsLike(temp.getDouble("feels_like"));
             day.setCurrentTemp(temp.getDouble("temp"));
             day.setHumidity(temp.getDouble("humidity"));
-            day.setMIN_TEMP(temp.getDouble("temp_min"));
-            day.setMAX_TEMP(temp.getDouble("temp_max"));
+            day.setMin_temp(temp.getDouble("temp_min"));
+            day.setMax_temp(temp.getDouble("temp_max"));
         } catch (Exception e) {
             System.err.println("Da lief etwas schief!");
             e.printStackTrace();

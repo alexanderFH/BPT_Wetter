@@ -57,7 +57,7 @@ public class Settings implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         getUnit();
-
+        Position.setPromptText(plz + "," + country);
         // Gets current unit Celsius or Fahrenheit
         Temperature.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.toString().toLowerCase().equals("fahrenheit")) {

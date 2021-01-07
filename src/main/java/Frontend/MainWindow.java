@@ -3,7 +3,6 @@ package Frontend;
 import Backbone.Day;
 import Backbone.WeatherGetter;
 import javafx.animation.FadeTransition;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,15 +10,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -181,12 +177,13 @@ public class MainWindow implements Initializable {
         setFadeAnimation(nextWeatherInfo, 1500);
 
         try {
-            changeImageWhenNight(0, 0);
+
             changeImageWhenNight(1, 1);
             changeImageWhenNight(2, 2);
             changeImageWhenNight(3, 3);
             changeImageWhenNight(4, 4);
             changeImageWhenNight(5, 5);
+            changeImageWhenNight(0, 0);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -584,12 +581,12 @@ public class MainWindow implements Initializable {
         ZonedDateTime no = ZonedDateTime.now();
         String mondphase = "";
 
-        Image vollmond = new Image("/img/moonphases/vollmond.png");
+        Image vollmond = new Image("/img/moonphases/fullmoon.png");
         Image abHalbmond = new Image("/img/moonphases/abHalbmond.png");
         Image abSichelmond = new Image("/img/moonphases/abSichelmond.png");
-        Image abDreiviertel = new Image("/img/moonphases/abDreiViertelmond.png");
-        Image neumond = new Image("/img/moonphases/neumond.png");
-        Image zuDreiviertel = new Image("/img/moonphases/zuDreiViertelmond.png");
+        Image abDreiviertel = new Image("/img/moonphases/abDreiviertelmond.png");
+        Image neumond = new Image("/img/moonphases/newmoon.png");
+        Image zuDreiviertel = new Image("/img/moonphases/zuDreiviertelmond.png");
         Image zuHalbmond = new Image("/img/moonphases/zuHalbmond.png");
         Image zuSichelmond = new Image("/img/moonphases/zuSichelmond.png");
 
@@ -624,15 +621,15 @@ public class MainWindow implements Initializable {
         if (days.get(index).getMoonphase().equals("abnehmender Halbmond")) {
             mondphase = "abHalbmond";
             image.setImage(abHalbmond);
-        } else if (days.get(index).getMoonphase().equals("abnehmender Sichelmond")) {
-            mondphase = "abSichelmond";
-            image.setImage(abSichelmond);
+        } else if (days.get(index).getMoonphase().equals("Vollmond")) {
+            mondphase = "vollmond";
+            image.setImage(vollmond);
         } else if (days.get(index).getMoonphase().equals("abnehmender Dreiviertelmond")) {
             mondphase = "abDreiviertelmond";
             image.setImage(abDreiviertel);
-        } else if (days.get(index).getMoonphase().equals("letztes Viertel")) {
-            mondphase = "letztesViertel";
-            image.setImage(vollmond);
+        } else if (days.get(index).getMoonphase().equals("abnehmender Sichelmond")) {
+            mondphase = "abSichelmond";
+            image.setImage(abSichelmond);
         } else if (days.get(index).getMoonphase().equals("zunehmender Sichelmond")) {
             mondphase = "zuSichelmond";
             image.setImage(zuSichelmond);
@@ -658,14 +655,14 @@ public class MainWindow implements Initializable {
                     case 5 -> imageNextDay6.setImage(abHalbmond);
                 }
                 break;
-            case "abSichelmond":
+            case "vollmond":
                 switch (currentDay) {
-                    case 0 -> imageNextDay1.setImage(abSichelmond);
-                    case 1 -> imageNextDay2.setImage(abSichelmond);
-                    case 2 -> imageNextDay3.setImage(abSichelmond);
-                    case 3 -> imageNextDay4.setImage(abSichelmond);
-                    case 4 -> imageNextDay5.setImage(abSichelmond);
-                    case 5 -> imageNextDay6.setImage(abSichelmond);
+                    case 0 -> imageNextDay1.setImage(vollmond);
+                    case 1 -> imageNextDay2.setImage(vollmond);
+                    case 2 -> imageNextDay3.setImage(vollmond);
+                    case 3 -> imageNextDay4.setImage(vollmond);
+                    case 4 -> imageNextDay5.setImage(vollmond);
+                    case 5 -> imageNextDay6.setImage(vollmond);
                 }
                 break;
             case "abDreiviertelmond":
@@ -678,14 +675,14 @@ public class MainWindow implements Initializable {
                     case 5 -> imageNextDay6.setImage(abDreiviertel);
                 }
                 break;
-            case "letztesViertel":
+            case "abSichelmond":
                 switch (currentDay) {
-                    case 0 -> imageNextDay1.setImage(vollmond);
-                    case 1 -> imageNextDay2.setImage(vollmond);
-                    case 2 -> imageNextDay3.setImage(vollmond);
-                    case 3 -> imageNextDay4.setImage(vollmond);
-                    case 4 -> imageNextDay5.setImage(vollmond);
-                    case 5 -> imageNextDay6.setImage(vollmond);
+                    case 0 -> imageNextDay1.setImage(abSichelmond);
+                    case 1 -> imageNextDay2.setImage(abSichelmond);
+                    case 2 -> imageNextDay3.setImage(abSichelmond);
+                    case 3 -> imageNextDay4.setImage(abSichelmond);
+                    case 4 -> imageNextDay5.setImage(abSichelmond);
+                    case 5 -> imageNextDay6.setImage(abSichelmond);
                 }
                 break;
             case "zuSichelmond":

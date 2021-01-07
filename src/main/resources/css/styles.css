@@ -38,6 +38,34 @@
     -fx-background-position: center center;
 }
 
+.myBorderPaneNightCloudy {
+    -fx-background-image: url("/img/backgrounds/night_cloudy.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 710 420;
+    -fx-background-position: center center;
+}
+
+.myBorderPaneNightRain {
+    -fx-background-image: url("/img/backgrounds/night_rain.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 710 420;
+    -fx-background-position: center center;
+}
+
+.myBorderPaneNightSnowy {
+    -fx-background-image: url("/img/backgrounds/night_snowy.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 710 420;
+    -fx-background-position: center center;
+}
+
+.myBorderPaneNightThunder {
+    -fx-background-image: url("/img/backgrounds/night_thunder.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 710 420;
+    -fx-background-position: center center;
+}
+
 .menuBar {
     -fx-background-color: #fff;
 }

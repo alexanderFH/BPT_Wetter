@@ -129,6 +129,8 @@ public class MainWindow implements Initializable {
     @FXML
     private MenuBar menuBar;
 
+    private boolean nightMode = false;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Settings.mainWindow = this;
@@ -136,12 +138,6 @@ public class MainWindow implements Initializable {
     }
 
     protected void start() {
-
-        bp2.getStyleClass().removeAll("clickedOnPane");
-        bp3.getStyleClass().removeAll("clickedOnPane");
-        bp4.getStyleClass().removeAll("clickedOnPane");
-        bp5.getStyleClass().removeAll("clickedOnPane");
-        bp6.getStyleClass().removeAll("clickedOnPane");
 
         if (Settings.declareUnit) {
             unit = " \u2103";
@@ -185,15 +181,21 @@ public class MainWindow implements Initializable {
         setFadeAnimation(nextWeatherInfo, 1500);
 
         try {
-            changeIconWhenNight(0, 0);
-            changeIconWhenNight(1, 1);
-            changeIconWhenNight(2, 2);
-            changeIconWhenNight(3, 3);
-            changeIconWhenNight(4, 4);
-            changeIconWhenNight(5, 5);
+            changeImageWhenNight(0, 0);
+            changeImageWhenNight(1, 1);
+            changeImageWhenNight(2, 2);
+            changeImageWhenNight(3, 3);
+            changeImageWhenNight(4, 4);
+            changeImageWhenNight(5, 5);
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        bp2.getStyleClass().removeAll("clickedOnPane");
+        bp3.getStyleClass().removeAll("clickedOnPane");
+        bp4.getStyleClass().removeAll("clickedOnPane");
+        bp5.getStyleClass().removeAll("clickedOnPane");
+        bp6.getStyleClass().removeAll("clickedOnPane");
     }
 
 
@@ -225,7 +227,7 @@ public class MainWindow implements Initializable {
         feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(0).getFeelsLike() + unit);
         //detail.setText(days.get(0).getNarrative());
         changeImage(0);
-        changeIconWhenNight(0, 0);
+        changeImageWhenNight(0, 0);
 
         bp1Pressed = true;
         bp2Pressed = false;
@@ -266,7 +268,7 @@ public class MainWindow implements Initializable {
         moonphase.setText("Mondphase:\n " + days.get(1).getMoonphase());
         feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(1).getFeelsLike() + unit);
         changeImage(1);
-        changeIconWhenNight(1, 1);
+        changeImageWhenNight(1, 1);
 
         bp2Pressed = true;
         bp1Pressed = false;
@@ -307,7 +309,7 @@ public class MainWindow implements Initializable {
         moonphase.setText("Mondphase:\n " + days.get(2).getMoonphase());
         feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(2).getFeelsLike() + unit);
         changeImage(2);
-        changeIconWhenNight(2, 2);
+        changeImageWhenNight(2, 2);
 
         bp3Pressed = true;
         bp1Pressed = false;
@@ -348,7 +350,7 @@ public class MainWindow implements Initializable {
         moonphase.setText("Mondphase:\n " + days.get(3).getMoonphase());
         feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(3).getFeelsLike() + unit);
         changeImage(3);
-        changeIconWhenNight(3, 3);
+        changeImageWhenNight(3, 3);
 
         bp4Pressed = true;
         bp1Pressed = false;
@@ -389,7 +391,7 @@ public class MainWindow implements Initializable {
         moonphase.setText("Mondphase:\n " + days.get(4).getMoonphase());
         feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(4).getFeelsLike() + unit);
         changeImage(4);
-        changeIconWhenNight(4, 4);
+        changeImageWhenNight(4, 4);
 
         bp5Pressed = true;
         bp1Pressed = false;
@@ -429,7 +431,7 @@ public class MainWindow implements Initializable {
         moonphase.setText("Mondphase:\n " + days.get(5).getMoonphase());
         feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(5).getFeelsLike() + unit);
         changeImage(5);
-        changeIconWhenNight(5, 5);
+        changeImageWhenNight(5, 5);
 
         bp6Pressed = true;
         bp1Pressed = false;
@@ -464,7 +466,6 @@ public class MainWindow implements Initializable {
         if (nararative.contains("schauer".toLowerCase())) {
             image.setImage(cloudyRain);
             checkImage = "cloudyRain";
-
             mainBorderPane.getStyleClass().removeAll("myBorderPaneCloudy", "myBorderPaneCloudySunny", "myBorderPaneSnowy", "myBorderPaneThunder");
             mainBorderPane.getStyleClass().add("myBorderPaneCloudyRain");
 
@@ -473,6 +474,7 @@ public class MainWindow implements Initializable {
             checkImage = "sunny";
             mainBorderPane.getStyleClass().removeAll("myBorderPaneCloudy", "myBorderPaneCloudyRain", "myBorderPaneSnowy", "myBorderPaneThunder");
             mainBorderPane.getStyleClass().add("myBorderPaneSunny");
+
 
         } else if (nararative.contains("bedeckt".toLowerCase())) {
             image.setImage(cloudy);
@@ -494,6 +496,9 @@ public class MainWindow implements Initializable {
 
             mainBorderPane.getStyleClass().removeAll("myBorderPaneSunny", "myBorderPaneCloudyRain", "myBorderPaneSnowy", "myBorderPaneCloudy");
             mainBorderPane.getStyleClass().add("myBorderPaneThunder");
+
+
+
         } else {
             image.setImage(cloudy);
             checkImage = "cloudy";
@@ -556,13 +561,13 @@ public class MainWindow implements Initializable {
 
 
     /**
-     * when the current time reach sunrise the app
+     * when the current time reaches sunrise the app
      * switches to night mode
      * @param currentDay
      * @param index
      * @throws ParseException
      */
-    public void changeIconWhenNight(int currentDay, int index) throws ParseException {
+    public void changeImageWhenNight(int currentDay, int index) throws ParseException {
 
         Date sunset = new SimpleDateFormat("HH:mm:ss").parse(days.get(index).getSunset());
         Date sunrise = new SimpleDateFormat("HH:mm:ss").parse(days.get(index).getSunrise());
@@ -594,13 +599,28 @@ public class MainWindow implements Initializable {
             changeImage(index);
             return;
         }
-        mainBorderPane.getStyleClass().removeAll("myBorderPane");
-        mainBorderPane.getStyleClass().add("myBorderPaneNight");
+
+        String nararative = days.get(currentDay).getNarrative().toLowerCase();
+        if (nararative.contains("schauer".toLowerCase())) {
+            mainBorderPane.getStyleClass().removeAll("myBorderPaneNight", "myBorderPaneNightCloudy", "myBorderPaneNightSnowy", "myBorderPaneNightThunder");
+            mainBorderPane.getStyleClass().add("myBorderPaneNightRain");
+        } else if (nararative.contains("klar".toLowerCase())) {
+            mainBorderPane.getStyleClass().removeAll("myBorderPaneNightRain", "myBorderPaneNightCloudy", "myBorderPaneNightSnowy", "myBorderPaneNightThunder");
+            mainBorderPane.getStyleClass().add("myBorderPaneNight");
+        } else if (nararative.contains("bedeckt".toLowerCase())) {
+            mainBorderPane.getStyleClass().removeAll("myBorderPaneNight", "myBorderPaneNightRain", "myBorderPaneNightSnowy", "myBorderPaneNightThunder");
+            mainBorderPane.getStyleClass().add("myBorderPaneNightCloudy");
+        } else if (nararative.contains("Schnee".toLowerCase())) {
+            mainBorderPane.getStyleClass().removeAll("myBorderPaneNight", "myBorderPaneNightCloudy", "myBorderPaneNightRain", "myBorderPaneNightThunder");
+            mainBorderPane.getStyleClass().add("myBorderPaneNightSnowy");
+        } else if (nararative.contains("gewitter".toLowerCase())) {
+            mainBorderPane.getStyleClass().removeAll("myBorderPaneNight", "myBorderPaneNightCloudy", "myBorderPaneNightSnowy", "myBorderPaneNightRain");
+            mainBorderPane.getStyleClass().add("myBorderPaneNightThunder");
+        }
 
         menuBar.getStyleClass().removeAll("menuBar");
         menuBar.getStyleClass().add("menuBarNight");
 
-        System.out.println("TimeSpan1 value is greater");
         if (days.get(index).getMoonphase().equals("abnehmender Halbmond")) {
             mondphase = "abHalbmond";
             image.setImage(abHalbmond);

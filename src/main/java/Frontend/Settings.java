@@ -16,8 +16,7 @@ public class Settings implements Initializable {
     protected static String plz = "1220";
     protected static String country = "AT";
     protected static MainWindow mainWindow;
-    //public class Settings extends Application implements EventHandler {
-// Button Export = new Button();
+
 
     @FXML
     private ChoiceBox Temperature;
@@ -36,23 +35,6 @@ public class Settings implements Initializable {
         else
             Temperature.setValue("Fahrenheit");
     }
-
-    //@Override
-    //public void start(Stage primaryStage) throws Exception {
-    //    Export.setOnAction(this);
-    //    String unit = getUnit();
-    //}
-
-    //@Override
-    //public void handle(ActionEvent event) {
-    //    if (event.getSource() == Button) {
-    //        //save the Information of the Weather
-    //    }
-    //}
-
-    //@Override
-    //public void handle(Event event) {
-    //}
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

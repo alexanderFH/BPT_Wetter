@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.*;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -60,8 +61,6 @@ public class WeatherGetter {
      */
     public static ArrayList<Day> getWeatherJson(String plz, String country, boolean celsius) {
         ArrayList<Day> back = new ArrayList<>();
-        Day today = getCurrentWeather(plz, country, celsius);
-
         String unit = "m";
         if (!celsius)
             unit = "e";
@@ -78,6 +77,7 @@ public class WeatherGetter {
             JSONArray sunset = weatherData.getJSONArray("sunsetTimeUtc");
             JSONArray rain = weatherData.getJSONArray("qpf");
 
+            Day today = getCurrentWeather(plz, country, celsius);
             today.setNarrative(nar.getString(0));
             today.setRain(rain.getDouble(0));
             today.setMoonphase(moon.getString(0));
@@ -89,8 +89,13 @@ public class WeatherGetter {
                 back.add(new Day(dayName.getString(i), tempMin.getDouble(i), tempMax.getDouble(i), nar.getString(i), moon.getString(i), sunrise.getLong(i), sunset.getLong(i), rain.getDouble(i)));
 
             }
+        } catch (FileNotFoundException e) {
+            System.err.println(e);
+            System.err.println("Invalid postal key / country combination!");
+            alertWindow("Ung\u00fcltige Adresse!", "Leider wurde die angegebene Adresse nicht gefunden!", "Es werden nun die Wetterdaten der Standard-Adresse 1220,AT angezeigt.");
+            return getWeatherJson("1220", "AT", true);
         } catch (Exception e) {
-            System.out.println(e);
+            System.err.println();
         }
         return back;
     }
@@ -134,10 +139,7 @@ public class WeatherGetter {
             fx.setInitialFileName("Wetter.txt");
             File file = fx.showSaveDialog(null);
             if (file == null) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Export-Fehler");
-                alert.setHeaderText("Es wurde kein g\u00fcltiger Speicherort ausgew\u00e4hlt!");
-                alert.show();
+                alertWindow("Export-Fehler", "Es wurde kein g\u00fcltiger Speicherort ausgew\u00e4hlt!", null);
             } else {
                 PrintWriter writer = new PrintWriter(file, "UTF-8");
                 for (Day day : forecast) {
@@ -149,6 +151,15 @@ public class WeatherGetter {
             System.err.println("Fehler beim File writen");
             e.printStackTrace();
         }
+    }
+
+    private static void alertWindow(String title, String header, String text) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        if (text != null)
+            alert.setContentText(text);
+        alert.show();
     }
 
 

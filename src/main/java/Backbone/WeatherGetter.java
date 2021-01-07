@@ -5,7 +5,6 @@ import javafx.stage.FileChooser;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import javax.swing.*;
 import java.io.*;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -16,11 +15,11 @@ public class WeatherGetter {
     private static final String openWeatherAPIKey = "6b5717bc865ffcb87230cfbcf6263078";
 
     public static void main(String[] args) throws IOException {
-    //    ArrayList<Day> days = getWeatherJson("2325", "AT", false);
-      //  System.out.println(days.size());
-        printWeatherToFile("2325","AT",false);
-     //   for (Day day : days)
-       //     System.out.println(day);
+        //    ArrayList<Day> days = getWeatherJson("2325", "AT", false);
+        //  System.out.println(days.size());
+        printWeatherToFile("2325", "AT", false);
+        //   for (Day day : days)
+        //     System.out.println(day);
         // printWeatherToFile("1220","AT",true);
         // ArrayList<Backbone.Day> days = getWeatherJson("33.74,-84.39");
         //getWeatherJson("1220", "AT");
@@ -37,6 +36,11 @@ public class WeatherGetter {
         */
     }
 
+    /**
+     * @param rd
+     * @return
+     * @throws IOException
+     */
     private static String readAll(Reader rd) throws IOException {
         StringBuilder sb = new StringBuilder();
         int cp;
@@ -46,12 +50,20 @@ public class WeatherGetter {
         return sb.toString();
     }
 
+    /**
+     * @param plz
+     * @param country
+     * @param celsius
+     * @return
+     */
     public static ArrayList<Day> getWeatherJson(String plz, String country, boolean celsius) {
         ArrayList<Day> back = new ArrayList<>();
+        Day today = getCurrentWeather(plz, country, celsius);
+
         String unit = "m";
         if (!celsius)
             unit = "e";
-        try (InputStream is = new URL("https://api.weather.com/v3/wx/forecast/daily/5day?postalKey=" + plz + ":" + country + "&format=json&units=" + unit + "&language=de-DE&apiKey="+weatherAPIKey).openStream()) {
+        try (InputStream is = new URL("https://api.weather.com/v3/wx/forecast/daily/5day?postalKey=" + plz + ":" + country + "&format=json&units=" + unit + "&language=de-DE&apiKey=" + weatherAPIKey).openStream()) {
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
             String jsonString = readAll(rd);
             JSONObject weatherData = new JSONObject(jsonString);
@@ -63,45 +75,57 @@ public class WeatherGetter {
             JSONArray sunrise = weatherData.getJSONArray("sunriseTimeUtc");
             JSONArray sunset = weatherData.getJSONArray("sunsetTimeUtc");
             JSONArray rain = weatherData.getJSONArray("qpf");
-            for (int i = 0; i < dayName.length(); i++) {
-                if (tempMax.get(i).equals(null))
-                    back.add(new Day(dayName.getString(i), 0, 0, nar.getString(i), moon.getString(i), sunrise.getLong(i), sunset.getLong(i), rain.getDouble(i)));
-                else
-                    back.add(new Day(dayName.getString(i), tempMin.getDouble(i), tempMax.getDouble(i), nar.getString(i), moon.getString(i), sunrise.getLong(i), sunset.getLong(i), rain.getDouble(i)));
+
+            today.setNarrative(nar.getString(0));
+            today.setRain(rain.getDouble(0));
+            today.setMoonphase(moon.getString(0));
+            today.setDay(dayName.getString(0));
+            today.setSunrise(sunrise.getLong(0));
+            today.setSunset(sunset.getLong(0));
+            back.add(today);
+            for (int i = 1; i < dayName.length(); i++) {
+                back.add(new Day(dayName.getString(i), tempMin.getDouble(i), tempMax.getDouble(i), nar.getString(i), moon.getString(i), sunrise.getLong(i), sunset.getLong(i), rain.getDouble(i)));
 
             }
-            getCurrentWeather(plz, country, celsius, back.get(0));
         } catch (Exception e) {
             System.out.println(e);
         }
         return back;
     }
 
-    protected static void getCurrentWeather(String plz, String country, boolean celsius, Day day) {
+    /**
+     * @param plz
+     * @param country
+     * @param celsius
+     */
+    protected static Day getCurrentWeather(String plz, String country, boolean celsius) {
+        Day today = null;
         String unit = "metric";
         if (!celsius)
             unit = "imperial";
-        try (InputStream is = new URL("http://api.openweathermap.org/data/2.5/weather?zip=" + plz + "," + country + "&appid="+openWeatherAPIKey+"&units=" + unit + "&lang=de").openStream()) {
+        try (InputStream is = new URL("http://api.openweathermap.org/data/2.5/weather?zip=" + plz + "," + country + "&appid=" + openWeatherAPIKey + "&units=" + unit + "&lang=de").openStream()) {
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
             String jsonString = rd.readLine();
             JSONObject weatherData = new JSONObject(jsonString);
             JSONObject temp = weatherData.getJSONObject("main");
-            day.setFeelsLike(temp.getDouble("feels_like"));
-            day.setCurrentTemp(temp.getDouble("temp"));
-            day.setHumidity(temp.getDouble("humidity"));
-            day.setMin_temp(temp.getDouble("temp_min"));
-            day.setMax_temp(temp.getDouble("temp_max"));
+            today = new Day(temp.getDouble("temp_min"), temp.getDouble("temp_max"), temp.getInt("feels_like"), temp.getInt("temp"), temp.getInt("humidity"));
         } catch (Exception e) {
             System.err.println("Da lief etwas schief!");
             e.printStackTrace();
         }
+        return today;
     }
 
+    /**
+     * @param plz
+     * @param country
+     * @param celsius
+     */
     public static void printWeatherToFile(String plz, String country, boolean celsius) {
         ArrayList<Day> forecast = getWeatherJson(plz, country, celsius);
         String unit = " \u2103";
         if (!celsius)
-            unit = " Fahrenheit"; //TODO Richtiges Zeichen suchen!
+            unit = " \u2109";
         try {
             FileChooser fx = new FileChooser();
             fx.setTitle("Bitte wählen Sie einen Speicherort");
@@ -110,7 +134,7 @@ public class WeatherGetter {
             if (file == null) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Export-Fehler");
-                alert.setHeaderText("Es wurde keine g\u00fcltiger Speicherort ausgew\u00e4hlt!");
+                alert.setHeaderText("Es wurde kein g\u00fcltiger Speicherort ausgew\u00e4hlt!");
                 alert.show();
             } else {
                 PrintWriter writer = new PrintWriter(file, "UTF-8");

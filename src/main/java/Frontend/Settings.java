@@ -4,10 +4,8 @@ import Backbone.WeatherGetter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,9 +13,12 @@ import java.util.ResourceBundle;
 public class Settings implements Initializable {
     // true for Celsius and false for Fahrenheit
     protected static boolean declareUnit = true;
+    protected static String plz = "1220";
+    protected static String country = "AT";
     protected static MainWindow mainWindow;
     //public class Settings extends Application implements EventHandler {
 // Button Export = new Button();
+
     @FXML
     private ChoiceBox Temperature;
     @FXML
@@ -30,7 +31,7 @@ public class Settings implements Initializable {
     private void getUnit() {
         Temperature.getItems().add("Celsius");
         Temperature.getItems().add("Fahrenheit");
-        if(declareUnit)
+        if (declareUnit)
             Temperature.setValue("Celsius");
         else
             Temperature.setValue("Fahrenheit");
@@ -72,6 +73,35 @@ public class Settings implements Initializable {
 
     public void export(ActionEvent actionEvent) {
         System.out.println(actionEvent.getSource().toString());
-        WeatherGetter.printWeatherToFile("1220", "AT", declareUnit);
+        WeatherGetter.printWeatherToFile(Settings.plz, Settings.country, declareUnit);
+    }
+
+    public void enterAction(ActionEvent actionEvent) {
+        positionChange();
+    }
+
+    public void mouseExit(MouseEvent mouseEvent) {
+        positionChange();
+    }
+
+    private void positionChange() {
+        String position = Position.getText();
+        if (position.equals(""))
+            return;
+        if (position.contains(",")) {
+            String newplz = position.split(",")[0].trim();
+            String newcountry = position.split(",")[1].trim();
+            if (!plz.equals(newplz) || !country.equals(newcountry)) { //Only refresh if different plz or country
+                plz = newplz;
+                country = newcountry;
+                mainWindow.start();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Positions-Fehler");
+            alert.setHeaderText("Ung\u00fcltige Position!");
+            alert.setContentText("Wurde vielleicht der ',' vergessen?");
+            alert.show();
+        }
     }
 }

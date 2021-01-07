@@ -3,6 +3,7 @@ package Frontend;
 import Backbone.Day;
 import Backbone.WeatherGetter;
 import javafx.animation.FadeTransition;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,6 +19,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -162,10 +164,10 @@ public class MainWindow implements Initializable {
     protected void start() {
         if (Settings.declareUnit) {
             unit = " \u2103";
-            days = WeatherGetter.getWeatherJson("1220", "AT", true);
+            days = WeatherGetter.getWeatherJson(Settings.plz, Settings.country, true);
         } else {
             unit = " \u2109";
-            days = WeatherGetter.getWeatherJson("1220", "AT", false);
+            days = WeatherGetter.getWeatherJson(Settings.plz, Settings.country, false);
         }
 
         currentDate = new Date();

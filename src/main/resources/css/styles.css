@@ -46,15 +46,13 @@
 .subPane {
     -fx-background-radius: 10 10 10 10;
     -fx-opacity: 0.8;
+    -fx-background-color: #FFF;
 }
 
 .subPane:hover {
     -fx-effect: dropshadow(three-pass-box, #89C4F4, 30, 0.5, 0, 0);
     -fx-cursor: hand;
     -fx-opacity: 1;
-    /*-fx-end-margin: 10px;
-    -fx-pref-height: 158px;
-    -fx-pref-width: 113px;*/
 }
 
 .displayTemp {

@@ -58,7 +58,7 @@
                </HBox>
                <ImageView BorderPane.alignment="CENTER" fx:id="image" fitHeight="101.0" fitWidth="111.0" layoutX="237.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
                    <image>
-                       <Image fx:id="img" url="/img/sun-icon.png" />
+                       <Image url="/img/sun-icon.png" />
                    </image>
                </ImageView>
            </VBox>
@@ -79,7 +79,7 @@
             <padding>
                 <Insets bottom="10" />
             </padding>
-            <BorderPane fx:id="bp1" layoutX="14.0" layoutY="246.0" onMouseClicked="#changeToFirstDay" prefHeight="116.0" prefWidth="86.0" style="-fx-background-color: #FFF;" styleClass="subPane">
+            <BorderPane fx:id="bp1" layoutX="14.0" layoutY="246.0" onMouseClicked="#changeToFirstDay" prefHeight="116.0" prefWidth="86.0" styleClass="subPane">
                 <top>
                     <Label BorderPane.alignment="TOP_CENTER" fx:id="dayOne2" layoutX="18.0" layoutY="14.0" style="-fx-font-weight: bold; -fx-font-size: 14px" text="Dienstag" />
                 </top>
@@ -89,7 +89,7 @@
                 <bottom>
                     <ImageView BorderPane.alignment="BOTTOM_CENTER" fx:id="imageNextDay1" fitHeight="50.0" fitWidth="60" layoutX="237.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                            <Image fx:id="imgNextDay1" url="/img/sun-icon.png" />
+                            <Image url="/img/sun-icon.png" />
                         </image>
                     </ImageView>
                 </bottom>
@@ -98,7 +98,7 @@
                 </padding>
             </BorderPane>
 
-            <BorderPane fx:id="bp2" layoutX="136.0" layoutY="246.0" onMouseClicked="#changeDayTwo" prefHeight="116.0" prefWidth="86.0" style="-fx-background-color: #FFF;" styleClass="subPane">
+            <BorderPane fx:id="bp2" layoutX="136.0" layoutY="246.0" onMouseClicked="#changeDayTwo" prefHeight="116.0" prefWidth="86.0" styleClass="subPane">
                 <top>
                     <Label BorderPane.alignment="TOP_CENTER" fx:id="dayTwo" layoutX="20.0" layoutY="14.0" style="-fx-font-weight: bold; -fx-font-size: 14px" text="Mittwoch" />
                 </top>
@@ -108,7 +108,7 @@
                 <bottom>
                     <ImageView BorderPane.alignment="BOTTOM_CENTER" fx:id="imageNextDay2" fitHeight="50.0" fitWidth="60" layoutX="237.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                            <Image fx:id="imgNextDay2" url="/img/sun-icon.png" />
+                            <Image url="/img/sun-icon.png" />
                         </image>
                     </ImageView>
                 </bottom>
@@ -117,7 +117,7 @@
                 </padding>
             </BorderPane>
 
-            <BorderPane fx:id="bp3" layoutX="257.0" layoutY="246.0" onMouseClicked="#changeDayThree" prefHeight="116.0" prefWidth="86.0" style="-fx-background-color: #FFF;" styleClass="subPane">
+            <BorderPane fx:id="bp3" layoutX="257.0" layoutY="246.0" onMouseClicked="#changeDayThree" prefHeight="116.0" prefWidth="86.0" styleClass="subPane">
                 <top>
                     <Label BorderPane.alignment="TOP_CENTER" fx:id="dayThree" layoutX="21" layoutY="14.0" style="-fx-font-weight: bold; -fx-font-size: 14px" text="Donnerstag" />
                 </top>
@@ -127,7 +127,7 @@
                 <bottom>
                     <ImageView BorderPane.alignment="BOTTOM_CENTER" fx:id="imageNextDay3" fitHeight="50.0" fitWidth="60" layoutX="237.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                            <Image fx:id="imgNextDay3" url="/img/sun-icon.png" />
+                            <Image url="/img/sun-icon.png" />
                         </image>
                     </ImageView>
                 </bottom>
@@ -136,7 +136,7 @@
                 </padding>
             </BorderPane>
 
-            <BorderPane fx:id="bp4" layoutX="382.0" layoutY="246.0" onMouseClicked="#changeDayFour" prefHeight="116.0" prefWidth="86.0" style="-fx-background-color: #FFF;" styleClass="subPane">
+            <BorderPane fx:id="bp4" layoutX="382.0" layoutY="246.0" onMouseClicked="#changeDayFour" prefHeight="116.0" prefWidth="86.0" styleClass="subPane">
                 <top>
                     <Label BorderPane.alignment="TOP_CENTER" fx:id="dayFour" layoutX="19.0" layoutY="14.0" style="-fx-font-weight: bold; -fx-font-size: 14px" text="Freitag" />
                 </top>
@@ -146,7 +146,7 @@
                 <bottom>
                     <ImageView BorderPane.alignment="BOTTOM_CENTER" fx:id="imageNextDay4" fitHeight="50.0" fitWidth="60" layoutX="237.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                            <Image fx:id="imgNextDay4" url="/img/sun-icon.png" />
+                            <Image url="/img/sun-icon.png" />
                         </image>
                     </ImageView>
                 </bottom>
@@ -155,7 +155,7 @@
                 </padding>
             </BorderPane>
 
-            <BorderPane fx:id="bp5" layoutX="504.0" layoutY="246.0" onMouseClicked="#changeDayFive" prefHeight="116.0" prefWidth="86.0" style="-fx-background-color: #FFF;" styleClass="subPane">
+            <BorderPane fx:id="bp5" layoutX="504.0" layoutY="246.0" onMouseClicked="#changeDayFive" prefHeight="116.0" prefWidth="86.0" styleClass="subPane">
                 <top>
                     <Label BorderPane.alignment="TOP_CENTER" fx:id="dayFive" layoutX="23.0" layoutY="14.0" style="-fx-font-weight: bold; -fx-font-size: 14px" text="Freitag" />
                 </top>
@@ -165,7 +165,7 @@
                 <bottom>
                     <ImageView BorderPane.alignment="BOTTOM_CENTER" fx:id="imageNextDay5" fitHeight="50.0" fitWidth="60" layoutX="237.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                            <Image fx:id="imgNextDay5" url="/img/sun-icon.png" />
+                            <Image url="/img/sun-icon.png" />
                         </image>
                     </ImageView>
                 </bottom>
@@ -174,7 +174,7 @@
                 </padding>
             </BorderPane>
 
-            <BorderPane fx:id="bp6" layoutX="504.0" layoutY="246.0" onMouseClicked="#changeDaySix" prefHeight="116.0" prefWidth="86.0" style="-fx-background-color: #FFF;" styleClass="subPane">
+            <BorderPane fx:id="bp6" layoutX="504.0" layoutY="246.0" onMouseClicked="#changeDaySix" prefHeight="116.0" prefWidth="86.0" styleClass="subPane">
 
                 <top>
                     <Label BorderPane.alignment="TOP_CENTER" fx:id="daySix" layoutX="23.0" layoutY="14.0" style="-fx-font-weight: bold; -fx-font-size: 14px" text="Freitag" />
@@ -185,7 +185,7 @@
                 <bottom>
                     <ImageView BorderPane.alignment="BOTTOM_CENTER" fx:id="imageNextDay6" fitHeight="50.0" fitWidth="60" layoutX="237.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                            <Image fx:id="imgNextDay6" url="/img/sun-icon.png" />
+                            <Image url="/img/sun-icon.png" />
                         </image>
                     </ImageView>
                 </bottom>

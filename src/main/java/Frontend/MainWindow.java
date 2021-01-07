@@ -42,8 +42,6 @@ public class MainWindow implements Initializable {
     protected static String unit = " \u2103";
     Date currentDate = null;
     @FXML
-    private MenuItem closeMenu;
-    @FXML
     private Label displayDate;
     @FXML
     private Label dayOne;
@@ -66,8 +64,6 @@ public class MainWindow implements Initializable {
     @FXML
     private Label maxTemp;
     @FXML
-    private Label detail;
-    @FXML
     private Label rain;
     @FXML
     private Label humidity;
@@ -82,31 +78,17 @@ public class MainWindow implements Initializable {
     @FXML
     private ImageView image;  // Displays "Main Image"
     @FXML
-    private Image img;
-    @FXML
     private ImageView imageNextDay1;  // Icon Box 1
-    @FXML
-    private Image imgNextDay1;
     @FXML
     private ImageView imageNextDay2;  // Icon Box 2
     @FXML
-    private Image imgNextDay2;
-    @FXML
     private ImageView imageNextDay3;  // Icon Box 3
-    @FXML
-    private Image imgNextDay3;
     @FXML
     private ImageView imageNextDay4;  // icon Box 4
     @FXML
-    private Image imgNextDay4;
-    @FXML
     private ImageView imageNextDay5;  // Icon Box 5
     @FXML
-    private Image imgNextDay5;
-    @FXML
     private ImageView imageNextDay6;  // Icon Box 5
-    @FXML
-    private Image imgNextDay6;
     @FXML
     private Label nextDayTemp1;
     @FXML
@@ -143,15 +125,7 @@ public class MainWindow implements Initializable {
     @FXML
     private Pane weatherInfo;
     @FXML
-    private Pane moonIcon;
-    @FXML
     private HBox nextWeatherInfo;
-    @FXML
-    private VBox leftInfos;
-    @FXML
-    private VBox centerInfos;
-    @FXML
-    private VBox rightInfos;
     @FXML
     private MenuBar menuBar;
 
@@ -162,6 +136,13 @@ public class MainWindow implements Initializable {
     }
 
     protected void start() {
+
+        bp2.getStyleClass().removeAll("clickedOnPane");
+        bp3.getStyleClass().removeAll("clickedOnPane");
+        bp4.getStyleClass().removeAll("clickedOnPane");
+        bp5.getStyleClass().removeAll("clickedOnPane");
+        bp6.getStyleClass().removeAll("clickedOnPane");
+
         if (Settings.declareUnit) {
             unit = " \u2103";
             days = WeatherGetter.getWeatherJson(Settings.plz, Settings.country, true);
@@ -216,6 +197,11 @@ public class MainWindow implements Initializable {
     }
 
 
+    /**
+     * next six methods change the weather informations
+     * to a specific day
+     * @throws ParseException
+     */
     @FXML
     private void changeToFirstDay() throws ParseException {
 
@@ -568,15 +554,28 @@ public class MainWindow implements Initializable {
 
     }
 
+
+    /**
+     * when the current time reach sunrise the app
+     * switches to night mode
+     * @param currentDay
+     * @param index
+     * @throws ParseException
+     */
     public void changeIconWhenNight(int currentDay, int index) throws ParseException {
 
-        Date date1 = new SimpleDateFormat("HH:mm:ss").parse(days.get(index).getSunset());
+        Date sunset = new SimpleDateFormat("HH:mm:ss").parse(days.get(index).getSunset());
+        Date sunrise = new SimpleDateFormat("HH:mm:ss").parse(days.get(index).getSunrise());
 
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date1);
-        long seconds = calendar.get(Calendar.SECOND);
+        calendar.setTime(sunset);
+        long secondsSunset = calendar.get(Calendar.SECOND);
 
-        ZonedDateTime zo = ZonedDateTime.ofInstant(Instant.ofEpochSecond(seconds), ZoneId.systemDefault());
+        calendar.setTime(sunrise);
+        long secondsSunrise = calendar.get(Calendar.SECOND);
+
+        ZonedDateTime sunsetZO = ZonedDateTime.ofInstant(Instant.ofEpochSecond(secondsSunset), ZoneId.systemDefault());
+        ZonedDateTime sunriseZO = ZonedDateTime.ofInstant(Instant.ofEpochSecond(secondsSunrise), ZoneId.systemDefault());
         ZonedDateTime no = ZonedDateTime.now();
         String mondphase = "";
 
@@ -591,42 +590,43 @@ public class MainWindow implements Initializable {
 
         //normally there is: no.isAfter(zo)
         // but for further implementation its set to no.isBefore(zo)
-        if (no.isBefore(zo)) {
-            mainBorderPane.getStyleClass().removeAll("myBorderPane");
-            mainBorderPane.getStyleClass().add("myBorderPaneNight");
-
-            menuBar.getStyleClass().removeAll("menuBar");
-            menuBar.getStyleClass().add("menuBarNight");
-
-            System.out.println("TimeSpan1 value is greater");
-            if (days.get(index).getMoonphase().equals("abnehmender Halbmond")) {
-                mondphase = "abHalbmond";
-                image.setImage(abHalbmond);
-            } else if (days.get(index).getMoonphase().equals("abnehmender Sichelmond")) {
-                mondphase = "abSichelmond";
-                image.setImage(abSichelmond);
-            } else if (days.get(index).getMoonphase().equals("abnehmender Dreiviertelmond")) {
-                mondphase = "abDreiviertelmond";
-                image.setImage(abDreiviertel);
-            } else if (days.get(index).getMoonphase().equals("letztes Viertel")) {
-                mondphase = "letztesViertel";
-                image.setImage(vollmond);
-            } else if (days.get(index).getMoonphase().equals("zunehmender Sichelmond")) {
-                mondphase = "zuSichelmond";
-                image.setImage(zuSichelmond);
-            } else if (days.get(index).getMoonphase().equals("zunehmender Halbmond")) {
-                mondphase = "zuHalbmond";
-                image.setImage(zuHalbmond);
-            } else if (days.get(index).getMoonphase().equals("zunehmender Dreiviertelmond")) {
-                mondphase = "zuDreiviertelmond";
-                image.setImage(zuDreiviertel);
-            } else if (days.get(index).getMoonphase().equals("neumond")) {
-                mondphase = "neumond";
-                image.setImage(neumond);
-            }
-        } else {
-            System.out.println("TimeSpan2 value is greater");
+        if (no.isAfter(sunriseZO) && no.isBefore(sunsetZO)) {
+            changeImage(index);
+            return;
         }
+        mainBorderPane.getStyleClass().removeAll("myBorderPane");
+        mainBorderPane.getStyleClass().add("myBorderPaneNight");
+
+        menuBar.getStyleClass().removeAll("menuBar");
+        menuBar.getStyleClass().add("menuBarNight");
+
+        System.out.println("TimeSpan1 value is greater");
+        if (days.get(index).getMoonphase().equals("abnehmender Halbmond")) {
+            mondphase = "abHalbmond";
+            image.setImage(abHalbmond);
+        } else if (days.get(index).getMoonphase().equals("abnehmender Sichelmond")) {
+            mondphase = "abSichelmond";
+            image.setImage(abSichelmond);
+        } else if (days.get(index).getMoonphase().equals("abnehmender Dreiviertelmond")) {
+            mondphase = "abDreiviertelmond";
+            image.setImage(abDreiviertel);
+        } else if (days.get(index).getMoonphase().equals("letztes Viertel")) {
+            mondphase = "letztesViertel";
+            image.setImage(vollmond);
+        } else if (days.get(index).getMoonphase().equals("zunehmender Sichelmond")) {
+            mondphase = "zuSichelmond";
+            image.setImage(zuSichelmond);
+        } else if (days.get(index).getMoonphase().equals("zunehmender Halbmond")) {
+            mondphase = "zuHalbmond";
+            image.setImage(zuHalbmond);
+        } else if (days.get(index).getMoonphase().equals("zunehmender Dreiviertelmond")) {
+            mondphase = "zuDreiviertelmond";
+            image.setImage(zuDreiviertel);
+        } else if (days.get(index).getMoonphase().equals("Neumond")) {
+            mondphase = "neumond";
+            image.setImage(neumond);
+        }
+
         switch (mondphase) {
             case "abHalbmond":
                 switch (currentDay) {
@@ -711,6 +711,11 @@ public class MainWindow implements Initializable {
         }
     }
 
+
+    /**
+     * marks the the clicked day
+     * by adding and removing css classes
+     */
     public void borderPanePressed() {
         if (bp1Pressed) {
             bp1.getStyleClass().add("clickedOnPane");
@@ -762,6 +767,12 @@ public class MainWindow implements Initializable {
         }
     }
 
+
+    /**
+     * gets the rain value from weather array
+     * depending on the value the corresponding informationwill change
+     * @param index
+     */
     public void setRainLabel(int index) {
         if (days.get(index).getRain() < 1) {
             rain.setText("Regen: leichter Regen moeglich");
@@ -776,6 +787,12 @@ public class MainWindow implements Initializable {
         }
     }
 
+
+    /**
+     * gets the current temperature from the weather array
+     * checks if current temperature is a valid value
+     * if not the average of min and max temperature is calculated
+     */
     public void setCurrentTempLabel() {
         if (days.get(0).getCurrentTemp() == -999) {
             double minT = days.get(0).getMin_temp();
@@ -829,6 +846,10 @@ public class MainWindow implements Initializable {
         }
     }
 
+
+    /**
+     * this method opens the settings window
+     */
     public void openSettings() {
         Parent root;
         try {
@@ -842,10 +863,21 @@ public class MainWindow implements Initializable {
         }
     }
 
+
+    /**
+     * closing the app by returning exit code 0
+     */
     public void closeWindow() {
         System.exit(0);
     }
 
+
+    /**
+     * adds a fade transition when the app is starting
+     * or when you switch days
+     * @param p
+     * @param ms
+     */
     public void setFadeAnimation(Pane p, int ms) {
         FadeTransition fadeTransition = new FadeTransition(Duration.millis(ms), p);
         fadeTransition.setFromValue(0);

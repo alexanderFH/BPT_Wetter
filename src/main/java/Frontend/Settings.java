@@ -24,8 +24,8 @@ public class Settings implements Initializable {
     private TextField Position;
     @FXML
     private Button Export;
-    @FXML
-    private ColorPicker Colourpick;
+
+
 
     private void getUnit() {
         Temperature.getItems().add("Celsius");

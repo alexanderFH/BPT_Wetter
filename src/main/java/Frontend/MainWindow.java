@@ -452,7 +452,7 @@ public class MainWindow implements Initializable {
     }
 
     /**
-     * Chnageimage based on narrative
+     * Change image based on narrative
      * @param currentDay
      */
     @FXML

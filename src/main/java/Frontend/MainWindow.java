@@ -129,8 +129,9 @@ public class MainWindow implements Initializable {
 
     /**
      * Initializes the controller Class for MainWindow
-     * @param location
-     * @param resources
+     *
+     * @param location  URL
+     * @param resources ResourceBundle
      */
 
     @Override
@@ -209,6 +210,7 @@ public class MainWindow implements Initializable {
     /**
      * next six methods change the weather informations
      * to a specific day
+     *
      * @throws ParseException
      */
     @FXML
@@ -453,7 +455,8 @@ public class MainWindow implements Initializable {
 
     /**
      * Change image based on narrative
-     * @param currentDay
+     *
+     * @param currentDay currentDay as int to change the right image
      */
     @FXML
     private void changeImage(int currentDay) {
@@ -506,7 +509,6 @@ public class MainWindow implements Initializable {
 
             mainBorderPane.getStyleClass().removeAll("myBorderPaneSunny", "myBorderPaneCloudyRain", "myBorderPaneSnowy", "myBorderPaneCloudy");
             mainBorderPane.getStyleClass().add("myBorderPaneThunder");
-
 
 
         } else {
@@ -573,6 +575,7 @@ public class MainWindow implements Initializable {
     /**
      * when the current time reaches sunrise the app
      * switches to night mode
+     *
      * @param currentDay
      * @param index
      * @throws ParseException
@@ -801,6 +804,7 @@ public class MainWindow implements Initializable {
     /**
      * gets the rain value from weather array
      * depending on the value the corresponding informationwill change
+     *
      * @param index
      */
     public void setRainLabel(int index) {
@@ -905,6 +909,7 @@ public class MainWindow implements Initializable {
     /**
      * adds a fade transition when the app is starting
      * or when you switch days
+     *
      * @param p
      * @param ms
      */

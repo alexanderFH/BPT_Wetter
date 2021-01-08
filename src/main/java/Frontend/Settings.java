@@ -15,6 +15,7 @@ public class Settings implements Initializable {
     protected static boolean declareUnit = true;
     protected static String plz = "1220";
     protected static String country = "AT";
+    public static boolean validAddress = true;
     protected static MainWindow mainWindow;
 
 
@@ -24,7 +25,6 @@ public class Settings implements Initializable {
     private TextField Position;
     @FXML
     private Button Export;
-
 
 
     private void getUnit() {
@@ -54,8 +54,10 @@ public class Settings implements Initializable {
     }
 
     public void export(ActionEvent actionEvent) {
-        System.out.println(actionEvent.getSource().toString());
-        WeatherGetter.printWeatherToFile(Settings.plz, Settings.country, declareUnit);
+        if (validAddress)
+            WeatherGetter.printWeatherToFile(Settings.plz, Settings.country, declareUnit);
+        else
+            WeatherGetter.printWeatherToFile("1220", "AT", declareUnit);
     }
 
     public void enterAction(ActionEvent actionEvent) {

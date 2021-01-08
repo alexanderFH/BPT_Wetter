@@ -44,10 +44,8 @@ public class Settings implements Initializable {
         Temperature.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.toString().toLowerCase().equals("fahrenheit")) {
                 declareUnit = false;
-                System.out.println("Fahrenheit");
             } else {
                 declareUnit = true;
-                System.out.println("Celsius");
             }
             mainWindow.start();
         });

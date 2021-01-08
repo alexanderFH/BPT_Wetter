@@ -177,7 +177,6 @@ public class MainWindow implements Initializable {
         feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(0).getFeelsLike() + unit);
 
         if (Instant.now().getEpochSecond() > days.get(0).getLongSunrise() && Instant.now().getEpochSecond() < days.get(0).getLongSunset()) {
-            System.out.println("HELLO");
             changeImage(1);
             changeImage(2);
             changeImage(3);

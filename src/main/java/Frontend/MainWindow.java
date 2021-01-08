@@ -128,12 +128,22 @@ public class MainWindow implements Initializable {
 
     private boolean nightMode = false;
 
+    /**
+     * Initializes the controller Class for MainWindow
+     * @param location
+     * @param resources
+     */
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Settings.mainWindow = this;
         start();
     }
 
+
+    /**
+     * Starts a method when needed
+     */
     protected void start() {
 
         if (Settings.declareUnit) {
@@ -455,7 +465,10 @@ public class MainWindow implements Initializable {
         setFadeAnimation(weatherInfo, 1000);
     }
 
-    // Change image based on currentTemp/narrative
+    /**
+     * Change image based on narrative
+     * @param currentDay
+     */
     @FXML
     private void changeImage(int currentDay) {
 

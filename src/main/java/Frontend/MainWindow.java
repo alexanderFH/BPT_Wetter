@@ -130,8 +130,9 @@ public class MainWindow implements Initializable {
 
     /**
      * Initializes the controller Class for MainWindow
-     * @param location
-     * @param resources
+     *
+     * @param location  URL
+     * @param resources ResourceBundle
      */
 
     @Override
@@ -176,7 +177,6 @@ public class MainWindow implements Initializable {
         feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(0).getFeelsLike() + unit);
 
         if (Instant.now().getEpochSecond() > days.get(0).getLongSunrise() && Instant.now().getEpochSecond() < days.get(0).getLongSunset()) {
-            System.out.println("HELLO");
             changeImage(1);
             changeImage(2);
             changeImage(3);
@@ -454,7 +454,8 @@ public class MainWindow implements Initializable {
 
     /**
      * Change image based on narrative
-     * @param currentDay
+     *
+     * @param currentDay currentDay as int to change the right image
      */
     @FXML
     private void changeImage(int currentDay) {

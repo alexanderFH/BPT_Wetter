@@ -6,12 +6,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Settings implements Initializable {
-    // true for Celsius and false for Fahrenheit
     protected static boolean declareUnit = true;
     protected static String plz = "1220";
     protected static String country = "AT";
@@ -26,7 +24,9 @@ public class Settings implements Initializable {
     @FXML
     private Button Export;
 
-
+    /**
+     * Adjust Celsius and Fahrenheit
+     */
     private void getUnit() {
         Temperature.getItems().add("Celsius");
         Temperature.getItems().add("Fahrenheit");
@@ -44,15 +44,16 @@ public class Settings implements Initializable {
         Temperature.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.toString().toLowerCase().equals("fahrenheit")) {
                 declareUnit = false;
-                System.out.println("Fahrenheit");
             } else {
                 declareUnit = true;
-                System.out.println("Celsius");
             }
             mainWindow.start();
         });
     }
 
+    /**
+     * Adjust the position
+     */
     public void export(ActionEvent actionEvent) {
         if (validAddress)
             WeatherGetter.printWeatherToFile(Settings.plz, Settings.country, declareUnit);
@@ -64,6 +65,7 @@ public class Settings implements Initializable {
         positionChange();
     }
 
+    //update with MouseEvent
     public void mouseExit(MouseEvent mouseEvent) {
         positionChange();
     }

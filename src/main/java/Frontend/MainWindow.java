@@ -34,7 +34,7 @@ import java.util.ResourceBundle;
 
 public class MainWindow implements Initializable {
 
-    private static final DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+    private static final DateFormat DATEFORMAT = new SimpleDateFormat("dd.MM.yyyy");
     @FXML
     protected static String unit = " \u2103";
     Date currentDate = null;
@@ -156,7 +156,7 @@ public class MainWindow implements Initializable {
         }
 
         currentDate = new Date();
-        displayDate.setText(dateFormat.format(currentDate));
+        displayDate.setText(DATEFORMAT.format(currentDate));
 
         dayOne.setText(days.get(0).getDayName());
         dayOne2.setText(days.get(0).getDayName());
@@ -174,7 +174,7 @@ public class MainWindow implements Initializable {
         sunrise.setText("Sonnenaufgang um:\n " + days.get(0).getSunrise() + " Uhr");
         sunset.setText("Sonnenuntergang um:\n " + days.get(0).getSunset() + " Uhr");
         moonphase.setText("Mondphase:\n " + days.get(0).getMoonphase());
-        feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(0).getFeelsLike() + unit);
+        feelsLike.setText("Temperatur f\u00fchlt sich\n an wie " + days.get(0).getFeelsLike() + unit);
 
         if (Instant.now().getEpochSecond() > days.get(0).getLongSunrise() && Instant.now().getEpochSecond() < days.get(0).getLongSunset()) {
             changeImage(1);
@@ -214,9 +214,9 @@ public class MainWindow implements Initializable {
      * @throws ParseException
      */
     @FXML
-    private void changeToFirstDay() throws ParseException {
+    private void changeToFirstDay() {
 
-        displayDate.setText(dateFormat.format(currentDate));
+        displayDate.setText(DATEFORMAT.format(currentDate));
 
         dayOne.setText(dayOne2.getText());
         if (days.get(0).getCurrentTemp() == -999) {
@@ -233,9 +233,10 @@ public class MainWindow implements Initializable {
         sunrise.setText("Sonnenaufgang um:\n " + days.get(0).getSunrise() + " Uhr");
         sunset.setText("Sonnenuntergang um:\n " + days.get(0).getSunset() + " Uhr");
         moonphase.setText("Mondphase:\n " + days.get(0).getMoonphase());
-        feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(0).getFeelsLike() + unit);
+        feelsLike.setText("Temperatur f\u00fchlt sich\n an wie " + days.get(0).getFeelsLike() + unit);
         //detail.setText(days.get(0).getNarrative());
-        if (Instant.now().getEpochSecond() > days.get(0).getLongSunrise() && Instant.now().getEpochSecond() < days.get(0).getLongSunset())
+        if (Instant.now().getEpochSecond() > days.get(0).getLongSunrise() && Instant.now().getEpochSecond() <
+                days.get(0).getLongSunset())
             changeImage(0);
         else
             changeImageWhenNight(0, 0);
@@ -255,7 +256,7 @@ public class MainWindow implements Initializable {
 
         Date currentDate = c.getTime();
 
-        displayDate.setText(dateFormat.format(currentDate));
+        displayDate.setText(DATEFORMAT.format(currentDate));
 
         dayOne.setText(dayTwo.getText());
         if (days.get(1).getCurrentTemp() == -999) {
@@ -273,8 +274,9 @@ public class MainWindow implements Initializable {
         sunrise.setText("Sonnenaufgang um:\n " + days.get(1).getSunrise() + " Uhr");
         sunset.setText("Sonnenuntergang um:\n " + days.get(1).getSunset() + " Uhr");
         moonphase.setText("Mondphase:\n " + days.get(1).getMoonphase());
-        feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(1).getFeelsLike() + unit);
-        if (Instant.now().getEpochSecond() > days.get(0).getLongSunrise() && Instant.now().getEpochSecond() < days.get(0).getLongSunset())
+        feelsLike.setText("Temperatur f\u00fchlt sich\n an wie " + days.get(1).getFeelsLike() + unit);
+        if (Instant.now().getEpochSecond() > days.get(0).getLongSunrise() && Instant.now().getEpochSecond() <
+                days.get(0).getLongSunset())
             changeImage(1);
         else
             changeImageWhenNight(1, 1);
@@ -294,7 +296,7 @@ public class MainWindow implements Initializable {
 
         Date currentDate = c.getTime();
 
-        displayDate.setText(dateFormat.format(currentDate));
+        displayDate.setText(DATEFORMAT.format(currentDate));
 
         dayOne.setText(dayThree.getText());
         if (days.get(2).getCurrentTemp() == -999) {
@@ -312,8 +314,9 @@ public class MainWindow implements Initializable {
         sunrise.setText("Sonnenaufgang um:\n " + days.get(2).getSunrise() + " Uhr");
         sunset.setText("Sonnenuntergang um:\n " + days.get(2).getSunset() + " Uhr");
         moonphase.setText("Mondphase:\n " + days.get(2).getMoonphase());
-        feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(2).getFeelsLike() + unit);
-        if (Instant.now().getEpochSecond() > days.get(0).getLongSunrise() && Instant.now().getEpochSecond() < days.get(0).getLongSunset())
+        feelsLike.setText("Temperatur f\u00fchlt sich\n an wie " + days.get(2).getFeelsLike() + unit);
+        if (Instant.now().getEpochSecond() > days.get(0).getLongSunrise() && Instant.now().getEpochSecond() <
+                days.get(0).getLongSunset())
             changeImage(2);
         else
             changeImageWhenNight(2, 2);
@@ -333,7 +336,7 @@ public class MainWindow implements Initializable {
 
         Date currentDate = c.getTime();
 
-        displayDate.setText(dateFormat.format(currentDate));
+        displayDate.setText(DATEFORMAT.format(currentDate));
 
         dayOne.setText(dayFour.getText());
         if (days.get(3).getCurrentTemp() == -999) {
@@ -351,8 +354,9 @@ public class MainWindow implements Initializable {
         sunrise.setText("Sonnenaufgang um:\n " + days.get(3).getSunrise() + " Uhr");
         sunset.setText("Sonnenuntergang um:\n " + days.get(3).getSunset() + " Uhr");
         moonphase.setText("Mondphase:\n " + days.get(3).getMoonphase());
-        feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(3).getFeelsLike() + unit);
-        if (Instant.now().getEpochSecond() > days.get(0).getLongSunrise() && Instant.now().getEpochSecond() < days.get(0).getLongSunset())
+        feelsLike.setText("Temperatur f\u00fchlt sich\n an wie " + days.get(3).getFeelsLike() + unit);
+        if (Instant.now().getEpochSecond() > days.get(0).getLongSunrise() && Instant.now().getEpochSecond() <
+                days.get(0).getLongSunset())
             changeImage(3);
         else
             changeImageWhenNight(3, 3);
@@ -372,7 +376,7 @@ public class MainWindow implements Initializable {
 
         Date currentDate = c.getTime();
 
-        displayDate.setText(dateFormat.format(currentDate));
+        displayDate.setText(DATEFORMAT.format(currentDate));
 
         dayOne.setText(dayFive.getText());
         if (days.get(4).getCurrentTemp() == -999) {
@@ -390,8 +394,9 @@ public class MainWindow implements Initializable {
         sunrise.setText("Sonnenaufgang um:\n " + days.get(4).getSunrise() + " Uhr");
         sunset.setText("Sonnenuntergang um:\n " + days.get(4).getSunset() + " Uhr");
         moonphase.setText("Mondphase:\n " + days.get(4).getMoonphase());
-        feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(4).getFeelsLike() + unit);
-        if (Instant.now().getEpochSecond() > days.get(0).getLongSunrise() && Instant.now().getEpochSecond() < days.get(0).getLongSunset())
+        feelsLike.setText("Temperatur f\u00fchlt sich\n an wie " + days.get(4).getFeelsLike() + unit);
+        if (Instant.now().getEpochSecond() > days.get(0).getLongSunrise() && Instant.now().getEpochSecond() <
+                days.get(0).getLongSunset())
             changeImage(4);
         else
             changeImageWhenNight(4, 4);
@@ -412,7 +417,7 @@ public class MainWindow implements Initializable {
 
         Date currentDate = c.getTime();
 
-        displayDate.setText(dateFormat.format(currentDate));
+        displayDate.setText(DATEFORMAT.format(currentDate));
 
         dayOne.setText(daySix.getText());
         if (days.get(5).getCurrentTemp() == -999) {
@@ -430,8 +435,9 @@ public class MainWindow implements Initializable {
         sunrise.setText("Sonnenaufgang um:\n " + days.get(5).getSunrise() + " Uhr");
         sunset.setText("Sonnenuntergang um:\n " + days.get(5).getSunset() + " Uhr");
         moonphase.setText("Mondphase:\n " + days.get(5).getMoonphase());
-        feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(5).getFeelsLike() + unit);
-        if (Instant.now().getEpochSecond() > days.get(0).getLongSunrise() && Instant.now().getEpochSecond() < days.get(0).getLongSunset())
+        feelsLike.setText("Temperatur f\u00fchlt sich\n an wie " + days.get(5).getFeelsLike() + unit);
+        if (Instant.now().getEpochSecond() > days.get(0).getLongSunrise() && Instant.now().getEpochSecond() <
+                days.get(0).getLongSunset())
             changeImage(5);
         else
             changeImageWhenNight(5, 5);
@@ -478,27 +484,31 @@ public class MainWindow implements Initializable {
         if (nararative.contains("schauer".toLowerCase())) {
             image.setImage(cloudyRain);
             checkImage = "cloudyRain";
-            mainBorderPane.getStyleClass().removeAll("myBorderPaneCloudy", "myBorderPaneCloudySunny", "myBorderPaneSnowy", "myBorderPaneThunder");
+            mainBorderPane.getStyleClass().removeAll("myBorderPaneCloudy", "myBorderPaneCloudySunny",
+                    "myBorderPaneSnowy", "myBorderPaneThunder");
             mainBorderPane.getStyleClass().add("myBorderPaneCloudyRain");
 
         } else if (nararative.contains("klar".toLowerCase())) {
             image.setImage(sunny);
             checkImage = "sunny";
-            mainBorderPane.getStyleClass().removeAll("myBorderPaneCloudy", "myBorderPaneCloudyRain", "myBorderPaneSnowy", "myBorderPaneThunder");
+            mainBorderPane.getStyleClass().removeAll("myBorderPaneCloudy", "myBorderPaneCloudyRain",
+                    "myBorderPaneSnowy", "myBorderPaneThunder");
             mainBorderPane.getStyleClass().add("myBorderPaneSunny");
 
 
         } else if (nararative.contains("bedeckt".toLowerCase())) {
             image.setImage(cloudy);
             checkImage = "cloudy";
-            mainBorderPane.getStyleClass().removeAll("myBorderPaneSunny", "myBorderPaneCloudyRain", "myBorderPaneSnowy", "myBorderPaneThunder");
+            mainBorderPane.getStyleClass().removeAll("myBorderPaneSunny", "myBorderPaneCloudyRain",
+                    "myBorderPaneSnowy", "myBorderPaneThunder");
             mainBorderPane.getStyleClass().add("myBorderPaneCloudy");
 
 
         } else if (nararative.contains("Schnee".toLowerCase())) {
             image.setImage(snowy);
             checkImage = "snowy";
-            mainBorderPane.getStyleClass().removeAll("myBorderPaneCloudy", "myBorderPaneCloudyRain", "myBorderPaneSunny", "myBorderPaneThunder");
+            mainBorderPane.getStyleClass().removeAll("myBorderPaneCloudy", "myBorderPaneCloudyRain",
+                    "myBorderPaneSunny", "myBorderPaneThunder");
             mainBorderPane.getStyleClass().add("myBorderPaneSnowy");
 
 
@@ -506,7 +516,8 @@ public class MainWindow implements Initializable {
             image.setImage(thunderstorm);
             checkImage = "thunderstorm";
 
-            mainBorderPane.getStyleClass().removeAll("myBorderPaneSunny", "myBorderPaneCloudyRain", "myBorderPaneSnowy", "myBorderPaneCloudy");
+            mainBorderPane.getStyleClass().removeAll("myBorderPaneSunny", "myBorderPaneCloudyRain",
+                    "myBorderPaneSnowy", "myBorderPaneCloudy");
             mainBorderPane.getStyleClass().add("myBorderPaneThunder");
 
 
@@ -572,11 +583,11 @@ public class MainWindow implements Initializable {
 
 
     /**
-     * when the current time reaches sunrise the app
+     * when the current time reaches sunset the app
      * switches to night mode
      *
      * @param currentDay
-     * @param index
+     * @param index index of the day as int
      * @throws ParseException
      */
     public void changeImageWhenNight(int currentDay, int index) {
@@ -596,19 +607,24 @@ public class MainWindow implements Initializable {
 
         String nararative = days.get(currentDay).getNarrative().toLowerCase();
         if (nararative.contains("schauer".toLowerCase())) {
-            mainBorderPane.getStyleClass().removeAll("myBorderPaneNight", "myBorderPaneNightCloudy", "myBorderPaneNightSnowy", "myBorderPaneNightThunder");
+            mainBorderPane.getStyleClass().removeAll("myBorderPaneNight", "myBorderPaneNightCloudy",
+                    "myBorderPaneNightSnowy", "myBorderPaneNightThunder");
             mainBorderPane.getStyleClass().add("myBorderPaneNightRain");
         } else if (nararative.contains("klar".toLowerCase())) {
-            mainBorderPane.getStyleClass().removeAll("myBorderPaneNightRain", "myBorderPaneNightCloudy", "myBorderPaneNightSnowy", "myBorderPaneNightThunder");
+            mainBorderPane.getStyleClass().removeAll("myBorderPaneNightRain", "myBorderPaneNightCloudy",
+                    "myBorderPaneNightSnowy", "myBorderPaneNightThunder");
             mainBorderPane.getStyleClass().add("myBorderPaneNight");
         } else if (nararative.contains("bedeckt".toLowerCase())) {
-            mainBorderPane.getStyleClass().removeAll("myBorderPaneNight", "myBorderPaneNightRain", "myBorderPaneNightSnowy", "myBorderPaneNightThunder");
+            mainBorderPane.getStyleClass().removeAll("myBorderPaneNight", "myBorderPaneNightRain",
+                    "myBorderPaneNightSnowy", "myBorderPaneNightThunder");
             mainBorderPane.getStyleClass().add("myBorderPaneNightCloudy");
         } else if (nararative.contains("Schnee".toLowerCase())) {
-            mainBorderPane.getStyleClass().removeAll("myBorderPaneNight", "myBorderPaneNightCloudy", "myBorderPaneNightRain", "myBorderPaneNightThunder");
+            mainBorderPane.getStyleClass().removeAll("myBorderPaneNight", "myBorderPaneNightCloudy",
+                    "myBorderPaneNightRain", "myBorderPaneNightThunder");
             mainBorderPane.getStyleClass().add("myBorderPaneNightSnowy");
         } else if (nararative.contains("gewitter".toLowerCase())) {
-            mainBorderPane.getStyleClass().removeAll("myBorderPaneNight", "myBorderPaneNightCloudy", "myBorderPaneNightSnowy", "myBorderPaneNightRain");
+            mainBorderPane.getStyleClass().removeAll("myBorderPaneNight", "myBorderPaneNightCloudy",
+                    "myBorderPaneNightSnowy", "myBorderPaneNightRain");
             mainBorderPane.getStyleClass().add("myBorderPaneNightThunder");
         }
 
@@ -793,9 +809,9 @@ public class MainWindow implements Initializable {
 
     /**
      * gets the rain value from weather array
-     * depending on the value the corresponding informationwill change
+     * depending on the value the corresponding information will change
      *
-     * @param index
+     * @param index indicates which day should be set as int
      */
     public void setRainLabel(int index) {
         if (days.get(index).getRain() < 1) {
@@ -901,8 +917,8 @@ public class MainWindow implements Initializable {
      * adds a fade transition when the app is starting
      * or when you switch days
      *
-     * @param p
-     * @param ms
+     * @param p on which pane the transition should be as pane
+     * @param ms how long the transition should be as int
      */
     public void setFadeAnimation(Pane p, int ms) {
         FadeTransition fadeTransition = new FadeTransition(Duration.millis(ms), p);

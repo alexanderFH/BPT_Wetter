@@ -115,6 +115,14 @@ public class Day {
         return UTC_to_String(sunset);
     }
 
+    public long getLongSunset(){
+        return sunset;
+    }
+
+    public long getLongSunrise(){
+        return sunrise;
+    }
+
     public double getRain() {
         return rain;
     }

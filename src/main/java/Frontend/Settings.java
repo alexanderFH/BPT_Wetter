@@ -26,7 +26,6 @@ public class Settings implements Initializable {
     private Button Export;
 
 
-
     private void getUnit() {
         Temperature.getItems().add("Celsius");
         Temperature.getItems().add("Fahrenheit");

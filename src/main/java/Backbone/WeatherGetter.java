@@ -1,5 +1,6 @@
 package Backbone;
 
+import Frontend.Settings;
 import javafx.scene.control.Alert;
 import javafx.stage.FileChooser;
 import org.json.JSONArray;
@@ -15,7 +16,6 @@ public class WeatherGetter {
     private static final String weatherAPIKey = "d3d0b6bdc95a468f90b6bdc95a468f52";
     private static final String openWeatherAPIKey = "6b5717bc865ffcb87230cfbcf6263078";
 
-    //TODO Fehlermeldung falls falscher Standort
 
     public static void main(String[] args) throws IOException {
         //    ArrayList<Day> days = getWeatherJson("2325", "AT", false);
@@ -153,6 +153,12 @@ public class WeatherGetter {
         }
     }
 
+    /**
+     *
+     * @param title
+     * @param header
+     * @param text
+     */
     private static void alertWindow(String title, String header, String text) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);

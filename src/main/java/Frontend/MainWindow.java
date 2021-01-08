@@ -26,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -164,29 +165,29 @@ public class MainWindow implements Initializable {
         moonphase.setText("Mondphase:\n " + days.get(0).getMoonphase());
         feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(0).getFeelsLike() + unit);
 
-        changeImage(1);
-        changeImage(2);
-        changeImage(3);
-        changeImage(4);
-        changeImage(5);
-        changeImage(0);
-
-        bp1.getStyleClass().add("clickedOnPane");
-
-        setFadeAnimation(weatherInfo, 1500);
-        setFadeAnimation(nextWeatherInfo, 1500);
-
-        try {
-
+        if (Instant.now().getEpochSecond() > days.get(0).getLongSunrise() && Instant.now().getEpochSecond() < days.get(0).getLongSunset()) {
+            System.out.println("HELLO");
+            changeImage(1);
+            changeImage(2);
+            changeImage(3);
+            changeImage(4);
+            changeImage(5);
+            changeImage(0);
+        } else {
             changeImageWhenNight(1, 1);
             changeImageWhenNight(2, 2);
             changeImageWhenNight(3, 3);
             changeImageWhenNight(4, 4);
             changeImageWhenNight(5, 5);
             changeImageWhenNight(0, 0);
-        } catch (ParseException e) {
-            e.printStackTrace();
         }
+
+
+        bp1.getStyleClass().add("clickedOnPane");
+
+        setFadeAnimation(weatherInfo, 1500);
+        setFadeAnimation(nextWeatherInfo, 1500);
+
 
         bp2.getStyleClass().removeAll("clickedOnPane");
         bp3.getStyleClass().removeAll("clickedOnPane");
@@ -199,6 +200,7 @@ public class MainWindow implements Initializable {
     /**
      * next six methods change the weather informations
      * to a specific day
+     *
      * @throws ParseException
      */
     @FXML
@@ -223,8 +225,10 @@ public class MainWindow implements Initializable {
         moonphase.setText("Mondphase:\n " + days.get(0).getMoonphase());
         feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(0).getFeelsLike() + unit);
         //detail.setText(days.get(0).getNarrative());
-        changeImage(0);
-        changeImageWhenNight(0, 0);
+        if (Instant.now().getEpochSecond() > days.get(0).getLongSunrise() && Instant.now().getEpochSecond() < days.get(0).getLongSunset())
+            changeImage(0);
+        else
+            changeImageWhenNight(0, 0);
 
         bp1Pressed = true;
         bp2Pressed = false;
@@ -264,8 +268,10 @@ public class MainWindow implements Initializable {
         sunset.setText("Sonnenuntergang um:\n " + days.get(1).getSunset() + " Uhr");
         moonphase.setText("Mondphase:\n " + days.get(1).getMoonphase());
         feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(1).getFeelsLike() + unit);
-        changeImage(1);
-        changeImageWhenNight(1, 1);
+        if (Instant.now().getEpochSecond() > days.get(0).getLongSunrise() && Instant.now().getEpochSecond() < days.get(0).getLongSunset())
+            changeImage(1);
+        else
+            changeImageWhenNight(1, 1);
 
         bp2Pressed = true;
         bp1Pressed = false;
@@ -305,8 +311,10 @@ public class MainWindow implements Initializable {
         sunset.setText("Sonnenuntergang um:\n " + days.get(2).getSunset() + " Uhr");
         moonphase.setText("Mondphase:\n " + days.get(2).getMoonphase());
         feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(2).getFeelsLike() + unit);
-        changeImage(2);
-        changeImageWhenNight(2, 2);
+        if (Instant.now().getEpochSecond() > days.get(0).getLongSunrise() && Instant.now().getEpochSecond() < days.get(0).getLongSunset())
+            changeImage(2);
+        else
+            changeImageWhenNight(2, 2);
 
         bp3Pressed = true;
         bp1Pressed = false;
@@ -346,8 +354,10 @@ public class MainWindow implements Initializable {
         sunset.setText("Sonnenuntergang um:\n " + days.get(3).getSunset() + " Uhr");
         moonphase.setText("Mondphase:\n " + days.get(3).getMoonphase());
         feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(3).getFeelsLike() + unit);
-        changeImage(3);
-        changeImageWhenNight(3, 3);
+        if (Instant.now().getEpochSecond() > days.get(0).getLongSunrise() && Instant.now().getEpochSecond() < days.get(0).getLongSunset())
+            changeImage(3);
+        else
+            changeImageWhenNight(3, 3);
 
         bp4Pressed = true;
         bp1Pressed = false;
@@ -387,8 +397,10 @@ public class MainWindow implements Initializable {
         sunset.setText("Sonnenuntergang um:\n " + days.get(4).getSunset() + " Uhr");
         moonphase.setText("Mondphase:\n " + days.get(4).getMoonphase());
         feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(4).getFeelsLike() + unit);
-        changeImage(4);
-        changeImageWhenNight(4, 4);
+        if (Instant.now().getEpochSecond() > days.get(0).getLongSunrise() && Instant.now().getEpochSecond() < days.get(0).getLongSunset())
+            changeImage(4);
+        else
+            changeImageWhenNight(4, 4);
 
         bp5Pressed = true;
         bp1Pressed = false;
@@ -427,8 +439,10 @@ public class MainWindow implements Initializable {
         sunset.setText("Sonnenuntergang um:\n " + days.get(5).getSunset() + " Uhr");
         moonphase.setText("Mondphase:\n " + days.get(5).getMoonphase());
         feelsLike.setText("Temperatur fuehlt sich\n an wie " + days.get(5).getFeelsLike() + unit);
-        changeImage(5);
-        changeImageWhenNight(5, 5);
+        if (Instant.now().getEpochSecond() > days.get(0).getLongSunrise() && Instant.now().getEpochSecond() < days.get(0).getLongSunset())
+            changeImage(5);
+        else
+            changeImageWhenNight(5, 5);
 
         bp6Pressed = true;
         bp1Pressed = false;
@@ -495,7 +509,6 @@ public class MainWindow implements Initializable {
             mainBorderPane.getStyleClass().add("myBorderPaneThunder");
 
 
-
         } else {
             image.setImage(cloudy);
             checkImage = "cloudy";
@@ -560,25 +573,12 @@ public class MainWindow implements Initializable {
     /**
      * when the current time reaches sunrise the app
      * switches to night mode
+     *
      * @param currentDay
      * @param index
      * @throws ParseException
      */
-    public void changeImageWhenNight(int currentDay, int index) throws ParseException {
-
-        Date sunset = new SimpleDateFormat("HH:mm:ss").parse(days.get(index).getSunset());
-        Date sunrise = new SimpleDateFormat("HH:mm:ss").parse(days.get(index).getSunrise());
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(sunset);
-        long secondsSunset = calendar.get(Calendar.SECOND);
-
-        calendar.setTime(sunrise);
-        long secondsSunrise = calendar.get(Calendar.SECOND);
-
-        ZonedDateTime sunsetZO = ZonedDateTime.ofInstant(Instant.ofEpochSecond(secondsSunset), ZoneId.systemDefault());
-        ZonedDateTime sunriseZO = ZonedDateTime.ofInstant(Instant.ofEpochSecond(secondsSunrise), ZoneId.systemDefault());
-        ZonedDateTime no = ZonedDateTime.now();
+    public void changeImageWhenNight(int currentDay, int index) {
         String mondphase = "";
 
         Image vollmond = new Image("/img/moonphases/fullmoon.png");
@@ -592,10 +592,6 @@ public class MainWindow implements Initializable {
 
         //normally there is: no.isAfter(zo)
         // but for further implementation its set to no.isBefore(zo)
-        if (no.isAfter(sunriseZO) && no.isBefore(sunsetZO)) {
-            changeImage(index);
-            return;
-        }
 
         String nararative = days.get(currentDay).getNarrative().toLowerCase();
         if (nararative.contains("schauer".toLowerCase())) {
@@ -788,6 +784,7 @@ public class MainWindow implements Initializable {
     /**
      * gets the rain value from weather array
      * depending on the value the corresponding informationwill change
+     *
      * @param index
      */
     public void setRainLabel(int index) {
@@ -892,6 +889,7 @@ public class MainWindow implements Initializable {
     /**
      * adds a fade transition when the app is starting
      * or when you switch days
+     *
      * @param p
      * @param ms
      */

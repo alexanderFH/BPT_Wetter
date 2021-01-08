@@ -13,6 +13,7 @@ public class Settings implements Initializable {
     protected static boolean declareUnit = true;
     protected static String plz = "1220";
     protected static String country = "AT";
+    public static boolean validAddress = true;
     protected static MainWindow mainWindow;
 
 
@@ -43,10 +44,8 @@ public class Settings implements Initializable {
         Temperature.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.toString().toLowerCase().equals("fahrenheit")) {
                 declareUnit = false;
-                System.out.println("Fahrenheit");
             } else {
                 declareUnit = true;
-                System.out.println("Celsius");
             }
             mainWindow.start();
         });
@@ -56,8 +55,10 @@ public class Settings implements Initializable {
      * Adjust the position
      */
     public void export(ActionEvent actionEvent) {
-        System.out.println(actionEvent.getSource().toString());
-        WeatherGetter.printWeatherToFile(Settings.plz, Settings.country, declareUnit);
+        if (validAddress)
+            WeatherGetter.printWeatherToFile(Settings.plz, Settings.country, declareUnit);
+        else
+            WeatherGetter.printWeatherToFile("1220", "AT", declareUnit);
     }
 
     public void enterAction(ActionEvent actionEvent) {

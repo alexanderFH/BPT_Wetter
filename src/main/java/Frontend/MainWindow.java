@@ -240,12 +240,8 @@ public class MainWindow implements Initializable {
         else
             changeImageWhenNight(0, 0);
 
+        setButtonHighlightFalse();
         bp1Pressed = true;
-        bp2Pressed = false;
-        bp3Pressed = false;
-        bp4Pressed = false;
-        bp5Pressed = false;
-        bp6Pressed = false;
         borderPanePressed();
 
         setFadeAnimation(weatherInfo, 1000);
@@ -283,12 +279,8 @@ public class MainWindow implements Initializable {
         else
             changeImageWhenNight(1, 1);
 
+        setButtonHighlightFalse();
         bp2Pressed = true;
-        bp1Pressed = false;
-        bp4Pressed = false;
-        bp3Pressed = false;
-        bp5Pressed = false;
-        bp6Pressed = false;
         borderPanePressed();
 
         setFadeAnimation(weatherInfo, 1000);
@@ -326,12 +318,8 @@ public class MainWindow implements Initializable {
         else
             changeImageWhenNight(2, 2);
 
+        setButtonHighlightFalse();
         bp3Pressed = true;
-        bp1Pressed = false;
-        bp2Pressed = false;
-        bp4Pressed = false;
-        bp5Pressed = false;
-        bp6Pressed = false;
         borderPanePressed();
 
         setFadeAnimation(weatherInfo, 1000);
@@ -369,12 +357,8 @@ public class MainWindow implements Initializable {
         else
             changeImageWhenNight(3, 3);
 
+        setButtonHighlightFalse();
         bp4Pressed = true;
-        bp1Pressed = false;
-        bp2Pressed = false;
-        bp3Pressed = false;
-        bp5Pressed = false;
-        bp6Pressed = false;
         borderPanePressed();
 
         setFadeAnimation(weatherInfo, 1000);
@@ -412,15 +396,13 @@ public class MainWindow implements Initializable {
         else
             changeImageWhenNight(4, 4);
 
+        setButtonHighlightFalse();
         bp5Pressed = true;
-        bp1Pressed = false;
-        bp2Pressed = false;
-        bp3Pressed = false;
-        bp4Pressed = false;
-        bp6Pressed = false;
         borderPanePressed();
         setFadeAnimation(weatherInfo, 1000);
     }
+
+
 
     @FXML
     private void changeDaySix() throws ParseException {
@@ -454,15 +436,20 @@ public class MainWindow implements Initializable {
         else
             changeImageWhenNight(5, 5);
 
+        setButtonHighlightFalse();
         bp6Pressed = true;
+        borderPanePressed();
+
+        setFadeAnimation(weatherInfo, 1000);
+    }
+
+    private void setButtonHighlightFalse() {
         bp1Pressed = false;
         bp2Pressed = false;
         bp3Pressed = false;
         bp4Pressed = false;
         bp5Pressed = false;
-        borderPanePressed();
-
-        setFadeAnimation(weatherInfo, 1000);
+        bp6Pressed = false;
     }
 
     /**
@@ -627,30 +614,39 @@ public class MainWindow implements Initializable {
         menuBar.getStyleClass().removeAll("menuBar");
         menuBar.getStyleClass().add("menuBarNight");
 
-        if (days.get(index).getMoonphase().equals("abnehmender Halbmond")) {
-            mondphase = "abHalbmond";
-            image.setImage(abHalbmond);
-        } else if (days.get(index).getMoonphase().equals("Vollmond")) {
-            mondphase = "vollmond";
-            image.setImage(vollmond);
-        } else if (days.get(index).getMoonphase().equals("abnehmender Dreiviertelmond")) {
-            mondphase = "abDreiviertelmond";
-            image.setImage(abDreiviertel);
-        } else if (days.get(index).getMoonphase().equals("abnehmender Sichelmond")) {
-            mondphase = "abSichelmond";
-            image.setImage(abSichelmond);
-        } else if (days.get(index).getMoonphase().equals("zunehmender Sichelmond")) {
-            mondphase = "zuSichelmond";
-            image.setImage(zuSichelmond);
-        } else if (days.get(index).getMoonphase().equals("zunehmender Halbmond")) {
-            mondphase = "zuHalbmond";
-            image.setImage(zuHalbmond);
-        } else if (days.get(index).getMoonphase().equals("zunehmender Dreiviertelmond")) {
-            mondphase = "zuDreiviertelmond";
-            image.setImage(zuDreiviertel);
-        } else if (days.get(index).getMoonphase().equals("Neumond")) {
-            mondphase = "neumond";
-            image.setImage(neumond);
+        switch (days.get(index).getMoonphase()) {
+            case "abnehmender Halbmond" -> {
+                mondphase = "abHalbmond";
+                image.setImage(abHalbmond);
+            }
+            case "Vollmond" -> {
+                mondphase = "vollmond";
+                image.setImage(vollmond);
+            }
+            case "abnehmender Dreiviertelmond" -> {
+                mondphase = "abDreiviertelmond";
+                image.setImage(abDreiviertel);
+            }
+            case "abnehmender Sichelmond" -> {
+                mondphase = "abSichelmond";
+                image.setImage(abSichelmond);
+            }
+            case "zunehmender Sichelmond" -> {
+                mondphase = "zuSichelmond";
+                image.setImage(zuSichelmond);
+            }
+            case "zunehmender Halbmond" -> {
+                mondphase = "zuHalbmond";
+                image.setImage(zuHalbmond);
+            }
+            case "zunehmender Dreiviertelmond" -> {
+                mondphase = "zuDreiviertelmond";
+                image.setImage(zuDreiviertel);
+            }
+            case "Neumond" -> {
+                mondphase = "neumond";
+                image.setImage(neumond);
+            }
         }
 
         switch (mondphase) {
@@ -831,6 +827,7 @@ public class MainWindow implements Initializable {
             temp.setText(days.get(0).getCurrentTemp() + unit);
             nextDayTemp1.setText(days.get(0).getCurrentTemp() + unit);
         }
+
 
         if (days.get(1).getCurrentTemp() == -999) {
             double minT = days.get(1).getMin_temp();

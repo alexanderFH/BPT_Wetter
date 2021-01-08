@@ -17,28 +17,6 @@ public class WeatherGetter {
     private static final String openWeatherAPIKey = "6b5717bc865ffcb87230cfbcf6263078";
 
 
-    public static void main(String[] args) throws IOException {
-        //    ArrayList<Day> days = getWeatherJson("2325", "AT", false);
-        //  System.out.println(days.size());
-        printWeatherToFile("2325", "AT", false);
-        //   for (Day day : days)
-        //     System.out.println(day);
-        // printWeatherToFile("1220","AT",true);
-        // ArrayList<Backbone.Day> days = getWeatherJson("33.74,-84.39");
-        //getWeatherJson("1220", "AT");
-        //WeatherGetter w = new WeatherGetter();
-        //System.out.println(w.UTC_to_String(1609224276));
-        // System.out.println(getCurrentWeather("1220", "AT").getNarrative());
-        // ArrayList<Day> days = getWeatherJson("1220", "AT");
-        // System.out.println(days.get(0));
-       /* Day day = new Day("sonntat", 5, 10, "toll");//test
-        System.out.println(day.getCurrentTemp());
-        ArrayList<Day> days = getWeatherJson("1220:AT");
-        for (Day d : days)
-            System.out.println(d);
-        */
-    }
-
     /**
      * @param rd
      * @return
@@ -67,6 +45,7 @@ public class WeatherGetter {
         try (InputStream is = new URL("https://api.weather.com/v3/wx/forecast/daily/5day?postalKey=" + plz + ":" + country + "&format=json&units=" + unit + "&language=de-DE&apiKey=" + weatherAPIKey).openStream()) {
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
             String jsonString = readAll(rd);
+            Settings.validAddress = true;
             JSONObject weatherData = new JSONObject(jsonString);
             JSONArray dayName = weatherData.getJSONArray("dayOfWeek");
             JSONArray tempMin = weatherData.getJSONArray("temperatureMin");
@@ -92,6 +71,7 @@ public class WeatherGetter {
         } catch (FileNotFoundException e) {
             System.err.println(e);
             System.err.println("Invalid postal key / country combination!");
+            Settings.validAddress = false;
             alertWindow("Ung\u00fcltige Adresse!", "Leider wurde die angegebene Adresse nicht gefunden!", "Es werden nun die Wetterdaten der Standard-Adresse 1220,AT angezeigt.");
             return getWeatherJson("1220", "AT", true);
         } catch (Exception e) {
@@ -135,7 +115,7 @@ public class WeatherGetter {
             unit = " \u2109";
         try {
             FileChooser fx = new FileChooser();
-            fx.setTitle("Bitte wählen Sie einen Speicherort");
+            fx.setTitle("Bitte w\u00e4hlen Sie einen Speicherort");
             fx.setInitialFileName("Wetter.txt");
             File file = fx.showSaveDialog(null);
             if (file == null) {
@@ -154,7 +134,6 @@ public class WeatherGetter {
     }
 
     /**
-     *
      * @param title
      * @param header
      * @param text

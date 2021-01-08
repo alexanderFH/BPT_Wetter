@@ -6,8 +6,8 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Day {
-    private double min_temp;
-    private double max_temp;
+    private final double MIN_TEMP;
+    private final double MAX_TEMP;
     private long sunset;
     private long sunrise;
     private String day;
@@ -17,20 +17,22 @@ public class Day {
     private String moonphase;
     private String narrative;
     private double rain;
+
     /**
      * Constructor for the weather forecast API
      *
-     * @param min_temp
-     * @param max_temp
-     * @param narrative
-     * @param moonphase
-     * @param sunrise
-     * @param sunset
+     * @param min_temp  minimum temp as double
+     * @param max_temp  maximum temp as double
+     * @param narrative narrative as string
+     * @param moonphase moonphase as string
+     * @param sunrise   sunrise as utc long
+     * @param sunset    sunset as utc long
      */
-    public Day(String day, double min_temp, double max_temp, String narrative, String moonphase, long sunrise, long sunset, double rain) {
+    public Day(String day, double min_temp, double max_temp, String narrative, String moonphase, long sunrise, long sunset,
+               double rain) {
         this.day = day;
-        this.min_temp = min_temp;
-        this.max_temp = max_temp;
+        this.MIN_TEMP = min_temp;
+        this.MAX_TEMP = max_temp;
         this.narrative = narrative;
         this.moonphase = moonphase;
         this.sunrise = sunrise;
@@ -40,20 +42,28 @@ public class Day {
 
 
     /**
-     * @param min_temp
-     * @param max_temp
-     * @param feels_like
-     * @param temp
-     * @param humidity
+     * Constructor of the current weather api
+     *
+     * @param min_temp   minimum temp as a double
+     * @param max_temp   maximum temp as a double
+     * @param feels_like feels like temp as a double
+     * @param temp       current temp as double
+     * @param humidity   current humidity as double
      */
-    public Day(double min_temp, double max_temp, int feels_like, int temp, int humidity) {
-        this.min_temp = min_temp;
-        this.max_temp = max_temp;
+    public Day(double min_temp, double max_temp, double feels_like, double temp, double humidity) {
+        this.MIN_TEMP = min_temp;
+        this.MAX_TEMP = max_temp;
         this.feelsLike = feels_like;
         this.currentTemp = temp;
         this.humidity = humidity;
     }
 
+    /**
+     * formats a utc long to a String with the format HH:mm:ss
+     *
+     * @param utc long
+     * @return time with the format HH:mm:ss as string
+     */
     public static String UTC_to_String(long utc) {
         ZonedDateTime zo = ZonedDateTime.ofInstant(Instant.ofEpochSecond(utc), ZoneId.systemDefault());
         return DateTimeFormatter.ofPattern("HH:mm:ss").format(zo);
@@ -64,20 +74,14 @@ public class Day {
     }
 
     public double getMin_temp() {
-        return min_temp;
+        return MIN_TEMP;
     }
 
-    public void setMin_temp(double min_temp) {
-        this.min_temp = min_temp;
-    }
 
     public double getMax_temp() {
-        return max_temp;
+        return MAX_TEMP;
     }
 
-    public void setMax_temp(double max_temp) {
-        this.max_temp = max_temp;
-    }
 
     public double getCurrentTemp() {
         return currentTemp;
@@ -115,11 +119,11 @@ public class Day {
         return UTC_to_String(sunset);
     }
 
-    public long getLongSunset(){
+    public long getLongSunset() {
         return sunset;
     }
 
-    public long getLongSunrise(){
+    public long getLongSunrise() {
         return sunrise;
     }
 
@@ -144,8 +148,8 @@ public class Day {
     }
 
     public String toStringWithUnit(String unit) {
-        return day + ":\nMinimale Temperatur: " + min_temp + unit +
-                "\nMaximale Temperatur: " + max_temp + unit +
+        return day + ":\nMinimale Temperatur: " + MIN_TEMP + unit +
+                "\nMaximale Temperatur: " + MAX_TEMP + unit +
                 "\nMondphase: " + moonphase +
                 "\nRegenwahrscheinlichkeit: " + rain +
                 "\nSonnenaufgang: " + getSunrise() +
@@ -154,8 +158,8 @@ public class Day {
 
     @Override
     public String toString() {
-        return day + ":\nMinimale Temperatur: " + min_temp +
-                "\nMaximale Temperatur: " + max_temp +
+        return day + ":\nMinimale Temperatur: " + MIN_TEMP +
+                "\nMaximale Temperatur: " + MAX_TEMP +
                 "\nMondphase: " + moonphase +
                 "\nRegenwahrscheinlichkeit: " + rain +
                 "\nSonnenaufgang: " + getSunrise() +

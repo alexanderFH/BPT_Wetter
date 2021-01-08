@@ -9,7 +9,7 @@
       <ChoiceBox fx:id="Temperature" layoutX="14.0" layoutY="14.0" prefHeight="45.0" prefWidth="120.0">
       </ChoiceBox>
       <TextField fx:id="Position" layoutX="160.0" layoutY="16.0" onAction="#enterAction" onMouseExited="#mouseExit" prefHeight="45.0" prefWidth="120.0" promptText="1220, AT" />
-      <Button fx:id="Export" layoutX="311.0" layoutY="16.0" mnemonicParsing="false" onAction="#export" prefHeight="45.0" prefWidth="120.0" text="Exportieren" />
+      <Button fx:id="Export" layoutX="311.0" layoutY="16.0" mnemonicParsing="false" onAction="#export" prefHeight="45.0" prefWidth="120.0" text="Export" />
       <Text layoutX="352.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Version: 1.0.0 " wrappingWidth="88.0" />
    </children>
 </AnchorPane>

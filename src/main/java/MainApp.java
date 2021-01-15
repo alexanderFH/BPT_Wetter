@@ -20,6 +20,7 @@ public class MainApp extends Application {
         primaryStage.show();
         primaryStage.setResizable(false);
         primaryStage.getIcons().add(new Image(getClass().getResource("img/sun-icon.png").toExternalForm()));
+        primaryStage.setOnCloseRequest(e -> Platform.exit());
 
     }
 

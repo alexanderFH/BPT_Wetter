@@ -131,8 +131,8 @@ public class MainWindow implements Initializable {
     /**
      * Initializes the controller Class for MainWindow
      *
-     * @param location  URL
-     * @param resources ResourceBundle
+     * @param location as URL
+     * @param resources as ResourceBundle
      */
 
     @Override

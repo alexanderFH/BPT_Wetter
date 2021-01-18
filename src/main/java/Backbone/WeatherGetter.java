@@ -70,7 +70,7 @@ public class WeatherGetter {
             back.add(today);
             for (int i = 1; i < dayName.length(); i++) {
                 back.add(new Day(dayName.getString(i), tempMin.getDouble(i), tempMax.getDouble(i), nar.getString(i),
-                        moon.getString(i), sunrise.getLong(i), sunset.getLong(i), rain.getDouble(i)));
+                        moon.getString(i), sunrise.getLong(i), sunset.getLong(i), rain.getDouble(i), today.getLocation()));
             }
         } catch (FileNotFoundException e) {
             Settings.validAddress = false;
@@ -105,7 +105,7 @@ public class WeatherGetter {
             JSONObject weatherData = new JSONObject(jsonString);
             JSONObject temp = weatherData.getJSONObject("main");
             today = new Day(temp.getDouble("temp_min"), temp.getDouble("temp_max"), temp.getDouble("feels_like"),
-                    temp.getDouble("temp"), temp.getDouble("humidity"));
+                    temp.getDouble("temp"), temp.getDouble("humidity"), weatherData.getString("name"));
         } catch (Exception e) {
             System.err.println("Error while getting current Weather!");
             e.printStackTrace();

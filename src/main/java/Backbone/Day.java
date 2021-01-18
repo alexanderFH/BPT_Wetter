@@ -17,6 +17,7 @@ public class Day {
     private String moonphase;
     private String narrative;
     private double rain;
+    private String location;
 
     /**
      * Constructor for the weather forecast API
@@ -29,7 +30,7 @@ public class Day {
      * @param sunset    sunset as utc long
      */
     public Day(String day, double min_temp, double max_temp, String narrative, String moonphase, long sunrise, long sunset,
-               double rain) {
+               double rain,String location) {
         this.day = day;
         this.MIN_TEMP = min_temp;
         this.MAX_TEMP = max_temp;
@@ -38,6 +39,7 @@ public class Day {
         this.sunrise = sunrise;
         this.sunset = sunset;
         this.rain = rain;
+        this.location = location;
     }
 
 
@@ -50,12 +52,13 @@ public class Day {
      * @param temp       current temp as double
      * @param humidity   current humidity as double
      */
-    public Day(double min_temp, double max_temp, double feels_like, double temp, double humidity) {
+    public Day(double min_temp, double max_temp, double feels_like, double temp, double humidity, String location) {
         this.MIN_TEMP = min_temp;
         this.MAX_TEMP = max_temp;
         this.feelsLike = feels_like;
         this.currentTemp = temp;
         this.humidity = humidity;
+        this.location = location;
     }
 
     /**
@@ -67,6 +70,10 @@ public class Day {
     public static String UTC_to_String(long utc) {
         ZonedDateTime zo = ZonedDateTime.ofInstant(Instant.ofEpochSecond(utc), ZoneId.systemDefault());
         return DateTimeFormatter.ofPattern("HH:mm:ss").format(zo);
+    }
+
+    public String getLocation() {
+        return location;
     }
 
     public void setDay(String day) {

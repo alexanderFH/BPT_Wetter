@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
 public class Day {
     private final double MIN_TEMP;
     private final double MAX_TEMP;
+    private final String LOCATION;
     private long sunset;
     private long sunrise;
     private String day;
@@ -17,7 +18,7 @@ public class Day {
     private String moonphase;
     private String narrative;
     private double rain;
-    private String location;
+
 
     /**
      * Constructor for the weather forecast API
@@ -39,7 +40,7 @@ public class Day {
         this.sunrise = sunrise;
         this.sunset = sunset;
         this.rain = rain;
-        this.location = location;
+        this.LOCATION = location;
     }
 
 
@@ -58,7 +59,7 @@ public class Day {
         this.feelsLike = feels_like;
         this.currentTemp = temp;
         this.humidity = humidity;
-        this.location = location;
+        this.LOCATION = location;
     }
 
     /**
@@ -73,7 +74,7 @@ public class Day {
     }
 
     public String getLocation() {
-        return location;
+        return LOCATION;
     }
 
     public void setDay(String day) {

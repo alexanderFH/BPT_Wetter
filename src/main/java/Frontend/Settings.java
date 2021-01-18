@@ -30,6 +30,7 @@ public class Settings implements Initializable {
     @FXML
     private Button Export;
 
+
     /**
      * Adjust Celsius and Fahrenheit
      */
@@ -45,6 +46,7 @@ public class Settings implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         getUnit();
+        settings.getStylesheets().add("/css/styles.css");
         Position.setPromptText(plz + "," + country);
         // Gets current unit Celsius or Fahrenheit
         Temperature.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {

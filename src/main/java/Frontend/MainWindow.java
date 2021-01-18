@@ -19,7 +19,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -963,7 +965,8 @@ public class MainWindow implements Initializable {
             root = FXMLLoader.load(getClass().getClassLoader().getResource("Settings/settings.fxml"));
             stage = new Stage();
             stage.setTitle("Settings");
-            stage.setScene(new Scene(root, 450, 300));
+            stage.setScene(new Scene(root, 450, 120, Color.TRANSPARENT));
+            stage.initStyle(StageStyle.TRANSPARENT);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

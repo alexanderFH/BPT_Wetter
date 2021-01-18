@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -98,6 +99,8 @@ public class MainWindow implements Initializable {
     private Label nextDayTemp5;
     @FXML
     private Label nextDayTemp6;
+    @FXML
+    private Label location;
     private ArrayList<Day> days;
     private boolean bp1Pressed;
     private boolean bp2Pressed;
@@ -129,6 +132,7 @@ public class MainWindow implements Initializable {
     private Menu refreshMenu;
 
     private boolean labelVisible;
+
 
     /**
      * Initializes the controller Class for MainWindow
@@ -171,6 +175,8 @@ public class MainWindow implements Initializable {
         dayFive.setText(days.get(4).getDayName());
         daySix.setText(days.get(5).getDayName());
 
+        location.setPadding(new Insets(0, 0, 0, 15));
+        location.setText(days.get(0).getLocation());
         setCurrentTempLabel();
         minTemp.setText("minimale Temperatur: " + days.get(0).getMin_temp() + unit);
         maxTemp.setText("maximale Temperatur: " + days.get(0).getMax_temp() + unit);
@@ -290,7 +296,6 @@ public class MainWindow implements Initializable {
         }
 
         labelVisible = false;
-
         setRainLabel(1);
         minTemp.setText("minimale Temperatur: " + days.get(1).getMin_temp() + unit);
         maxTemp.setText("maximale Temperatur: " + days.get(1).getMax_temp() + unit);

@@ -24,9 +24,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -596,9 +593,9 @@ public class MainWindow implements Initializable {
         Image vollmond = new Image("/img/moonphases/fullmoon.png");
         Image abHalbmond = new Image("/img/moonphases/abHalbmond.png");
         Image abSichelmond = new Image("/img/moonphases/abSichelmond.png");
-        Image abDreiviertel = new Image("/img/moonphases/abDreiviertelmond.png");
+        Image abDreiviertel = new Image("/img/moonphases/abDreiviertel-Mond.png");
         Image neumond = new Image("/img/moonphases/newmoon.png");
-        Image zuDreiviertel = new Image("/img/moonphases/zuDreiviertelmond.png");
+        Image zuDreiviertel = new Image("/img/moonphases/zuDreiviertel-Mond.png");
         Image zuHalbmond = new Image("/img/moonphases/zuHalbmond.png");
         Image zuSichelmond = new Image("/img/moonphases/zuSichelmond.png");
 

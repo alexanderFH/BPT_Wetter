@@ -55,7 +55,7 @@ public class WeatherGetter {
             JSONArray tempMin = weatherData.getJSONArray("temperatureMin");
             JSONArray tempMax = weatherData.getJSONArray("temperatureMax");
             JSONArray nar = weatherData.getJSONArray("narrative");
-            JSONArray moon = weatherData.getJSONArray("moonPhase");
+            JSONArray moon = weatherData.getJSONArray("moonPhaseCode");
             JSONArray sunrise = weatherData.getJSONArray("sunriseTimeUtc");
             JSONArray sunset = weatherData.getJSONArray("sunsetTimeUtc");
             JSONArray rain = weatherData.getJSONArray("qpf");
@@ -64,6 +64,7 @@ public class WeatherGetter {
             today.setNarrative(nar.getString(0));
             today.setRain(rain.getDouble(0));
             today.setMoonphase(moon.getString(0));
+            System.out.println(moon.getString(0));
             today.setDay(dayName.getString(0));
             today.setSunrise(sunrise.getLong(0));
             today.setSunset(sunset.getLong(0));

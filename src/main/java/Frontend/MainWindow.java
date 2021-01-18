@@ -10,7 +10,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -123,6 +125,8 @@ public class MainWindow implements Initializable {
     private HBox nextWeatherInfo;
     @FXML
     private MenuBar menuBar;
+    @FXML
+    private Menu refreshMenu;
 
     private boolean labelVisible;
 
@@ -136,6 +140,7 @@ public class MainWindow implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Settings.mainWindow = this;
+        refresh(refreshMenu);
         start();
     }
 
@@ -953,9 +958,23 @@ public class MainWindow implements Initializable {
         fadeTransition.play();
     }
 
+    /**
+     * Adds hidden menuitem to menu (javafx need atleast 1 menuitem to fire an event)
+     * @param menu
+     */
     @FXML
-    public void refresh(ActionEvent event) {
-        System.out.println("test");
+    public void refresh(Menu menu) {
+        final MenuItem menuItem = new MenuItem();
+        menu.getItems().add(menuItem);
+        menu.addEventHandler(Menu.ON_SHOWN, event -> menu.hide());
+        menu.addEventHandler(Menu.ON_SHOWING, event -> menu.fire());
+    }
+
+    /**
+     * Event for the refresh Button
+     * @param actionEvent
+     */
+    public void refresh(ActionEvent actionEvent) {
         start();
     }
 }

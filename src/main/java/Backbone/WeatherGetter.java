@@ -135,6 +135,7 @@ public class WeatherGetter {
                 alertWindow("Export-Fehler", "Es wurde kein g\u00fcltiger Speicherort ausgew\u00e4hlt!", null);
             } else {
                 PrintWriter writer = new PrintWriter(file, "UTF-8");
+                writer.println("Wetter-Bericht für: " + plz + " , " + country);
                 for (Day day : forecast) {
                     writer.println(day.toStringWithUnit(unit) + "\n");
                 }

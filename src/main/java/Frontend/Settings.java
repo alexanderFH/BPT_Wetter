@@ -1,11 +1,15 @@
 package Frontend;
 
 import Backbone.WeatherGetter;
+import com.sun.tools.javac.Main;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -16,6 +20,8 @@ public class Settings implements Initializable {
     public static boolean validAddress = true;
     protected static MainWindow mainWindow;
 
+    @FXML
+    private AnchorPane settings;
 
     @FXML
     private ChoiceBox Temperature;
@@ -44,21 +50,29 @@ public class Settings implements Initializable {
         Temperature.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.toString().toLowerCase().equals("fahrenheit")) {
                 declareUnit = false;
+                MainWindow.stage.close();
             } else {
                 declareUnit = true;
+                MainWindow.stage.close();
             }
             mainWindow.start();
         });
+
+        settings.getStylesheets().add("/css/styles.css");
     }
 
     /**
      * Adjust the position
      */
     public void export(ActionEvent actionEvent) {
-        if (validAddress)
+        if (validAddress) {
             WeatherGetter.printWeatherToFile(Settings.plz, Settings.country, declareUnit);
-        else
+            MainWindow.stage.close();
+        } else {
             WeatherGetter.printWeatherToFile("1220", "AT", declareUnit);
+            MainWindow.stage.close();
+        }
+
     }
 
     public void enterAction(ActionEvent actionEvent) {
@@ -81,6 +95,7 @@ public class Settings implements Initializable {
                 plz = newplz;
                 country = newcountry;
                 mainWindow.start();
+                MainWindow.stage.close();
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);

@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="300" minWidth="450" prefHeight="300.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Frontend.Settings">
+<AnchorPane fx:id="settings" styleClass="settings" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="300" minWidth="450" prefHeight="300.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Frontend.Settings">
    <children>
       <ChoiceBox fx:id="Temperature" layoutX="14.0" layoutY="14.0" prefHeight="45.0" prefWidth="120.0">
       </ChoiceBox>

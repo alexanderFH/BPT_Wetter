@@ -113,3 +113,7 @@
     -fx-opacity: 1;
     -fx-effect: dropshadow(three-pass-box, #89C4F4, 30, 0.5, 0, 0);
 }
+
+.settings {
+    -fx-background-color: green;
+}

@@ -132,6 +132,7 @@ public class MainWindow implements Initializable {
     private Menu refreshMenu;
 
     private boolean labelVisible;
+    public static Stage stage;
 
 
     /**
@@ -960,7 +961,7 @@ public class MainWindow implements Initializable {
         Parent root;
         try {
             root = FXMLLoader.load(getClass().getClassLoader().getResource("Settings/settings.fxml"));
-            Stage stage = new Stage();
+            stage = new Stage();
             stage.setTitle("Settings");
             stage.setScene(new Scene(root, 450, 300));
             stage.show();

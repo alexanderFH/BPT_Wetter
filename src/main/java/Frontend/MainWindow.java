@@ -3,6 +3,7 @@ package Frontend;
 import Backbone.Day;
 import Backbone.WeatherGetter;
 import javafx.animation.FadeTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -123,7 +124,7 @@ public class MainWindow implements Initializable {
     @FXML
     private MenuBar menuBar;
 
-    private boolean nightMode = false;
+    private boolean labelVisible;
 
     /**
      * Initializes the controller Class for MainWindow
@@ -152,6 +153,8 @@ public class MainWindow implements Initializable {
             days = WeatherGetter.getWeatherJson(Settings.plz, Settings.country, false);
         }
 
+        labelVisible = true;
+
         currentDate = new Date();
         displayDate.setText(DATEFORMAT.format(currentDate));
 
@@ -167,11 +170,17 @@ public class MainWindow implements Initializable {
         minTemp.setText("minimale Temperatur: " + days.get(0).getMin_temp() + unit);
         maxTemp.setText("maximale Temperatur: " + days.get(0).getMax_temp() + unit);
         setRainLabel(0);
-        humidity.setText("Luftfeuchtigkeit: " + days.get(0).getHumidity() + "%");
+        if(labelVisible) {
+            humidity.setVisible(true);
+            feelsLike.setVisible(true);
+            humidity.setText("Luftfeuchtigkeit: " + days.get(0).getHumidity() + "%");
+            feelsLike.setText("Temperatur f\u00fchlt sich\n an wie " + days.get(0).getFeelsLike() + unit);
+        }
+
         sunrise.setText("Sonnenaufgang um:\n " + days.get(0).getSunrise() + " Uhr");
         sunset.setText("Sonnenuntergang um:\n " + days.get(0).getSunset() + " Uhr");
         moonphase.setText("Mondphase:\n " + days.get(0).getMoonphase());
-        feelsLike.setText("Temperatur f\u00fchlt sich\n an wie " + days.get(0).getFeelsLike() + unit);
+
 
         if (Instant.now().getEpochSecond() > days.get(0).getLongSunrise() && Instant.now().getEpochSecond() < days.get(0).getLongSunset()) {
             changeImage(1);
@@ -219,18 +228,29 @@ public class MainWindow implements Initializable {
         if (days.get(0).getCurrentTemp() == -999) {
             double minT = days.get(0).getMin_temp();
             double maxT = days.get(0).getMax_temp();
-            temp.setText((minT + maxT) / 2 + unit);
+
+            double roundedTemperature = Math.round((minT + maxT)/2 * 10) / 10.0;
+
+            temp.setText(roundedTemperature + unit);
         } else {
-            temp.setText(days.get(0).getCurrentTemp() + unit);
+            double roundedTemperature = Math.round(days.get(0).getCurrentTemp() * 10) / 10.0;
+            temp.setText(roundedTemperature+ unit);
         }
+
+        labelVisible = true;
+
         setRainLabel(0);
         minTemp.setText("minimale Temperatur: " + days.get(0).getMin_temp() + unit);
         maxTemp.setText("maximale Temperatur: " + days.get(0).getMax_temp() + unit);
-        humidity.setText("Luftfeuchtigkeit: " + days.get(0).getHumidity() + "%");
+        if(labelVisible) {
+            humidity.setVisible(true);
+            feelsLike.setVisible(true);
+            humidity.setText("Luftfeuchtigkeit: " + days.get(0).getHumidity() + "%");
+            feelsLike.setText("Temperatur f\u00fchlt sich\n an wie " + days.get(0).getFeelsLike() + unit);
+        }
         sunrise.setText("Sonnenaufgang um:\n " + days.get(0).getSunrise() + " Uhr");
         sunset.setText("Sonnenuntergang um:\n " + days.get(0).getSunset() + " Uhr");
         moonphase.setText("Mondphase:\n " + days.get(0).getMoonphase());
-        feelsLike.setText("Temperatur f\u00fchlt sich\n an wie " + days.get(0).getFeelsLike() + unit);
         //detail.setText(days.get(0).getNarrative());
         if (Instant.now().getEpochSecond() > days.get(0).getLongSunrise() && Instant.now().getEpochSecond() <
                 days.get(0).getLongSunset())
@@ -264,14 +284,18 @@ public class MainWindow implements Initializable {
             temp.setText(days.get(1).getCurrentTemp() + unit);
         }
 
+        labelVisible = false;
+
         setRainLabel(1);
         minTemp.setText("minimale Temperatur: " + days.get(1).getMin_temp() + unit);
         maxTemp.setText("maximale Temperatur: " + days.get(1).getMax_temp() + unit);
-        humidity.setText("Luftfeuchtigkeit: " + days.get(1).getHumidity() + "%");
+        if(!labelVisible) {
+            humidity.setVisible(false);
+            feelsLike.setVisible(false);
+        }
         sunrise.setText("Sonnenaufgang um:\n " + days.get(1).getSunrise() + " Uhr");
         sunset.setText("Sonnenuntergang um:\n " + days.get(1).getSunset() + " Uhr");
         moonphase.setText("Mondphase:\n " + days.get(1).getMoonphase());
-        feelsLike.setText("Temperatur f\u00fchlt sich\n an wie " + days.get(1).getFeelsLike() + unit);
         if (Instant.now().getEpochSecond() > days.get(0).getLongSunrise() && Instant.now().getEpochSecond() <
                 days.get(0).getLongSunset())
             changeImage(1);
@@ -834,12 +858,17 @@ public class MainWindow implements Initializable {
         if (days.get(0).getCurrentTemp() == -999) {
             double minT = days.get(0).getMin_temp();
             double maxT = days.get(0).getMax_temp();
-            temp.setText((minT + maxT) / 2 + unit);
-            nextDayTemp1.setText((minT + maxT) / 2 + unit);
+
+            double roundedTemperature = Math.round((minT + maxT) / 2 * 10) / 10.0;
+
+            temp.setText(roundedTemperature + unit);
+            nextDayTemp1.setText(roundedTemperature + unit);
 
         } else {
-            temp.setText(days.get(0).getCurrentTemp() + unit);
-            nextDayTemp1.setText(days.get(0).getCurrentTemp() + unit);
+            double roundedTemperature = Math.round(days.get(0).getCurrentTemp() * 10) / 10.0;
+
+            temp.setText(roundedTemperature + unit);
+            nextDayTemp1.setText(roundedTemperature + unit);
         }
 
 
@@ -924,4 +953,9 @@ public class MainWindow implements Initializable {
         fadeTransition.play();
     }
 
+    @FXML
+    public void refresh(ActionEvent event) {
+        System.out.println("test");
+        start();
+    }
 }

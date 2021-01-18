@@ -184,7 +184,7 @@ public class MainWindow implements Initializable {
 
         sunrise.setText("Sonnenaufgang um:\n " + days.get(0).getSunrise() + " Uhr");
         sunset.setText("Sonnenuntergang um:\n " + days.get(0).getSunset() + " Uhr");
-        moonphase.setText("Mondphase:\n " + days.get(0).getMoonphase());
+        setMoonphaseLabel(0);
 
 
         if (Instant.now().getEpochSecond() > days.get(0).getLongSunrise() && Instant.now().getEpochSecond() < days.get(0).getLongSunset()) {
@@ -255,7 +255,7 @@ public class MainWindow implements Initializable {
         }
         sunrise.setText("Sonnenaufgang um:\n " + days.get(0).getSunrise() + " Uhr");
         sunset.setText("Sonnenuntergang um:\n " + days.get(0).getSunset() + " Uhr");
-        moonphase.setText("Mondphase:\n " + days.get(0).getMoonphase());
+        setMoonphaseLabel(0);
         //detail.setText(days.get(0).getNarrative());
         if (Instant.now().getEpochSecond() > days.get(0).getLongSunrise() && Instant.now().getEpochSecond() <
                 days.get(0).getLongSunset())
@@ -300,7 +300,7 @@ public class MainWindow implements Initializable {
         }
         sunrise.setText("Sonnenaufgang um:\n " + days.get(1).getSunrise() + " Uhr");
         sunset.setText("Sonnenuntergang um:\n " + days.get(1).getSunset() + " Uhr");
-        moonphase.setText("Mondphase:\n " + days.get(1).getMoonphase());
+        setMoonphaseLabel(1);
         if (Instant.now().getEpochSecond() > days.get(0).getLongSunrise() && Instant.now().getEpochSecond() <
                 days.get(0).getLongSunset())
             changeImage(1);
@@ -339,7 +339,7 @@ public class MainWindow implements Initializable {
         humidity.setText("Luftfeuchtigkeit: " + days.get(2).getHumidity() + "%");
         sunrise.setText("Sonnenaufgang um:\n " + days.get(2).getSunrise() + " Uhr");
         sunset.setText("Sonnenuntergang um:\n " + days.get(2).getSunset() + " Uhr");
-        moonphase.setText("Mondphase:\n " + days.get(2).getMoonphase());
+        setMoonphaseLabel(2);
         feelsLike.setText("Temperatur f\u00fchlt sich\n an wie " + days.get(2).getFeelsLike() + unit);
         if (Instant.now().getEpochSecond() > days.get(0).getLongSunrise() && Instant.now().getEpochSecond() <
                 days.get(0).getLongSunset())
@@ -379,7 +379,7 @@ public class MainWindow implements Initializable {
         humidity.setText("Luftfeuchtigkeit: " + days.get(3).getHumidity() + "%");
         sunrise.setText("Sonnenaufgang um:\n " + days.get(3).getSunrise() + " Uhr");
         sunset.setText("Sonnenuntergang um:\n " + days.get(3).getSunset() + " Uhr");
-        moonphase.setText("Mondphase:\n " + days.get(3).getMoonphase());
+        setMoonphaseLabel(3);
         feelsLike.setText("Temperatur f\u00fchlt sich\n an wie " + days.get(3).getFeelsLike() + unit);
         if (Instant.now().getEpochSecond() > days.get(0).getLongSunrise() && Instant.now().getEpochSecond() <
                 days.get(0).getLongSunset())
@@ -419,7 +419,7 @@ public class MainWindow implements Initializable {
         humidity.setText("Luftfeuchtigkeit: " + days.get(4).getHumidity() + "%");
         sunrise.setText("Sonnenaufgang um:\n " + days.get(4).getSunrise() + " Uhr");
         sunset.setText("Sonnenuntergang um:\n " + days.get(4).getSunset() + " Uhr");
-        moonphase.setText("Mondphase:\n " + days.get(4).getMoonphase());
+        setMoonphaseLabel(4);
         feelsLike.setText("Temperatur f\u00fchlt sich\n an wie " + days.get(4).getFeelsLike() + unit);
         if (Instant.now().getEpochSecond() > days.get(0).getLongSunrise() && Instant.now().getEpochSecond() <
                 days.get(0).getLongSunset())
@@ -460,7 +460,7 @@ public class MainWindow implements Initializable {
         humidity.setText("Luftfeuchtigkeit: " + days.get(5).getHumidity() + "%");
         sunrise.setText("Sonnenaufgang um:\n " + days.get(5).getSunrise() + " Uhr");
         sunset.setText("Sonnenuntergang um:\n " + days.get(5).getSunset() + " Uhr");
-        moonphase.setText("Mondphase:\n " + days.get(5).getMoonphase());
+        setMoonphaseLabel(5);
         feelsLike.setText("Temperatur f\u00fchlt sich\n an wie " + days.get(5).getFeelsLike() + unit);
         if (Instant.now().getEpochSecond() > days.get(0).getLongSunrise() && Instant.now().getEpochSecond() <
                 days.get(0).getLongSunset())
@@ -658,35 +658,35 @@ public class MainWindow implements Initializable {
         menuBar.getStyleClass().add("menuBarNight");
 
         switch (days.get(index).getMoonphase()) {
-            case "abnehmender Halbmond" -> {
+            case "LQ" -> {
                 mondphase = "abHalbmond";
                 image.setImage(abHalbmond);
             }
-            case "Vollmond" -> {
+            case "F" -> {
                 mondphase = "vollmond";
                 image.setImage(vollmond);
             }
-            case "abnehmender Dreiviertelmond" -> {
+            case "WNG" -> {
                 mondphase = "abDreiviertelmond";
                 image.setImage(abDreiviertel);
             }
-            case "abnehmender Sichelmond" -> {
+            case "WNC" -> {
                 mondphase = "abSichelmond";
                 image.setImage(abSichelmond);
             }
-            case "zunehmender Sichelmond" -> {
+            case "WXC" -> {
                 mondphase = "zuSichelmond";
                 image.setImage(zuSichelmond);
             }
-            case "zunehmender Halbmond" -> {
+            case "FQ" -> {
                 mondphase = "zuHalbmond";
                 image.setImage(zuHalbmond);
             }
-            case "zunehmender Dreiviertelmond" -> {
+            case "WXG" -> {
                 mondphase = "zuDreiviertelmond";
                 image.setImage(zuDreiviertel);
             }
-            case "Neumond" -> {
+            case "N" -> {
                 mondphase = "neumond";
                 image.setImage(neumond);
             }
@@ -915,6 +915,35 @@ public class MainWindow implements Initializable {
             nextDayTemp6.setText((minT + maxT) / 2 + unit);
         } else {
             nextDayTemp6.setText(days.get(5).getCurrentTemp() + unit);
+        }
+    }
+
+    public void setMoonphaseLabel(int index) {
+        switch (days.get(index).getMoonphase()) {
+            case "WNG":
+                moonphase.setText("Mondphase:\nabnehmender Dreiviertelmond");
+                break;
+            case "WXG":
+                moonphase.setText("Mondphase:\nzunehmender Dreiviertelmond");
+                break;
+            case "F":
+                moonphase.setText("Mondphase:\nVollmond");
+                break;
+            case "N":
+                moonphase.setText("Mondphase:\nNeumond");
+                break;
+            case "WNC":
+                moonphase.setText("Mondphase:\nabnehmender Sichelmond");
+                break;
+            case "WXC":
+                moonphase.setText("Mondphase:\nzunehmender Sichelmond");
+                break;
+            case "LQ":
+                moonphase.setText("Mondphase:\nabnehmender Halbmond");
+                break;
+            case "FQ":
+                moonphase.setText("Mondphase:\nzunehmender Halbmond");
+                break;
         }
     }
 

@@ -877,15 +877,15 @@ public class MainWindow implements Initializable {
      */
     public void setRainLabel(int index) {
         if (days.get(index).getRain() < 1) {
-            rain.setText("Regen: leichter Regen moeglich");
+            rain.setText("Regen: leichter Regen m\u00f6glich");
         } else if (days.get(index).getRain() >= 1 && days.get(index).getRain() < 2) {
-            rain.setText("Regen: Regen moeglich");
+            rain.setText("Regen: Regen m\u00f6glich");
         } else if (days.get(index).getRain() >= 2 && days.get(index).getRain() < 3) {
-            rain.setText("Regen: mittelstarker Regen moeglich");
+            rain.setText("Regen: mittelstarker Regen m\u00f6glich");
         } else if (days.get(index).getRain() >= 3 && days.get(index).getRain() < 4) {
-            rain.setText("Regen: starker Regen moeglich");
+            rain.setText("Regen: starker Regen m\u00f6glich");
         } else if (days.get(index).getRain() >= 4) {
-            rain.setText("Regen: starker Regen bis hinzu Hagel\n moeglich");
+            rain.setText("Regen: starker Regen bis hinzu Hagel\n m\u00f6glich");
         }
     }
 
@@ -896,62 +896,38 @@ public class MainWindow implements Initializable {
      * if not the average of min and max temperature is calculated
      */
     public void setCurrentTempLabel() {
-        if (days.get(0).getCurrentTemp() == -999) {
-            double minT = days.get(0).getMin_temp();
-            double maxT = days.get(0).getMax_temp();
+        double setTemperature = 0;
 
-            double roundedTemperature = Math.round((minT + maxT) / 2 * 10) / 10.0;
+        for (int i = 0; i < days.size(); i++) {
+            if(days.get(i).getCurrentTemp() == -999) {
+                setTemperature = (days.get(i).getMin_temp() + days.get(i).getMax_temp()) / 2;
+            } else {
+                setTemperature = days.get(i).getCurrentTemp();
+            }
 
-            temp.setText(roundedTemperature + unit);
-            nextDayTemp1.setText(roundedTemperature + unit);
-
-        } else {
-            double roundedTemperature = Math.round(days.get(0).getCurrentTemp() * 10) / 10.0;
-
-            temp.setText(roundedTemperature + unit);
-            nextDayTemp1.setText(roundedTemperature + unit);
+            switch (i) {
+                case 0:
+                    temp.setText(Math.round(setTemperature * 10) / 10.0 + unit);
+                    nextDayTemp1.setText(Math.round(setTemperature * 10) / 10.0 + unit);
+                    break;
+                case 1:
+                    nextDayTemp2.setText(Math.round(setTemperature * 10) / 10.0 + unit);
+                    break;
+                case 2:
+                    nextDayTemp3.setText(Math.round(setTemperature * 10) / 10.0 + unit);
+                    break;
+                case 3:
+                    nextDayTemp4.setText(Math.round(setTemperature * 10) / 10.0 + unit);
+                    break;
+                case 4:
+                    nextDayTemp5.setText(Math.round(setTemperature * 10) / 10.0 + unit);
+                    break;
+                case 5:
+                    nextDayTemp6.setText(Math.round(setTemperature * 10) / 10.0 + unit);
+                    break;
+            }
         }
 
-
-        if (days.get(1).getCurrentTemp() == -999) {
-            double minT = days.get(1).getMin_temp();
-            double maxT = days.get(1).getMax_temp();
-            nextDayTemp2.setText((minT + maxT) / 2 + unit);
-        } else {
-            nextDayTemp2.setText(days.get(1).getCurrentTemp() + unit);
-        }
-
-        if (days.get(2).getCurrentTemp() == -999) {
-            double minT = days.get(2).getMin_temp();
-            double maxT = days.get(2).getMax_temp();
-            nextDayTemp3.setText((minT + maxT) / 2 + unit);
-        } else {
-            nextDayTemp3.setText(days.get(2).getCurrentTemp() + unit);
-        }
-
-        if (days.get(3).getCurrentTemp() == -999) {
-            double minT = days.get(3).getMin_temp();
-            double maxT = days.get(3).getMax_temp();
-            nextDayTemp4.setText((minT + maxT) / 2 + unit);
-        } else {
-            nextDayTemp4.setText(days.get(3).getCurrentTemp() + unit);
-        }
-
-        if (days.get(4).getCurrentTemp() == -999) {
-            double minT = days.get(4).getMin_temp();
-            double maxT = days.get(4).getMax_temp();
-            nextDayTemp5.setText((minT + maxT) / 2 + unit);
-        } else {
-            nextDayTemp5.setText(days.get(4).getCurrentTemp() + unit);
-        }
-
-        if (days.get(5).getCurrentTemp() == -999) {
-            double minT = days.get(5).getMin_temp();
-            double maxT = days.get(5).getMax_temp();
-            nextDayTemp6.setText((minT + maxT) / 2 + unit);
-        } else {
-            nextDayTemp6.setText(days.get(5).getCurrentTemp() + unit);
-        }
     }
 
     public void setMoonphaseLabel(int index) {

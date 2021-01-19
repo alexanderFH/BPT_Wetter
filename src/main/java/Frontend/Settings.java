@@ -1,12 +1,15 @@
 package Frontend;
 
 import Backbone.WeatherGetter;
-import com.sun.tools.javac.Main;
-import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -14,10 +17,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Settings implements Initializable {
+    public static boolean validAddress = true;
     protected static boolean declareUnit = true;
     protected static String plz = "1220";
     protected static String country = "AT";
-    public static boolean validAddress = true;
     protected static MainWindow mainWindow;
 
     @FXML
@@ -59,7 +62,6 @@ public class Settings implements Initializable {
             }
             mainWindow.start();
         });
-
         settings.getStylesheets().add("/css/styles.css");
     }
 
@@ -69,11 +71,10 @@ public class Settings implements Initializable {
     public void export(ActionEvent actionEvent) {
         if (validAddress) {
             WeatherGetter.printWeatherToFile(Settings.plz, Settings.country, declareUnit);
-            MainWindow.stage.close();
         } else {
             WeatherGetter.printWeatherToFile("1220", "AT", declareUnit);
-            MainWindow.stage.close();
         }
+        MainWindow.stage.close();
 
     }
 

@@ -3,6 +3,8 @@ package Frontend;
 import Backbone.Day;
 import Backbone.WeatherGetter;
 import javafx.animation.FadeTransition;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -967,6 +969,10 @@ public class MainWindow implements Initializable {
             stage.setTitle("Settings");
             stage.setScene(new Scene(root, 450, 120, Color.TRANSPARENT));
             stage.initStyle(StageStyle.TRANSPARENT);
+            stage.focusedProperty().addListener((ov, onHidden, onShown) -> {
+                if(onHidden)
+                    stage.close();
+            });
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

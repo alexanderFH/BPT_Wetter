@@ -104,8 +104,12 @@ public class WeatherGetter {
             String jsonString = rd.readLine();
             JSONObject weatherData = new JSONObject(jsonString);
             JSONObject temp = weatherData.getJSONObject("main");
+            String location = weatherData.getString("name");
+            if (location.contains(","))
+                location = location.split(",")[0];
+            location += " - " + plz;
             today = new Day(temp.getDouble("temp_min"), temp.getDouble("temp_max"), temp.getDouble("feels_like"),
-                    temp.getDouble("temp"), temp.getDouble("humidity"), weatherData.getString("name"));
+                    temp.getDouble("temp"), temp.getDouble("humidity"), location);
         } catch (Exception e) {
             System.err.println("Error while getting current Weather!");
             e.printStackTrace();

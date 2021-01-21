@@ -1,8 +1,6 @@
 package Frontend;
 
 import Backbone.WeatherGetter;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,7 +8,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
@@ -79,11 +76,7 @@ public class Settings implements Initializable {
     }
 
     public void enterAction(ActionEvent actionEvent) {
-        positionChange();
-    }
-
-    //update with MouseEvent
-    public void mouseExit(MouseEvent mouseEvent) {
+        System.out.println("Action event");
         positionChange();
     }
 

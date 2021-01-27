@@ -925,7 +925,6 @@ public class MainWindow implements Initializable {
                     break;
             }
         }
-
     }
 
     public void setMoonphaseLabel(int index) {
@@ -959,20 +958,40 @@ public class MainWindow implements Initializable {
 
 
     /**
-     * this method opens the settings window
+     * opening settings window
      */
     public void openSettings() {
         Parent root;
         try {
             root = FXMLLoader.load(getClass().getClassLoader().getResource("Settings/settings.fxml"));
             stage = new Stage();
-            stage.setTitle("Settings");
+            stage.setTitle("Einstellungen");
             stage.setScene(new Scene(root, 450, 120, Color.TRANSPARENT));
             stage.initStyle(StageStyle.TRANSPARENT);
             stage.focusedProperty().addListener((ov, onHidden, onShown) -> {
                 if(onHidden)
                     stage.close();
             });
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * opening info window
+     */
+    public void openInfo() {
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getClassLoader().getResource("Info/info.fxml"));
+            stage = new Stage();
+            stage.setTitle("Informationen");
+            Scene scene = new Scene(root, 390, 350);
+            scene.getStylesheets().add("css/styles.css");
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.getIcons().add(new Image("img/sun-icon.png"));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -1021,4 +1040,6 @@ public class MainWindow implements Initializable {
     public void refresh(ActionEvent actionEvent) {
         start();
     }
+
+
 }

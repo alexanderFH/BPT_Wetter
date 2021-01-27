@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="Frontend.Info"
+            prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: lightblue">
+
+    <center>
+        <Pane>
+            <Label text="Hintergrundbilder sind von freestockcenter - www.freepik.com" layoutX="10" layoutY="25" style="-fx-font-weight: bold"/>
+            <Label text="Wetterdaten sind von folgenden Webseiten einsichtbar:" layoutX="10" layoutY="65" style="-fx-font-weight: bold"/>
+            <Label text="&#x2022; https://openweathermap.org/" layoutX="25" layoutY="107"/>
+            <Label text="&#x2022; https://www.weatherapi.com/" layoutX="25" layoutY="167"/>
+            <ImageView fitHeight="60" fitWidth="120" layoutX="200" layoutY="85">
+                <image>
+                    <Image url="/img/openweathermap.png"/>
+                </image>
+            </ImageView>
+            <ImageView fitHeight="30" fitWidth="160" layoutX="200" layoutY="160">
+                <image>
+                    <Image url="/img/wetterapi.PNG"/>
+                </image>
+            </ImageView>
+        </Pane>
+    </center>
+
+</BorderPane>

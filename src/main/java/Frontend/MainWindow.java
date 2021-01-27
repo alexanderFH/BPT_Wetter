@@ -185,12 +185,12 @@ public class MainWindow implements Initializable {
         temp.setPadding(new Insets(0,0,0,15));
         dayAndDate.setPadding(new Insets(0,0,0,10));
 
-        //location.setPadding(new Insets(0, 0, 0, 15));
-        location.setText(days.get(0).getLocation());
+
         setCurrentTempLabel();
-        minTemp.setText("minimale Temperatur: " + days.get(0).getMin_temp() + unit);
-        maxTemp.setText("maximale Temperatur: " + days.get(0).getMax_temp() + unit);
         setRainLabel(0);
+        location.setText(days.get(0).getLocation());
+        minTemp.setText("minimale Temperatur: " + Math.round(days.get(0).getMin_temp() * 10) / 10.0 + unit);
+        maxTemp.setText("maximale Temperatur: " + Math.round(days.get(0).getMax_temp() * 10) / 10.0 + unit);
         if(labelVisible) {
             humidity.setVisible(true);
             feelsLike.setVisible(true);
@@ -262,8 +262,8 @@ public class MainWindow implements Initializable {
         labelVisible = true;
 
         setRainLabel(0);
-        minTemp.setText("minimale Temperatur: " + days.get(0).getMin_temp() + unit);
-        maxTemp.setText("maximale Temperatur: " + days.get(0).getMax_temp() + unit);
+        minTemp.setText("minimale Temperatur: " + Math.round(days.get(0).getMin_temp() * 10) / 10.0 + unit);
+        maxTemp.setText("maximale Temperatur: " + Math.round(days.get(0).getMax_temp() * 10) / 10.0 + unit);
         if(labelVisible) {
             humidity.setVisible(true);
             feelsLike.setVisible(true);
@@ -273,7 +273,7 @@ public class MainWindow implements Initializable {
         sunrise.setText("Sonnenaufgang um:\n " + days.get(0).getSunrise() + " Uhr");
         sunset.setText("Sonnenuntergang um:\n " + days.get(0).getSunset() + " Uhr");
         setMoonphaseLabel(0);
-        //detail.setText(days.get(0).getNarrative());
+
         if (Instant.now().getEpochSecond() > days.get(0).getLongSunrise() && Instant.now().getEpochSecond() <
                 days.get(0).getLongSunset())
             changeImage(0);
@@ -288,7 +288,7 @@ public class MainWindow implements Initializable {
     }
 
     @FXML
-    private void changeDayTwo() throws ParseException {
+    private void changeDayTwo() {
         Calendar c = Calendar.getInstance();
         c.setTime(currentDate);
         c.add(Calendar.DATE, 1);
@@ -331,7 +331,7 @@ public class MainWindow implements Initializable {
     }
 
     @FXML
-    private void changeDayThree() throws ParseException {
+    private void changeDayThree() {
         Calendar c = Calendar.getInstance();
         c.setTime(currentDate);
         c.add(Calendar.DATE, 2);
@@ -376,7 +376,7 @@ public class MainWindow implements Initializable {
     }
 
     @FXML
-    private void changeDayFour() throws ParseException {
+    private void changeDayFour() {
         Calendar c = Calendar.getInstance();
         c.setTime(currentDate);
         c.add(Calendar.DATE, 3);
@@ -421,7 +421,7 @@ public class MainWindow implements Initializable {
     }
 
     @FXML
-    private void changeDayFive() throws ParseException {
+    private void changeDayFive() {
         Calendar c = Calendar.getInstance();
         c.setTime(currentDate);
         c.add(Calendar.DATE, 4);
@@ -467,7 +467,7 @@ public class MainWindow implements Initializable {
 
 
     @FXML
-    private void changeDaySix() throws ParseException {
+    private void changeDaySix() {
         Calendar c = Calendar.getInstance();
         c.setTime(currentDate);
         c.add(Calendar.DATE, 5);
@@ -664,8 +664,6 @@ public class MainWindow implements Initializable {
         Image zuHalbmond = new Image("/img/moonphases/zuHalbmond.png");
         Image zuSichelmond = new Image("/img/moonphases/zuSichelmond.png");
 
-        //normally there is: no.isAfter(zo)
-        // but for further implementation its set to no.isBefore(zo)
 
         String nararative = days.get(currentDay).getNarrative().toLowerCase();
         if (nararative.contains("schauer".toLowerCase()) || nararative.contains("regen".toLowerCase())) {
